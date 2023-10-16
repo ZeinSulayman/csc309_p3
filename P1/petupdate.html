@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<!--
+  CSC309 Assignment 1
+  
+  University of Toronto
+  Fall 2023
+-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSC309 A1 - Home</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .adoptapp-background {
+            background-color: #7CB9E8;
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: lighten;
+            padding: 50px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .adoptapp-background .card {
+            position: relative;
+            z-index: 2;
+        }
+
+        .centered {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            margin-bottom: 20px;
+        }
+
+        .centered-icon-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .text-field {
+            border: 1px solid #ced4da;
+            padding: 10px;
+            border-radius: 0.25rem;
+            display: block;
+            width: 100%;
+        }
+
+        .image-container {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .image-container img {
+            max-height: 100%;
+            width: auto;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- TODO: complete me -->
+     <!--header-->
+  <section class="nav">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary container-fluid">
+      <div class="container-fluid">
+        <a class="navbar-brand" style="color: white;" href="#">PetPal</a>
+        <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon bg-light"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+            <li class="nav-item mx-2">
+              <a class="nav-link active" aria-current="page" href="home-shelter.html" style="color: white">Home</a>
+            </li>
+            <li class="nav-item dropdown mx-2">
+                <a class="nav-link dropdown-toggle" style="color: skyblue; font-weight: bold;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Shelter
+                </a>
+                <ul class="dropdown-menu dropdown-menu-start">
+                  <li><a class="dropdown-item" href="shelter-manage.html">Manage Account</a></li>
+                  <li><a class="dropdown-item" href="shelter-pet-manager.html">Manage Pets</a></li>
+                  <li><a class="dropdown-item" href="shelter_manage_apps.html">Review Applications</a></li>
+                  <li><a class="dropdown-item" href="login.html">Sign-up</a></li>
+                </ul>
+              </li>
+            <li class="nav-item mx-2">
+              <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <i class="bi bi-bell" style="color: white;"></i>
+              </button>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </section>
+  <section>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Notifications</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <ul class="list-group">
+              <li class="list-group-item active" aria-current="true">Join us for our upcoming adoption events and fundraisers.</li>
+              <li class="list-group-item">Tips and tricks for taking care of your new pet. Ensure they have a happy and healthy life.</li>
+              <li class="list-group-item">Your adoption application has been reviewed. Please check your profile for updates.</li>
+              <li class="list-group-item">New pets available for adoption! Check them out!</li>
+              <li class="list-group-item">Congratulations! Your profile has been successfully created.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--header-->
+
+    <section class="adoptapp-background">
+        <div class="container centered">
+            <div class="col-md-6">
+                <h2 class="mb-4 text-center"><strong>Pet Update Form</strong></h2>
+
+                    <form class="row g-3 needs-validation" novalidate>
+
+                        <!-- Basic Details -->
+                        <div class="card">
+                            <div class="card-body">
+                                <h5><strong>General Information</strong></h5>
+
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Images:</label>
+                                    <div class="row mb-2">
+                                        <div class="col-sm-12 col-md-4 mb-3">
+                                           
+                                            <div class="image-container">
+                                                <img src="https://www.williamwalker.de/cdn/shop/articles/friendsofwilliamwalker_BreedProfileYorkshireTerrier4zu3_1024x.jpg?v=1628603961"
+                                                    alt="Pet Image 1" class="img-fluid">
+                                            </div>
+                                            <div class="btn-container mt-2">
+                                                <button type="button" class="btn btn-secondary btn-sm w-100"><i
+                                                        class="fas fa-upload"></i> Upload Image</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-4 mb-3">
+                                            
+                                            <div class="image-container">
+                                                <img src="https://dogtime.com/wp-content/uploads/sites/12/2011/01/GettyImages-1095667204-e1689790392229.jpg"
+                                                    alt="Pet Image 2" class="img-fluid">
+                                            </div>
+                                            <div class="btn-container mt-2">
+                                                <button type="button" class="btn btn-secondary btn-sm w-100"><i
+                                                        class="fas fa-upload"></i> Upload Image</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-4 mb-3">
+                                           
+                                            <div class="image-container">
+                                                <img src="https://cdn.britannica.com/49/233849-050-2ECC4F03/Yorkshire-terrier-dog-running.jpg"
+                                                    alt="Pet Image 3" class="img-fluid">
+                                            </div>
+                                            <div class="btn-container mt-2">
+                                                <button type="button" class="btn btn-secondary btn-sm w-100"><i
+                                                        class="fas fa-upload"></i> Upload Image</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="mb-3">
+                                    <div class="col-md-12">
+                                        <label for="petName" class="form-label"><strong>Pet Name</strong></label>
+                                        <input type="text" class="form-control bg-light" id="petName" value="Fredrick"
+                                            readonly>
+                                        <div class="invalid-feedback">
+                                            Please provide a pet name.
+                                        </div>
+                                    </div>
+
+                                    
+                                    <div class="col-md-12">
+                                        <label for="animalCode" class="form-label"><strong>Pet Code</strong></label>
+                                        <input type="text" class="form-control bg-light" id="animalCode" value="#12345"
+                                            readonly>
+                                        <div class="invalid-feedback">
+                                            Please provide a valid animal code.
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <label for="status" class="form-label"><strong>Status</strong></label>
+                                        <input type="text" class="form-control bg-light" id="status" value="Available"
+                                            readonly>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <label for="animalType" class="form-label"><strong>Animal Type</strong></label>
+                                        <input type="text" class="form-control bg-light" id="animalType" value="Dog"
+                                            readonly>
+                                        <div class="invalid-feedback">
+                                            Please select an animal type.
+                                        </div>
+                                    </div>
+
+                                    
+                                    <div class="col-md-12">
+                                        <label for="location" class="form-label"><strong>Location</strong></label>
+                                        <input type="text" class="form-control bg-light" id="location"
+                                            value="Hamilton, Ontario" readonly>
+                                        <div class="invalid-feedback">
+                                            Please provide a location.
+                                        </div>
+                                    </div>
+
+                                    
+                                    <div class="col-md-12">
+                                        <label for="gender" class="form-label"><strong>Gender</strong></label>
+                                        <input type="text" class="form-control bg-light" id="gender" value="Male"
+                                            readonly>
+                                        <div class="invalid-feedback">
+                                            Please select a gender.
+                                        </div>
+                                    </div>
+
+                                    
+                                    <div class="col-md-12">
+                                        <label for="age" class="form-label"><strong>Age</strong></label>
+                                        <input type="number" class="form-control bg-light" id="age" min="0" value="3"
+                                            readonly>
+                                        <div class="invalid-feedback">
+                                            Please provide a valid age.
+                                        </div>
+                                    </div>
+
+                                  
+                                    <div class="col-md-12">
+                                        <label for="size" class="form-label"><strong>Size</strong></label>
+                                        <input type="text" class="form-control bg-light" id="size" value="Small"
+                                            readonly>
+                                        <div class="invalid-feedback">
+                                            Please select a size.
+                                        </div>
+                                    </div>
+
+                                   
+                                    <div class="col-md-12">
+                                        <label for="breed" class="form-label"><strong>Breed</strong></label>
+                                        <input type="text" class="form-control bg-light" id="breed"
+                                            value="Yorkshire Terrier" readonly>
+                                        <div class="invalid-feedback">
+                                            Please provide a breed.
+                                        </div>
+                                    </div>
+
+                                   
+                                    <div class="col-md-12">
+                                        <label for="color" class="form-label"><strong>Color</strong></label>
+                                        <input type="text" class="form-control bg-light" id="color"
+                                            value="Honey and Black" readonly>
+                                        <div class="invalid-feedback">
+                                            Please provide a color.
+                                        </div>
+                                    </div>
+
+                                   
+                                    <div class="col-md-12">
+                                        <label for="houseTrained" class="form-label"><strong>House
+                                                Trained</strong></label>
+                                        <input type="text" class="form-control bg-light" id="houseTrained" value="Yes"
+                                            readonly>
+                                        <div class="invalid-feedback">
+                                            Please specify if the pet is house trained.
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                       
+                        <div class="card">
+                            <div class="card-body">
+                                <h5><strong>Personality</strong></h5>
+                                <div class="mb-2 row">
+                                    <label for="personalityTrait1" class="form-label fw-bold col-12">Personality
+                                        Trait:</label>
+                                    <div class="col-12 mb-2">
+                                        <input type="text" class="form-control bg-light" id="personalityTrait1"
+                                            value="Curious Explorer" readonly>
+                                    </div>
+                                    <label for="personalityTrait2" class="form-label fw-bold col-12">Personality
+                                        Trait:</label>
+                                    <div class="col-12">
+                                        <input type="text" class="form-control bg-light" id="personalityTrait2"
+                                            value="Playful Chaser" readonly>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body">
+                                <h5><strong>Special Needs</strong></h5>
+                                <textarea class="form-control mb-3 bg-light" id="specialNeeds" rows="3"
+                                    readonly>He likes walking a lot, hence he needs to be walked at least twice a day. He gets sick often, and needs to be taken to vet frequently.</textarea>
+                            </div>
+                        </div>
+
+
+
+
+                        <!-- Health Section -->
+                        <div class="card">
+                            <div class="card-body">
+                                <h5><strong>Health</strong></h5>
+
+
+                                <h4 class="mb-3">Vaccinations</h4>
+                                <h6 class="mb-3">Vaccinations:</h6>
+
+                                <!-- Vaccination 1 -->
+                                <div class="row mb-2">
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold">Vaccination Name:</label>
+                                        <input type="text" class="form-control bg-light" value="Rabies" readonly>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold">Date:</label>
+                                        <input type="date" class="form-control bg-light" value="2020-01-10" readonly>
+                                    </div>
+                                </div>
+
+                                <!-- Vaccination 2 -->
+                                <div class="row mb-2">
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold">Vaccination Name:</label>
+                                        <input type="text" class="form-control bg-light" value="Distemper" readonly>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold">Date:</label>
+                                        <input type="date" class="form-control bg-light" value="2020-01-12" readonly>
+                                    </div>
+                                </div>
+
+                                <!-- Vaccination 3 -->
+                                <div class="row mb-2">
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold">Vaccination Name:</label>
+                                        <input type="text" class="form-control bg-light" value="Parvovirus" readonly>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold">Date:</label>
+                                        <input type="date" class="form-control bg-light" value="2020-01-15" readonly>
+                                    </div>
+                                </div>
+
+
+                                <h4 class="mb-3">Surgeries</h4>
+                                <div class="row mb-2">
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold">Surgery Name:</label>
+                                        <input type="text" class="form-control bg-light" value="Neutering" readonly>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold">Date:</label>
+                                        <input type="date" class="form-control bg-light" value="2021-02-05" readonly>
+                                    </div>
+                                </div>
+
+
+                                <h4 class="mb-3">Allergies</h4>
+                                <textarea class="form-control mb-3 bg-light" id="allergies" rows="3"
+                                    readonly>No known allergies.</textarea>
+
+
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-end">
+                            <a href="petupdatesave.html" class="btn btn-primary">
+                                <i class="fas fa-pen"></i> Edit
+                            </a>
+                        </div>
+                        
+                    </form>
+            </div>
+        </div>
+    </section>
+
+
+
+<!-- Footer -->
+<footer class="text-center text-lg-start bg-light text-muted foot">
+    <!-- Section: Social media -->
+    <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom" style="color: white;">
+        <!-- Left -->
+        <div class="me-5 d-none d-lg-block">
+            <span>Get connected with us on social networks:</span>
+        </div>
+        <!-- Left -->
+        <!-- Right -->
+        <div>
+            <a href="" class="me-4 text-reset">
+                <i class="bi bi-instagram"></i>
+            </a>
+            <a href="" class="me-4 text-reset">
+                <i class="bi bi-facebook"></i>
+            </a>
+        </div>
+        <!-- Right -->
+    </section>
+    <!-- Section: Social media -->
+
+    <!-- Section: Links  -->
+    <section class="text-white">
+        <div class="container text-center text-md-start mt-5">
+            <!-- Grid row -->
+            <div class="row mt-3">
+                <!-- Grid column -->
+                <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                    <!-- Content -->
+                    <h6 class="text-uppercase fw-bold mb-4">
+                        <i class="fas fa-gem me-3"></i>Petpal Incorporated
+                    </h6>
+                    <p style="margin-top: 20px;">
+                        Our aim is to connect loving families with their perfect furry companions. We strive to promote responsible pet ownership and reduce the number of animals in need by facilitating successful adoptions, creating forever homes, and supporting animal welfare organizations.
+                    </p>
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                    <!-- Links -->
+                    <h6 class="text-uppercase fw-bold mb-4" style="margin-left: 16px;">Contact</h6>
+                    <p><i class="bi bi-house me-3"></i> 100 Petpal St, Toronto, Ontario</p>
+                    <p>
+                        <i class="bi bi-envelope me-3"></i>
+                        petpal@gmail.com
+                    </p>
+                    <p><i class="bi bi-phone me-3"></i> + 01 234 567 88</p>
+                    <p><i class="bi bi-printer me-3"></i> + 01 234 567 89</p>
+                </div>
+                <!-- Grid column -->
+            </div>
+            <!-- Grid row -->
+        </div>
+    </section>
+    <!-- Section: Links  -->
+
+    <!-- Copyright -->
+    <div class="text-center p-4 text-white" style="background-color: rgba(0, 0, 0, 0.05);">
+        © 2021 Copyright Petpal
+    </div>
+    <!-- Copyright -->
+</footer>
+<!-- Footer -->
+
+</body>
+
+</html>

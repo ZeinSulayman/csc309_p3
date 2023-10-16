@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<!--
+  CSC309 Assignment 1
+  
+  University of Toronto
+  Fall 2023
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSC309 A1 - Home</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+  <style>
+ [type=radio] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* IMAGE STYLES */
+[type=radio] + img {
+  cursor: pointer;
+  filter: opacity(30%);
+}
+
+/* CHECKED STYLES */
+[type=radio]:checked + img {
+filter: opacity(100%);
+}
+h6{
+display:inline;
+}
+
+
+  </style>
+</head>
+<body>
+  <!-- TODO: complete me -->
+  <!--header-->
+  <section class="nav">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary container-fluid">
+      <div class="container-fluid">
+        <a class="navbar-brand" style="color: white;" href="#">PetPal</a>
+        <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon bg-light"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+            <li class="nav-item mx-2">
+              <a class="nav-link active" aria-current="page" href="home-shelter.html" style="color: white">Home</a>
+            </li>
+            <li class="nav-item dropdown mx-2">
+                <a class="nav-link dropdown-toggle" style="color: skyblue; font-weight: bold;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Shelter
+                </a>
+                <ul class="dropdown-menu dropdown-menu-start">
+                  <li><a class="dropdown-item" href="shelter-manage.html">Manage Account</a></li>
+                  <li><a class="dropdown-item" href="shelter-pet-manager.html">Manage Pets</a></li>
+                  <li><a class="dropdown-item" href="shelter_manage_apps.html">Review Applications</a></li>
+                  <li><a class="dropdown-item" href="login.html">Sign-up</a></li>
+                </ul>
+              </li>
+            <li class="nav-item mx-2">
+              <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <i class="bi bi-bell" style="color: white;"></i>
+              </button>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </section>
+  <section>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Notifications</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <ul class="list-group">
+              <li class="list-group-item active" aria-current="true">Join us for our upcoming adoption events and fundraisers.</li>
+              <li class="list-group-item">Tips and tricks for taking care of your new pet. Ensure they have a happy and healthy life.</li>
+              <li class="list-group-item">Your adoption application has been reviewed. Please check your profile for updates.</li>
+              <li class="list-group-item">New pets available for adoption! Check them out!</li>
+              <li class="list-group-item">Congratulations! Your profile has been successfully created.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--header-->
+
+  <section>
+    <div class="container pt-4">
+      <div class="d-flex justify-content-between">
+        <div class="w-50">
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+        </div>
+        <div class="row align-items-end">
+          <!--<div class="col-md-auto">
+              <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                  <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+                  <label class="btn btn-outline-primary" for="btnradio1">Grid</label>
+
+                  <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+                  <label class="btn btn-outline-primary" for="btnradio2">Map</label>
+              </div>
+          </div>-->
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container text-center" style="margin-top: 30px;">
+      <div class="row">
+        <div class="col" style="margin-bottom:5px;">
+          <div class="card h-100">
+            <div class="card-body m-5 p-5">
+                <a href="./petcreation.html"> <i class="bi bi-patch-plus-fill" style="font-size: 70px;"></i></a>
+              <h5 class="card-title">Add Pet</h5>
+            </div>
+          </div>
+        </div>
+        <div class="w-100 d-md-none d-block m-3"></div>
+        <div class="col" style="margin-bottom:5px;">
+          <div class="card h-100">
+            <img src="https://i.kym-cdn.com/entries/icons/original/000/041/444/sdc.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title"><a style="text-decoration:none;color:black;" href="./petdetail.html">Jake</a></h5>
+              <p class="card-text">Breed: Suspicious Dog</p>
+              <p class="card-text">Gender: Male</p>
+              <p class="card-text">Age: 1 yrs old</p>
+              <p class="card-text">Size: 1 meter</p>
+              <p class="card-text">Description: This is a very suspicious dog, but it will vibe with you</p>
+              <div style="white-space:nowrap;display:inline;">
+                <label for="a"  style="margin-left:20px;">Available</label>
+                <label>
+                  <input onclick="return confirm('Are you sure you would like to change Jakes Current Availability?')" type="radio" id="a" name="av1" value="small" checked>
+                  <img style="width:15px; " src="./img/dog_paw.png" alt="Option 1">
+                </label>
+              </div>
+              <div style="white-space:nowrap;display:inline;">
+                <label style="padding-left:12px;" for="b">Adopted</label>
+                <label>
+                  <input onclick="return confirm('Are you sure you would like to change Jakes Current Availability?')" type="radio" id="b" name="av1" value="small">
+                  <img style="width:15px;" src="./img/cat_paw.png" alt="Option 1">
+                </label>
+              </div>
+              <div style="white-space:nowrap;display:inline;">
+                <label style="padding-left:12px;" for="c">Pending</label>
+                <label>
+                  <input onclick="return confirm('Are you sure you would like to change Jakes Current Availability?')" type="radio" id="c" name="av1" value="small">
+                  <img style="width:15px;" src="./img/bird_claw.png" alt="Option 1">
+                </label>
+              </div>
+              <div style="white-space:nowrap;display:inline;">
+              <label style="padding-left:12px;" for="d">Withdrawn</label>
+              <label>
+                <input onclick="return confirm('Are you sure you would like to change Jakes Current Availability?')" type="radio" id="d" name="av1" value="small">
+                <img style="width:15px;" src="./img/fish-tail.png" alt="Option 1">
+              </label>
+              </div>
+            </div>
+            <p class="card-text">Location: San Francisco, CA</p>
+            <a href="petupdate.html" class="btn btn-primary">Edit</a>
+            <div class="card-footer">
+              <small class="text-body-secondary">Published: 22/12/2022</small>
+            </div>
+          </div>
+        </div>
+        <div class="w-100 d-md-none d-block m-3"></div>
+        <div class="col" style="margin-bottom:5px;">
+          <div class="card h-100">
+            <img src="https://i.kym-cdn.com/entries/icons/original/000/041/444/sdc.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title"><a style="text-decoration:none;color:black;" href="./petdetail.html">Jack</a></h5>
+              <p class="card-text">Breed: Suspicious Dog</p>
+              <p class="card-text">Gender: Male</p>
+              <p class="card-text">Age: 2 yrs old</p>
+              <p class="card-text">Size: 1 meter</p>
+              <p class="card-text">Description: This is a very suspicious dog, but it will vibe with you</p>
+              <div style="white-space:nowrap;display:inline;">
+                <label for="a2"  style="margin-left:20px;">Available</label>
+                <label>
+                  <input onclick="return confirm('Are you sure you would like to change Jacks Current Availability?')" type="radio" id="a2" name="av2" value="small" checked>
+                  <img style="width:15px; " src="./img/dog_paw.png" alt="Option 1">
+                </label>
+              </div>
+              <div style="white-space:nowrap;display:inline;">
+                <label style="padding-left:12px;" for="b2">Adopted</label>
+                <label>
+                  <input onclick="return confirm('Are you sure you would like to change Jacks Current Availability?')" type="radio" id="b2" name="av2" value="small">
+                  <img style="width:15px;" src="./img/cat_paw.png" alt="Option 1">
+                </label>
+              </div>
+              <div style="white-space:nowrap;display:inline;">
+                <label style="padding-left:12px;" for="c2">Pending</label>
+                <label>
+                  <input onclick="return confirm('Are you sure you would like to change Jacks Current Availability?')" type="radio" id="c2" name="av2" value="small">
+                  <img style="width:15px;" src="./img/bird_claw.png" alt="Option 1">
+                </label>
+              </div>
+              <div style="white-space:nowrap;display:inline;">
+                <label style="padding-left:12px;" for="d2">Withdrawn</label>
+                <label>
+                  <input onclick="return confirm('Are you sure you would like to change Jacks Current Availability?')" type="radio" id="d2" name="av2" value="small">
+                  <img style="width:15px;" src="./img/fish-tail.png" alt="Option 1">
+                </label>
+              </div>
+            </div>
+            <p class="card-text">Location: San Francisco, CA</p>
+            <a href="petupdate.html" class="btn btn-primary">Edit</a>
+            <div class="card-footer">
+              <small class="text-body-secondary">Published: 22/12/2022</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="w-100 d-md-none d-block m-3"></div>
+      <div class="row py-5">
+        <div class="col" style="margin-bottom:5px;">
+          <div class="card h-100">
+            <img src="https://i.kym-cdn.com/entries/icons/original/000/041/444/sdc.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title"><a style="text-decoration:none;color:black;" href="./petdetail.html">Sammi</a></h5>
+              <p class="card-text">Breed: Suspicious Dog</p>
+              <p class="card-text">Gender: Male</p>
+              <p class="card-text">Age: 5 yrs old</p>
+              <p class="card-text">Size: 1 meter</p>
+              <p class="card-text">Description: This is a very suspicious dog, but it will vibe with you</p>
+              <div style="white-space:nowrap;display:inline;">
+                <label for="a3"  style="margin-left:20px;">Available</label>
+                <label>
+                  <input onclick="return confirm('Are you sure you would like to change Sammis Current Availability?')" type="radio" id="a3" name="av3" value="small">
+                  <img style="width:15px; " src="./img/dog_paw.png" alt="Option 1">
+                </label>
+              </div>
+              <div style="white-space:nowrap;display:inline;">
+                <label style="padding-left:12px;" for="b3">Adopted</label>
+                <label>
+                  <input onclick="return confirm('Are you sure you would like to change Sammis Current Availability?')" type="radio" id="b3" name="av3" value="small">
+                  <img style="width:15px;" src="./img/cat_paw.png" alt="Option 1">
+                </label>
+              </div>
+              <div style="white-space:nowrap;display:inline;">
+                <label style="padding-left:12px;" for="c3">Pending</label>
+                <label>
+                  <input onclick="return confirm('Are you sure you would like to change Sammis Current Availability?')" type="radio" id="c3" name="av3" value="small" checked>
+                  <img style="width:15px;" src="./img/bird_claw.png" alt="Option 1">
+                </label>
+              </div>
+              <div style="white-space:nowrap;display:inline;">
+                <label style="padding-left:12px;" for="d3">Withdrawn</label>
+                <label>
+                  <input onclick="return confirm('Are you sure you would like to change Sammis Current Availability?')" type="radio" id="d3" name="av3" value="small">
+                  <img style="width:15px;" src="./img/fish-tail.png" alt="Option 1">
+                </label>
+              </div>
+            </div>
+            <p class="card-text">Location: San Francisco, CA</p>
+            <a href="petupdate.html" class="btn btn-primary">Edit</a>
+            <div class="card-footer">
+              <small class="text-body-secondary">Published: 22/12/2022</small>
+            </div>
+          </div>
+        </div>
+        <div class="w-100 d-md-none d-block m-3"></div>
+        <div class="col" style="margin-bottom:5px;">
+          <div class="card h-100">
+            <img src="https://i.kym-cdn.com/entries/icons/original/000/041/444/sdc.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title"><a style="text-decoration:none;color:black;" href="./petdetail.html">Poodle</a></h5>
+              <p class="card-text">Breed: Suspicious Dog</p>
+              <p class="card-text">Gender: Male</p>
+              <p class="card-text">Age: 6 mnths old</p>
+              <p class="card-text">Size: 1 meter</p>
+              <p class="card-text">Description: This is a very suspicious dog, but it will vibe with you</p>
+              <div style="white-space:nowrap;display:inline;">
+                <label for="a5"  style="margin-left:20px;">Available</label>
+                <label>
+                  <input onclick="return confirm('Are you sure you would like to change Poodles Current Availability?')" type="radio" id="a5" name="av4" value="small">
+                  <img style="width:15px; " src="./img/dog_paw.png" alt="Option 1">
+                </label>
+              </div>
+              <div style="white-space:nowrap;display:inline;">
+                <label style="padding-left:12px;" for="b5">Adopted</label>
+                <label>
+                  <input onclick="return confirm('Are you sure you would like to change Poodles Current Availability?')" type="radio" id="b5" name="av4" value="small" checked>
+                  <img style="width:15px;" src="./img/cat_paw.png" alt="Option 1">
+                </label>
+              </div>
+              <div style="white-space:nowrap;display:inline;">
+                <label style="padding-left:12px;" for="c5">Pending</label>
+                <label>
+                  <input onclick="return confirm('Are you sure you would like to change Poodles Current Availability?')" type="radio" id="c5" name="av4" value="small">
+                  <img style="width:15px;" src="./img/bird_claw.png" alt="Option 1">
+                </label>
+              </div>
+              <div style="white-space:nowrap;display:inline;">
+                <label style="padding-left:12px;" for="d5">Withdrawn</label>
+                <label>
+                  <input onclick="return confirm('Are you sure you would like to change Poodles Current Availability?')" type="radio" id="d5" name="av4" value="small">
+                  <img style="width:15px;" src="./img/fish-tail.png" alt="Option 1">
+                </label>
+              </div>
+            </div>
+            <p class="card-text">Location: San Francisco, CA</p>
+            <a href="petupdate.html" class="btn btn-primary">Edit</a>
+            <div class="card-footer">
+              <small class="text-body-secondary">Published: 22/12/2022</small>
+            </div>
+          </div>
+        </div>
+        <div class="w-100 d-md-none d-block m-3"></div>
+        <div class="col" style="margin-bottom:5px;">
+          <div class="card h-100">
+            <img src="https://i.kym-cdn.com/entries/icons/original/000/041/444/sdc.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title"><a style="text-decoration:none;color:black;" href="./petdetail.html">Zack</a></h5>
+              <p class="card-text">Breed: Suspicious Dog</p>
+              <p class="card-text">Gender: Male</p>
+              <p class="card-text">Age: 4 yrs old</p>
+              <p class="card-text">Size: 1 meter</p>
+              <p class="card-text">Description: This is a very suspicious dog, but it will vibe with you</p>
+              <div style="white-space:nowrap;display:inline;">
+                <label for="a4"  style="margin-left:20px;">Available</label>
+                <label>
+                  <input onclick="return confirm('Are you sure you would like to change Zacks Current Availability?')" type="radio" id="a4" name="av5" value="small">
+                  <img style="width:15px; " src="./img/dog_paw.png" alt="Option 1">
+                </label>
+              </div>
+              <div style="white-space:nowrap;display:inline;">
+                <label style="padding-left:12px;" for="b4">Adopted</label>
+                <label>
+                  <input onclick="return confirm('Are you sure you would like to change Zacks Current Availability?')" type="radio" id="b4" name="av5" value="small">
+                  <img style="width:15px;" src="./img/cat_paw.png" alt="Option 1">
+                </label>
+              </div>
+              <div style="white-space:nowrap;display:inline;">
+                <label style="padding-left:12px;" for="c4">Pending</label>
+                <label>
+                  <input onclick="return confirm('Are you sure you would like to change Zacks Current Availability?')" type="radio" id="c4" name="av5" value="small">
+                  <img style="width:15px;" src="./img/bird_claw.png" alt="Option 1">
+                </label>
+              </div>
+              <div style="white-space:nowrap;display:inline;">
+                <label style="padding-left:12px;" for="d4">Withdrawn</label>
+                <label>
+                  <input onclick="return confirm('Are you sure you would like to change Zacks Current Availability?')" type="radio" id="d4" name="av5" value="small" checked>
+                  <img style="width:15px;" src="./img/fish-tail.png" alt="Option 1">
+                </label>
+              </div>
+            </div>
+            <p class="card-text">Location: San Francisco, CA</p>
+            <a href="petupdate.html" class="btn btn-primary">Edit</a>
+            <div class="card-footer">
+              <small class="text-body-secondary">Published: 22/12/2022</small>
+            </div>
+          </div>
+      </div>
+    </div>
+    <div>
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+      </nav>
+    </div>
+    </div>
+  </section>
+
+ <!-- Footer -->
+ <footer class="text-center text-lg-start bg-light text-muted foot">
+  <!-- Section: Social media -->
+  <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom" style="color: white;">
+      <!-- Left -->
+      <div class="me-5 d-none d-lg-block">
+          <span>Get connected with us on social networks:</span>
+      </div>
+      <!-- Left -->
+      <!-- Right -->
+      <div>
+          <a href="" class="me-4 text-reset">
+              <i class="bi bi-instagram"></i>
+          </a>
+          <a href="" class="me-4 text-reset">
+              <i class="bi bi-facebook"></i>
+          </a>
+      </div>
+      <!-- Right -->
+  </section>
+  <!-- Section: Social media -->
+
+  <!-- Section: Links  -->
+  <section class="text-white">
+      <div class="container text-center text-md-start mt-5">
+          <!-- Grid row -->
+          <div class="row mt-3">
+              <!-- Grid column -->
+              <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                  <!-- Content -->
+                  <h6 class="text-uppercase fw-bold mb-4">
+                      <i class="fas fa-gem me-3"></i>Petpal Incorporated
+                  </h6>
+                  <p style="margin-top: 20px;">
+                      Our aim is to connect loving families with their perfect furry companions. We strive to promote responsible pet ownership and reduce the number of animals in need by facilitating successful adoptions, creating forever homes, and supporting animal welfare organizations.
+                  </p>
+              </div>
+              <!-- Grid column -->
+
+              <!-- Grid column -->
+              <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                  <!-- Links -->
+                  <h6 class="text-uppercase fw-bold mb-4" style="margin-left: 16px;">Contact</h6>
+                  <p><i class="bi bi-house me-3"></i> 100 Petpal St, Toronto, Ontario</p>
+                  <p>
+                      <i class="bi bi-envelope me-3"></i>
+                      petpal@gmail.com
+                  </p>
+                  <p><i class="bi bi-phone me-3"></i> + 01 234 567 88</p>
+                  <p><i class="bi bi-printer me-3"></i> + 01 234 567 89</p>
+              </div>
+              <!-- Grid column -->
+          </div>
+          <!-- Grid row -->
+      </div>
+  </section>
+  <!-- Section: Links  -->
+
+  <!-- Copyright -->
+  <div class="text-center p-4 text-white" style="background-color: rgba(0, 0, 0, 0.05);">
+      © 2021 Copyright Petpal
+  </div>
+  <!-- Copyright -->
+</footer>
+<!-- Footer -->
+
+</body>
+</html>

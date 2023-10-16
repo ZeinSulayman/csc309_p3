@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<!--
+  CSC309 Assignment 1
+  
+  University of Toronto
+  Fall 2023
+-->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSC309 A1 - Home</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+</head>
+
+<body>
+  <!-- TODO: complete me -->
+  <!--header-->
+  <section class="nav">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary container-fluid">
+      <div class="container-fluid">
+        <a class="navbar-brand" style="color: white;" href="#">PetPal</a>
+        <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon bg-light"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+          <li class="nav-item mx-2">
+            <a class="nav-link active" aria-current="page" href="index.html"
+              style="font-weight: bold; color: skyblue;">Home</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link disabled" href="finder.html">Finder</a>
+          </li>
+          <li class="nav-item dropdown mx-2">
+            <a class="nav-link dropdown-toggle disabled" href="#" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Shelter
+            </a>
+            <ul class="dropdown-menu dropdown-menu-start">
+              <li><a class="dropdown-item" href="shelter-manage.html">Manage Account</a></li>
+              <li><a class="dropdown-item" href="shelter-pet-manager.html">Manage Pets</a></li>
+              <li><a class="dropdown-item" href="shelter_manage_apps.html">Review Applications</a></li>
+              <li><a class="dropdown-item" href="login.html">Sign-up</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown mx-2 ">
+            <a class="nav-link dropdown-toggle disabled" href="#" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Seeker
+            </a>
+            <ul class="dropdown-menu dropdown-menu-start">
+              <li><a class="dropdown-item" href="seeker-account.html">Manage Account</a></li>
+              <li><a class="dropdown-item" href="manage-adoptions.html">Manage Adoptions</a></li>
+              <li><a class="dropdown-item" href="login.html">Sign-up</a></li>
+            </ul>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link" href="login.html" style="color: white;">Sign-up</a>
+          </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </section>
+  <!--header-->
+  <section class="banner text-sm-start text-center p-4">
+    <div class="container">
+      <div class="d-sm-flex justify-content-center align-items-center">
+        <div>
+          <h1>Finding Forever Homes, One Paw at a Time.</h1>
+          <p>Welcome to <span style="color: darkgrey; font-size: 25px; font-weight: bold;">PetPal</span>! At our site,
+            we believe in the magic of companionship and the joy that pets bring to our lives. We're more than just a
+            pet adoption platform; we're matchmakers, bringing together loving families and adorable pets in need of a
+            home. Our dedicated team works tirelessly to ensure that every pet on our platform is not just a statistic,
+            but a soul deserving of love and care. From playful kittens to loyal dogs and everything in between, our
+            site is a virtual sanctuary where hearts meet furry paws.</p>
+        </div>
+
+        <img class="img-fluid" src="img/dog-png-30.png" alt="">
+      </div>
+    </div>
+  </section>
+
+  <!--<section>
+    <div class="container">
+      <div class="row align-items-center justify-content-center h-100">
+        <div class="col">
+          <img src="https://i.redd.it/gsqz7tkdlg171.jpg" class="img-fluid" alt="...">
+        </div>
+        <div class="col" style="background-color: grey;">
+          <p class="home-title">Your Source for Dog</p>
+          <p>Adopt a pet now</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container-fluid p-0 bg-primary">
+      <div class="d-flex">
+        <div class="col">
+          <img src="https://i.redd.it/gsqz7tkdlg171.jpg" class="img-fluid" alt="...">
+        </div>
+        <div class="col">
+          <p class="home-title">Your Source for Dog</p>
+          <p>Adopt a pet now</p>
+        </div>
+      </div>
+    </div>
+  </section>-->
+
+  <section>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Notifications</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <ul class="list-group">
+              <li class="list-group-item active" aria-current="true">Join us for our upcoming adoption events and
+                fundraisers.</li>
+              <li class="list-group-item">Tips and tricks for taking care of your new pet. Ensure they have a happy and
+                healthy life.</li>
+              <li class="list-group-item">Your adoption application has been reviewed. Please check your profile for
+                updates.</li>
+              <li class="list-group-item">New pets available for adoption! Check them out!</li>
+              <li class="list-group-item">Congratulations! Your profile has been successfully created.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Cards Section -->
+  <section class="container p-5">
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <div class="homecards card h-100 text-center">
+          <div class="card-body">
+            <h2 class="card-title">Save a Life</h2>
+            <p class="card-text">By adopting a pet, you are giving a homeless animal a second chance at life. Many
+              animals in shelters are euthanized due to overcrowding, and adopting saves them from this fate.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 text-center homecards">
+          <div class="card-body">
+            <h2 class="card-title">Unconditional Love</h2>
+            <p class="card-text">Adopted pets are incredibly grateful and show immense loyalty and love to their
+              adopters. They often understand that they've been given a second chance and reciprocate with unconditional
+              love.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 text-center homecards">
+          <div class="card-body">
+            <h2 class="card-title">Health Benefits</h2>
+            <p class="card-text">Studies have shown that having pets can lower blood pressure, reduce stress, and
+              improve overall mental and physical health. The companionship of a pet can bring joy and reduce feelings
+              of loneliness.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Cards Section -->
+
+
+  <section>
+    <div class="container">
+      <h1 class="">Recent Adoptions</h1>
+    </div>
+    <div class="container border border-secondary border-3 py-5 rounded-2" style="background-color: lightgray;">
+      <div id="carouselExampleCaptions" class="carousel slide vertical mx-5" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+            aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+            aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+            aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active h-100">
+            <img
+              src="https://people.com/thmb/BJO005QLK6f4YcZHW0iONQxoJ1g=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(999x0:1001x2)/family-adopt-dog-6c2f1eedd593433f85549e94e07af8bf.jpg"
+              class="d-block w-100" style="height: 100%;object-fit:fill;">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Jack and Joe</h5>
+            </div>
+          </div>
+          <div class="carousel-item h-100">
+            <img
+              src="https://images.contentstack.io/v3/assets/blt6f84e20c72a89efa/bltd3894bd280c131a6/6261d197787c0839e4c667c5/zpc_og_article_benefits-adopting-pet.jpg"
+              class="d-block w-100" style="height: 100%; object-fit: fill;">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Sparky and Maria</h5>
+            </div>
+          </div>
+          <div class="carousel-item h-100 ">
+            <img src="https://i.kym-cdn.com/entries/icons/original/000/041/444/sdc.jpg" class="d-block w-100"
+              style="height: 100%;object-fit: fill;">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Thomas and Alpha</h5>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+          data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+          data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+  <!-- Reviews Section -->
+  <section class="container p-5">
+    <div class="row">
+      <div class="col-md-4 mb-4" style="height: 30vh;">
+        <div class="card h-100 d-flex flex-column">
+
+          <div class="card-body d-flex flex-column">
+            <blockquote class="blockquote mb-0 flex-grow-1">
+              <p>"The best things in life are rescued."</p>
+
+            </blockquote>
+          </div>
+          <footer class="blockquote-footer mx-2">Tim <cite title="Source Title">Johnson</cite></footer>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4" style="height: 30vh;">
+        <div class="card h-100 d-flex flex-column">
+
+          <div class="card-body d-flex flex-column">
+            <blockquote class="blockquote mb-1 flex-grow-1">
+              <p>"Your new best friend is waiting for you at the shelter."</p>
+
+            </blockquote>
+
+          </div>
+          <footer class="blockquote-footer mx-2">Mary <cite title="Source Title">Moe</cite></footer>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4" style="height: 30vh;">
+        <div class="card h-100 d-flex flex-column">
+
+          <div class="card-body d-flex flex-column">
+            <blockquote class="blockquote mb-1 flex-grow-1">
+              <p>"Adopting a pet may not change the world, but for that pet, the world changes
+                forever."</p>
+
+            </blockquote>
+          </div>
+          <footer class="blockquote-footer mx-2">Joe <cite title="Source Title">Brown</cite></footer>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Reviews Section -->
+
+
+  <!-- Get Started Section
+ <section class="container-fluid bg-light p-5">
+  <div class="row">
+      <div class="col-md-4 text-center">
+          <img src="https://www.pngall.com/wp-content/uploads/13/Black-Cat-Transparent.png" class="img-fluid"
+              alt="...">
+      </div>
+      <div class="col-md-4 d-flex align-items-center justify-content-center">
+          <div class="rounded-pill bg-primary text-white p-4 text-center">
+              <h1>Get Started Today!</h1>
+          </div>
+      </div>
+      <div class="col-md-4 text-center">
+          <img src="https://www.freeiconspng.com/thumbs/cat-png/baby-cat-png-12.png" class="img-fluid" alt="...">
+      </div>
+  </div>
+</section>
+Get Started Section -->
+
+
+  <section>
+    <div class="bubble-container">
+      <div class="bubble small" style="top: 10%; left: 10%;"></div>
+      <div class="bubble medium" style="top: 20%; left: 30%;"></div>
+      <div class="bubble large" style="top: 40%; left: 50%;"></div>
+      <div class="bubble small" style="top: 60%; left: 70%;"></div>
+      <div class="bubble medium" style="top: 80%; left: 20%;"></div>
+      <div class="bubble large" style="top: 90%; left: 80%;"></div>
+      <div class="container-fluid my-5 h-100">
+        <div class="row h-100">
+          <div class="col">
+            <img src="https://www.pngall.com/wp-content/uploads/13/Black-Cat-Transparent.png" class="img-fluid"
+              alt="...">
+          </div>
+          <div class="col">
+            <a href="signup.html" class="get-started-text">
+              <div class="get-started-button d-flex justify-content-center align-items-center" style="color: white;">
+                <p class="mb-0">Get Started Today!</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center text-lg-start bg-light text-muted foot">
+    <!-- Section: Social media -->
+    <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom" style="color: white;">
+      <!-- Left -->
+      <div class="me-5 d-none d-lg-block">
+        <span>Get connected with us on social networks:</span>
+      </div>
+      <!-- Left -->
+      <!-- Right -->
+      <div>
+        <a href="" class="me-4 text-reset">
+          <i class="bi bi-instagram"></i>
+        </a>
+        <a href="" class="me-4 text-reset">
+          <i class="bi bi-facebook"></i>
+        </a>
+      </div>
+      <!-- Right -->
+    </section>
+    <!-- Section: Social media -->
+
+    <!-- Section: Links  -->
+    <section class="text-white">
+      <div class="container text-center text-md-start mt-5">
+        <!-- Grid row -->
+        <div class="row mt-3">
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+            <!-- Content -->
+            <h6 class="text-uppercase fw-bold mb-4">
+              <i class="fas fa-gem me-3"></i>Petpal Incorporated
+            </h6>
+            <p style="margin-top: 20px;">
+              Our aim is to connect loving families with their perfect furry companions. We strive to promote
+              responsible pet ownership and reduce the number of animals in need by facilitating successful adoptions,
+              creating forever homes, and supporting animal welfare organizations.
+            </p>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4" style="margin-left: 16px;">Contact</h6>
+            <p><i class="bi bi-house me-3"></i> 100 Petpal St, Toronto, Ontario</p>
+            <p>
+              <i class="bi bi-envelope me-3"></i>
+              petpal@gmail.com
+            </p>
+            <p><i class="bi bi-phone me-3"></i> + 01 234 567 88</p>
+            <p><i class="bi bi-printer me-3"></i> + 01 234 567 89</p>
+          </div>
+          <!-- Grid column -->
+        </div>
+        <!-- Grid row -->
+      </div>
+    </section>
+    <!-- Section: Links  -->
+
+    <!-- Copyright -->
+    <div class="text-center p-4 text-white" style="background-color: rgba(0, 0, 0, 0.05);">
+      © 2021 Copyright Petpal
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->
+
+</body>
+
+</html>
