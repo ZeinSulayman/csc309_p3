@@ -1,3 +1,3 @@
 #!/bin/bash
 . petpal/venv/bin/activate
-python petpal/manage.py runserver
+python3 petpal/manage.py runserver
