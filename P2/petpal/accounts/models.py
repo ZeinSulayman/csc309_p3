@@ -52,8 +52,8 @@ class PetSeeker(models.Model):
     )
     location = models.CharField(max_length=255)
     bio = models.TextField()
-    phone_num = models.CharField(max_length=255, null=True)
-    pref = models.TextField(null=True)
+    phone_num = models.CharField(max_length=255)
+    pref = models.TextField(null=True, blank=True)
     pic = models.ImageField(upload_to='pics/', blank=True, null=True)
 
     def __str__(self):
