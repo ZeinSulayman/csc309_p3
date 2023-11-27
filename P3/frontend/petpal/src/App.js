@@ -48,6 +48,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'; // Import the CSS file
 
 import Home from './pages/Home/index';
+import Login from './pages/Login/index';
 import About from './components/About';
 import Layout from './components/Layout/index'
 
@@ -59,6 +60,7 @@ function App() {
             <Route path="/" element={<Layout />}>
                 <Route index element={<Home/>} />
                 <Route path='/about' element={<About/>} />
+            <Route path='/login' element={<Login/>} />
             </Route>
           </Routes>
       </Router>

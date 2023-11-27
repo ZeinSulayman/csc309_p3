@@ -5,7 +5,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Layout = () => {
     return <>
-    <div>
     <section className="nav">
         <nav className="navbar navbar-expand-lg bg-body-tertiary container-fluid">
           <div className="container-fluid">
@@ -45,6 +44,35 @@ const Layout = () => {
                   About
                 </a>
               </li>
+              <li className="nav-item mx-2">
+                <a
+                  className="nav-link active"
+                  aria-current="page"
+                  href="login"
+                  style={{ fontWeight: 'bold', color: 'skyblue' }}
+                >
+                  Login
+                </a>
+              </li>
+              <li className="nav-item mx-2">
+            <a className="nav-link" href="finder.html" style={{color: "white"}}>Finder</a>
+          </li>
+          <li className="nav-item dropdown mx-2">
+            <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+              style={{color: "white"}}>
+              Seeker
+            </a>
+            <ul className="dropdown-menu dropdown-menu-start">
+              <li><a className="dropdown-item" href="seeker-account.html">Manage Account</a></li>
+              <li><a className="dropdown-item" href="applications.html">Manage Adoptions</a></li>
+              <li><a className="dropdown-item" href="login.html">Sign-up</a></li>
+            </ul>
+          </li>
+          <li class="nav-item mx-2">
+            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <i class="bi bi-bell" style={{color: "white"}}></i>
+            </button>
+            </li>
             </div>
           </div>
         </nav>
@@ -103,7 +131,7 @@ const Layout = () => {
       © 2021 Copyright Petpal
     </div>
   </footer>
-      </div>
+
     </>;
 
     /*<>
