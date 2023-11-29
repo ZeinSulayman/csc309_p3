@@ -52,6 +52,7 @@ import Login from './pages/Login/index';
 import Register from './pages/Register/index';
 import About from './components/About';
 import Layout from './components/Layout/index'
+import Finder from './pages/Finder/index';
 
 function App() {
   return (
@@ -61,8 +62,9 @@ function App() {
             <Route path="/" element={<Layout />}>
                 <Route index element={<Home/>} />
                 <Route path='/about' element={<About/>} />
+                <Route path='/finder' element={<Finder/>} />
             </Route>
-             <Route path='/api/newuser' element={<Register/>} />
+            <Route path='/api/newuser' element={<Register/>} />
             <Route path='/api/user' element={<Login/>} />
           </Routes>
       </Router>
