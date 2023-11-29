@@ -42,13 +42,14 @@ class MyApp extends React.Component {
 export default MyApp;
 */
 
-import React from 'react';
+import React, { useState, useEffect} from 'react';
 import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'; // Import the CSS file
 
 import Home from './pages/Home/index';
 import Login from './pages/Login/index';
+import Register from './pages/Register/index';
 import About from './components/About';
 import Layout from './components/Layout/index'
 
@@ -60,8 +61,9 @@ function App() {
             <Route path="/" element={<Layout />}>
                 <Route index element={<Home/>} />
                 <Route path='/about' element={<About/>} />
-            <Route path='/login' element={<Login/>} />
             </Route>
+             <Route path='/api/newuser' element={<Register/>} />
+            <Route path='/api/user' element={<Login/>} />
           </Routes>
       </Router>
     </main>

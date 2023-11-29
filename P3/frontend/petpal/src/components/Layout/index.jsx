@@ -1,9 +1,17 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Outlet, Link, useLocation } from "react-router-dom"
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const Layout = () => {
+function Layout(props){
+    const [isAuth, setIsAuth] = useState(false);
+
+   useEffect(() => {
+     if (localStorage.getItem('access_token') !== null) {
+        setIsAuth(true);
+      }
+    }, [isAuth]);
+
     return <>
     <section className="nav">
         <nav className="navbar navbar-expand-lg bg-body-tertiary container-fluid">
@@ -48,7 +56,7 @@ const Layout = () => {
                 <a
                   className="nav-link active"
                   aria-current="page"
-                  href="login"
+                  href="api/newuser"
                   style={{ fontWeight: 'bold', color: 'skyblue' }}
                 >
                   Login
