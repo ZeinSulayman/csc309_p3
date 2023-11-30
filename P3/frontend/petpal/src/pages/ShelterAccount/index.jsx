@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 function EditShelterAccount(props){
     const [loc, setLoc] = useState('');
     const [bio, setBio] = useState('');
-    const [num, setNum] = useState('');
+    const [num, setNum] = useState('d');
     const [name, setName] = useState('');
     const [website, setWebsite] = useState('');
 
