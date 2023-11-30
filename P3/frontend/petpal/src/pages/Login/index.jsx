@@ -29,7 +29,6 @@ const submit = async (e) => {
         // Check if the request was successful (status code in the range 200-299)
         if (response.ok) {
             const data = await response.json();
-            setUsername(data.access)
             // Initialize the access & refresh token in localstorage.
              localStorage.clear();
              localStorage.setItem('access_token', data.access);
@@ -101,7 +100,6 @@ const submit = async (e) => {
                     <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
                       <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Login</p>
-                      <p>{username}</p>
 
                       <form class="mx-1 mx-md-4" onSubmit={submit}>
 

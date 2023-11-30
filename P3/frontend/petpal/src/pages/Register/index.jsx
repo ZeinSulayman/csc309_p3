@@ -12,8 +12,6 @@ const Register = () => {
     const [shelter, setShelter] = useState(false);
 
 
-
-
    const submit = async (e) => {
         e.preventDefault();
 
@@ -44,7 +42,12 @@ const Register = () => {
                  localStorage.clear();
                  localStorage.setItem('access_token', data.access);
                  localStorage.setItem('refresh_token', data.refresh);
-                 window.location.href = '/'
+
+                 if (seeker){
+                     window.location.href = '/newuser/seeker'
+                 }else{
+                    window.location.href = '/newuser/shelter'
+                 }
                 // Initialize the access & refresh token in localstorage.
             } else {
                 // Handle error responses

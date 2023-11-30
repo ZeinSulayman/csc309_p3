@@ -71,7 +71,7 @@ function Layout(props){
               Seeker
             </a>
             <ul className="dropdown-menu dropdown-menu-start">
-              <li><a className="dropdown-item" href="seeker-account.html">Manage Account</a></li>
+              <li><a className="dropdown-item" href="seeker">Manage Account</a></li>
               <li><a className="dropdown-item" href="applications.html">Manage Adoptions</a></li>
               <li><a className="dropdown-item" href="login.html">Sign-up</a></li>
             </ul>
