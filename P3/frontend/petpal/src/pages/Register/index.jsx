@@ -37,17 +37,13 @@ const Register = () => {
             // Check if the request was successful (status code in the range 200-299)
             if (response.ok) {
                 const data = await response.json();
-                setUsername(data.access)
+                setPassword(data.password)
+                //setUsername(data.access)
                 // Initialize the access & refresh token in localstorage.
                  localStorage.clear();
                  localStorage.setItem('access_token', data.access);
                  localStorage.setItem('refresh_token', data.refresh);
-
-                 if (seeker){
-                     window.location.href = '/newuser/seeker'
-                 }else{
-                    window.location.href = '/newuser/shelter'
-                 }
+                 submit2();
                 // Initialize the access & refresh token in localstorage.
             } else {
                 // Handle error responses
@@ -59,6 +55,48 @@ const Register = () => {
         }
     };
 
+
+
+const submit2 = async (e) => {
+    //e.preventDefault();
+
+    const user = {
+        username: username,
+        password: password,
+    };
+
+    try {
+        // Create the POST request using the fetch API
+        const response = await fetch('http://127.0.0.1:8000/api/user/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(user),
+        });
+
+        // Check if the request was successful (status code in the range 200-299)
+        if (response.ok) {
+            const data = await response.json();
+            // Initialize the access & refresh token in localstorage.
+             localStorage.clear();
+             localStorage.setItem('access_token', data.access);
+             localStorage.setItem('refresh_token', data.refresh);
+              if (seeker){
+                     window.location.href = '/newuser/seeker'
+                 }else{
+                    window.location.href = '/newuser/shelter'
+                 }
+            // Initialize the access & refresh token in localstorage.
+        } else {
+            // Handle error responses
+            console.error('Error:', response.statusText);
+        }
+    } catch (error) {
+        // Handle network errors
+        console.error('Network error:', error.message);
+    }
+};
 
 
 

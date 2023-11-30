@@ -55,6 +55,7 @@ import Layout from './components/Layout/index'
 import Finder from './pages/Finder/index';
 import SeekerAccount from './pages/SeekerAccount/index';
 import EditSeekerAccount from './pages/SeekerAccount/ind';
+import EditShelterAccount from './pages/ShelterAccount/index';
 
 function App() {
   return (
@@ -66,10 +67,12 @@ function App() {
                 <Route path='/about' element={<About/>} />
                 <Route path='/finder' element={<Finder/>} />
                 <Route path='/seeker' element={<SeekerAccount/>} />
+                <Route path='/shelter' element={<EditShelterAccount/>} />
             </Route>
             <Route path='/api/newuser' element={<Register/>} />
             <Route path='/api/user' element={<Login/>} />
             <Route path='/newuser/seeker' element={<EditSeekerAccount/>} />
+            <Route path='/newuser/shelter' element={<EditShelterAccount/>} />
           </Routes>
       </Router>
     </main>
