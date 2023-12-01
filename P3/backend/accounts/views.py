@@ -22,7 +22,7 @@ class UserCreateView(generics.CreateAPIView):
 class UserRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = UserSerializer
     def get_object(self):
-        return get_object_or_404(User, id=self.kwargs['pk'])
+        return self.request.user
 
 class UserProfileView(generics.RetrieveAPIView):
     queryset = User.objects.all()

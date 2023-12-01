@@ -9,7 +9,7 @@ function Login(props) {
     const [isAuth, setIsAuth] = useState(false);
 
     const { user, updateUser } = useContext(UserContext);
-    console.log(user)
+    //console.log(user)
 
 
 const submit = async (e) => {
@@ -37,8 +37,8 @@ const submit = async (e) => {
              localStorage.clear();
              localStorage.setItem('access_token', data.access);
              localStorage.setItem('refresh_token', data.refresh);
-             getUser()
-             window.location.href = '/'
+             getUser();
+             //window.location.href = '/'
             // Initialize the access & refresh token in localstorage.
         } else {
             // Handle error responses
@@ -50,27 +50,27 @@ const submit = async (e) => {
     }
 };
 
-const getUser = async () => {
+const getUser = async (e) => {
+    //e.preventDefault();
     try {
-        const response = fetch('http://127.0.0.1:8000/seeker/', {
+        const response = await fetch('http://127.0.0.1:8000/user/', {
             method: 'get',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
-            },});
-
+            },
+            }
+            );
         // Check if the request was successful (status code in the range 200-299)
         if (response.ok) {
             const data = await response.json();
-              if (data == null){
-            console.log(data)
-                const userInfo = { id: 1, name: 'John Doe', seeker:false };
+                console.log(data)
+                const userInfo = { id: data['id'], name: data['username'], seeker: data['is_pet_seeker']};
                 updateUser(userInfo);
-            }
-             window.location.href = '/'
+                console.log(userInfo)
+                window.location.href = '/'
             // Initialize the access & refresh token in localstorage.
         } else {
-            // Handle error responses
             console.error('Error:', response.statusText);
         }
     } catch (error) {

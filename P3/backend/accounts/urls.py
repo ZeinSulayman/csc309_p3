@@ -31,7 +31,7 @@ urlpatterns = [
     #path('create/shelter/', ShelterCreateView.as_view(), name='shelter-create'),
     path('newuser/shelter/', ShelterCreateView.as_view(), name='shelter-create'),
     #user/pk/editor    editor may not be needed
-    path('user/<int:pk>/', UserRetrieveUpdateDestroy.as_view(), name='user-update'),
+    path('user/', UserRetrieveUpdateDestroy.as_view(), name='user-update'),
     #seeker/pk/editor
     path('seeker/', SeekerRetrieveUpdateDestroy.as_view(), name='seeker-update'),
     #path('seeker/update/', SeekerRetrieveUpdateDestroy.as_view(), name='seeker-update'),
