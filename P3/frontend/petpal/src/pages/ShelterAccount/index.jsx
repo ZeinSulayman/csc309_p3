@@ -5,17 +5,18 @@ import { useState, useEffect } from "react";
 function EditShelterAccount(props){
     const [loc, setLoc] = useState('');
     const [bio, setBio] = useState('');
-    const [num, setNum] = useState('d');
+    const [num, setNum] = useState('');
     const [name, setName] = useState('');
-    const [website, setWebsite] = useState('');
+    const [website, setWebsite] = useState('t');
 
     const submit = async (e) => {
+     e.preventDefault();
         const seek = {
             location: loc,
             description: bio,
             phone_num: num,
             shelter_name: name,
-            website: website
+            website: website,
         };
         try {
             // Create the POST request using the fetch API
@@ -30,7 +31,8 @@ function EditShelterAccount(props){
             // Check if the request was successful (status code in the range 200-299)
             if (response.ok) {
                 const data = await response.json();
-                console.log(localStorage.getItem('access_token'));
+                //console.log(localStorage.getItem('access_token'));
+                window.location.href = '/'
             } else {
                 // Handle error responses
                 console.error('Error:', response.statusText);

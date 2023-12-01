@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState, useEffect } from "react";
+import { UserContext } from '../../contexts/UserContext';
 
 function Login(props) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [isAuth, setIsAuth] = useState(false);
 
+    const { user, updateUser } = useContext(UserContext);
+    console.log(user)
+
 
 const submit = async (e) => {
-    //e.preventDefault();
+    e.preventDefault();
 
     const user = {
         username: username,
@@ -33,6 +37,7 @@ const submit = async (e) => {
              localStorage.clear();
              localStorage.setItem('access_token', data.access);
              localStorage.setItem('refresh_token', data.refresh);
+             getUser()
              window.location.href = '/'
             // Initialize the access & refresh token in localstorage.
         } else {
@@ -45,42 +50,34 @@ const submit = async (e) => {
     }
 };
 
-    //const [query, setQuery] = useState({search: "", page: 1});
+const getUser = async () => {
+    try {
+        const response = fetch('http://127.0.0.1:8000/seeker/', {
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+            },});
 
-    /*useEffect(() => {
-
-
-    // Example payload for the POST request
-    const postData = {
-
-    "username": "b",
-    "password": "123"
-
-    };
-
-    // Fetch options for a POST request
-    const requestOptions = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            // You can add other headers as needed
-        },
-        body: JSON.stringify(postData),
-    };
-
-    fetch('http://127.0.0.1:8000/api/user/', requestOptions)
-        .then(response => response.json()
-        )
-        .then(json => {
-            console.log('hi')
-            //setPlayers(json.data);
-            //setTotalPages(json.meta.total_pages);
-        })
-        .catch(error => {
-            // Handle errors
-            console.error('Error:', error);
-        });
-    }, [query]);*/
+        // Check if the request was successful (status code in the range 200-299)
+        if (response.ok) {
+            const data = await response.json();
+              if (data == null){
+            console.log(data)
+                const userInfo = { id: 1, name: 'John Doe', seeker:false };
+                updateUser(userInfo);
+            }
+             window.location.href = '/'
+            // Initialize the access & refresh token in localstorage.
+        } else {
+            // Handle error responses
+            console.error('Error:', response.statusText);
+        }
+    } catch (error) {
+        // Handle network errors
+        console.error('Network error:', error.message);
+    }
+};
 
   return ( <section class="vh-100" style={{backgroundColor: "#eee;"}}>
         <div class="container h-100">

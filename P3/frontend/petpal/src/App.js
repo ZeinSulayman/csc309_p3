@@ -47,6 +47,7 @@ import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'; // Import the CSS file
 
+import { UserProvider } from './contexts/UserContext';
 import Home from './pages/Home/index';
 import Login from './pages/Login/index';
 import Register from './pages/Register/index';
@@ -60,6 +61,7 @@ import EditShelterAccount from './pages/ShelterAccount/index';
 function App() {
   return (
     <main>
+      <UserProvider>
       <Router>
           <Routes>
             <Route path="/" element={<Layout />}>
@@ -75,6 +77,7 @@ function App() {
             <Route path='/newuser/shelter' element={<EditShelterAccount/>} />
           </Routes>
       </Router>
+      </UserProvider>
     </main>
   );
 }
