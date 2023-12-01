@@ -1,15 +1,21 @@
 import React, { useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState, useEffect } from "react";
-import { UserContext } from '../../contexts/UserContext';
+//import { UserContext } from '../../contexts/UserContext';
+import { useUser } from '../../contexts/UserContext';
+
 
 function Login(props) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [isAuth, setIsAuth] = useState(false);
 
-    const { user, updateUser } = useContext(UserContext);
+    //const { user, updateUser } = useContext(UserContext);
+      const { user, updateUser } = useUser();
     //console.log(user)
+    const handleUpdateUser = () => {
+    updateUser({ id: 1, name: 'John Doe', seeker: true });
+  };
 
 
 const submit = async (e) => {
@@ -67,6 +73,8 @@ const getUser = async (e) => {
                 console.log(data)
                 const userInfo = { id: data['id'], name: data['username'], seeker: data['is_pet_seeker']};
                 updateUser(userInfo);
+                localStorage.setItem('shelter',data['is_pet_seeker']);
+                handleUpdateUser();
                 console.log(userInfo)
                 window.location.href = '/'
             // Initialize the access & refresh token in localstorage.

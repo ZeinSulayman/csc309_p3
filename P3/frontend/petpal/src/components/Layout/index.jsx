@@ -1,12 +1,18 @@
 import { useContext, useState, useEffect } from "react";
 import { Outlet, Link, useLocation } from "react-router-dom"
 
+//import { UserContext } from '../../contexts/UserContext';
+
+import { useUser } from '../../contexts/UserContext';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Layout(props){
     const [isAuth, setIsAuth] = useState(false);
+     const { user, updateUser } = useUser();
 
    useEffect(() => {
+     console.log()
      if (localStorage.getItem('access_token') !== null) {
         setIsAuth(true);
       }
@@ -65,7 +71,20 @@ function Layout(props){
               <li className="nav-item mx-2">
             <a className="nav-link" href="finder" style={{color: "white"}}>Finder</a>
           </li>
-          <li className="nav-item dropdown mx-2">
+           {localStorage.getItem('shelter') ? (
+                <li className="nav-item dropdown mx-2">
+            <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+              style={{color: "white"}}>
+              Shelter
+            </a>
+            <ul className="dropdown-menu dropdown-menu-start">
+              <li><a className="dropdown-item" href="seeker">Manage Account</a></li>
+              <li><a className="dropdown-item" href="applications.html">Manage Adoptions</a></li>
+              <li><a className="dropdown-item" href="login.html">Sign-up</a></li>
+            </ul>
+          </li>
+              ) : (
+               <li className="nav-item dropdown mx-2">
             <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
               style={{color: "white"}}>
               Seeker
@@ -76,6 +95,7 @@ function Layout(props){
               <li><a className="dropdown-item" href="login.html">Sign-up</a></li>
             </ul>
           </li>
+              )}
           <li class="nav-item mx-2">
             <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
               <i class="bi bi-bell" style={{color: "white"}}></i>
