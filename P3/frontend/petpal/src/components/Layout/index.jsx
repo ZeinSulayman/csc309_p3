@@ -48,6 +48,16 @@ function Layout(props){
                   Home
                 </a>
               </li>
+                <li className="nav-item mx-2">
+                <a
+                  className="nav-link active"
+                  aria-current="page"
+                  href="/map"
+                  style={{ fontWeight: 'bold', color: 'skyblue' }}
+                >
+                  Map
+                </a>
+              </li>
               <li className="nav-item mx-2">
                 <a
                   className="nav-link active"

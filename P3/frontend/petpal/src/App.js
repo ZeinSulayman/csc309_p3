@@ -51,12 +51,14 @@ import { UserProvider } from './contexts/UserContext';
 import Home from './pages/Home/index';
 import Login from './pages/Login/index';
 import Register from './pages/Register/index';
-import About from './components/About';
-import Layout from './components/Layout/index'
 import Finder from './pages/Finder/index';
 import SeekerAccount from './pages/SeekerAccount/index';
 import EditSeekerAccount from './pages/SeekerAccount/ind';
 import EditShelterAccount from './pages/ShelterAccount/index';
+
+import About from './components/About';
+import Layout from './components/Layout/index'
+import Map from './components/Map/index'
 
 function App() {
   return (
@@ -70,6 +72,7 @@ function App() {
                 <Route path='/finder' element={<Finder/>} />
                 <Route path='/seeker' element={<SeekerAccount/>} />
                 <Route path='/shelter' element={<EditShelterAccount/>} />
+                <Route path='/map' element={<Map/>} />
             </Route>
             <Route path='/api/newuser' element={<Register/>} />
             <Route path='/api/user' element={<Login/>} />

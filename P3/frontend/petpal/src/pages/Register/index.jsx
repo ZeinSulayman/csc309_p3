@@ -58,7 +58,7 @@ const Register = () => {
 
 
 const submit2 = async (e) => {
-    e.preventDefault();
+    //e.preventDefault();
 
     const user = {
         username: username,
