@@ -6,16 +6,47 @@ import { Outlet, Link, useLocation } from "react-router-dom"
 import { useUser } from '../../contexts/UserContext';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import * as Icon from 'react-bootstrap-icons';
 
 function Layout(props){
     const [isAuth, setIsAuth] = useState(false);
-     const { user, updateUser } = useUser();
+    const { user, updateUser } = useUser();
+    const {filter, setFilter} = useState("False")
+
+    const [notiList, setNotiList] = useState([]);
+
+
+    const get_noti = async (e) => {
+        try {
+            // Create the POST request using the fetch API
+            const response = await fetch("http://127.0.0.1:8000/noti/?read=${filter}", {
+                method: 'get',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+                },
+            });
+            // Check if the request was successful (status code in the range 200-299)
+            if (response.ok) {
+                const data = await response.json();
+                setNotiList(data.results)
+            } else {
+                // Handle error responses
+                console.error('Error:', response.statusText);
+            }
+        } catch (error) {
+            // Handle network errors
+            console.error('Network error:', error.message);
+        }
+    };
 
    useEffect(() => {
      console.log()
      if (localStorage.getItem('access_token') !== null) {
         setIsAuth(true);
-      }
+        get_noti();
+        console.log(notiList)
+     }
     }, [isAuth]);
 
     return <>
@@ -62,16 +93,6 @@ function Layout(props){
                 <a
                   className="nav-link active"
                   aria-current="page"
-                  href="about"
-                  style={{ fontWeight: 'bold', color: 'skyblue' }}
-                >
-                  About
-                </a>
-              </li>
-              <li className="nav-item mx-2">
-                <a
-                  className="nav-link active"
-                  aria-current="page"
                   href="api/newuser"
                   style={{ fontWeight: 'bold', color: 'skyblue' }}
                 >
@@ -88,7 +109,7 @@ function Layout(props){
               Shelter
             </a>
             <ul className="dropdown-menu dropdown-menu-start">
-              <li><a className="dropdown-item" href="seeker">Manage Account</a></li>
+              <li><a className="dropdown-item" href="shelter">Manage Account</a></li>
               <li><a className="dropdown-item" href="applications.html">Manage Adoptions</a></li>
               <li><a className="dropdown-item" href="login.html">Sign-up</a></li>
             </ul>
@@ -108,16 +129,38 @@ function Layout(props){
               )}
           <li class="nav-item mx-2">
             <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-              <i class="bi bi-bell" style={{color: "white"}}></i>
+              <Icon.Bell class="bi bi-bell" style={{color: "white"}}></Icon.Bell>
             </button>
             </li>
             </div>
           </div>
         </nav>
       </section>
+
+          <section>
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Notifications</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <ul class="list-group">
+         {notiList && notiList.map((notification) => (
+                  <li class="list-group-item" key={notification.id}>{notification.content}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
       <section>
         <Outlet />
       </section>
+
       <footer class="text-center text-lg-start bg-light text-muted foot">
 
     <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom" style={{color: "white"}}>

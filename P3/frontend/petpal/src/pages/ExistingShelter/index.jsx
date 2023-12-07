@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState, useEffect } from "react";
 import '../../App.css'; // Import the CSS file
 
-function EditShelterAccount(props){
+function ShelterAccount(props){
     const [loc, setLoc] = useState('');
     const [bio, setBio] = useState('');
     const [num, setNum] = useState('');
@@ -11,7 +11,7 @@ function EditShelterAccount(props){
     const [website, setWebsite] = useState('');
 
     const submit = async (e) => {
-     e.preventDefault();
+     //e.preventDefault();
         const seek = {
             location: loc,
             description: bio,
@@ -21,8 +21,8 @@ function EditShelterAccount(props){
         };
         try {
             // Create the POST request using the fetch API
-            const response = await fetch('http://127.0.0.1:8000/newuser/shelter/', {
-                method: 'POST',
+            const response = await fetch('http://127.0.0.1:8000/shelter/', {
+                method: 'put',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
@@ -33,7 +33,41 @@ function EditShelterAccount(props){
             if (response.ok) {
                 const data = await response.json();
                 //console.log(localStorage.getItem('access_token'));
-                window.location.href = '/'
+            } else {
+                // Handle error responses
+                console.error('Error:', response.statusText);
+            }
+        } catch (error) {
+            // Handle network errors
+            console.error('Network error:', error.message);
+        }
+    };
+
+    const get_shelter = async (e) => {
+        const seek = {
+            location: loc,
+            description: bio,
+            phone_num: num,
+            shelter_name: name,
+            website: website,
+        };
+        try {
+            // Create the POST request using the fetch API
+            const response = await fetch('http://127.0.0.1:8000/shelter/', {
+                method: 'get',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+                },
+            });
+            // Check if the request was successful (status code in the range 200-299)
+            if (response.ok) {
+                const data = await response.json();
+                setName(data.shelter_name)
+                setLoc(data.location)
+                setBio(data.description)
+                setNum(data.phone_num)
+                setWebsite(data.website)
             } else {
                 // Handle error responses
                 console.error('Error:', response.statusText);
@@ -45,6 +79,10 @@ function EditShelterAccount(props){
     };
 
 
+   useEffect(() => {
+        get_shelter();
+   }, []);
+
 
 ///need to change to form so that that the reuqried feields are actaully required
     return <> <section>
@@ -52,12 +90,12 @@ function EditShelterAccount(props){
         <div class="row">
             <div class="col-lg-4">
                 <div class="card h-100">
-                    <form action="./shelter-manage.html" onSubmit={submit}>
+                    <form onSubmit={submit}>
                         <div class="card-body text-center">
                             <img src="./img/shelter-logo.png" alt="avatar"
                                  class="rounded-circle img-fluid" style={{width: "150px"}}></img>
                                 <input style={{ width: '100%', textAlign: 'center', border: '0px' }} type="text" class="my-3" style={{ width: '100%', border: '0px', textAlign: 'center', fontSize: '1.25rem', fontWeight: 500 }} value={name} onChange={e => setName(e.target.value)} required></input>
-                            <input type="text" class="text-muted mb-4" value={loc} onChange={e => setLoc(e.target.value)} required></input>
+                            <input style={{ width: '100%', textAlign: 'center', border: '0px' }} type="text" class="text-muted mb-4" value={loc} onChange={e => setLoc(e.target.value)} required></input>
                             <div class="d-flex justify-content-center mb-2">
                                 <button type="button" class="btn btn-primary">Follow</button>
                                 <button type="button" class="btn btn-outline-primary ms-1">Message</button>
@@ -74,7 +112,7 @@ function EditShelterAccount(props){
             <div class="col-lg-8">
                 <div class="card h-100">
                     <div class="card-body">
-                        <div class="row"    >
+                        <div class="row" style={{ paddingTop: '15px'}}    >
                             <div class="col-sm-3">
                                 <p class="mb-0">Shelter Name</p>
                             </div>
@@ -82,16 +120,7 @@ function EditShelterAccount(props){
                                 <input style={{ width: '70%', border: '0px' }} type="text" class="text-muted mb-0"  value={name} onChange={e => setName(e.target.value)}></input>
                             </div>
                         </div>
-                 <hr></hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p class="mb-0">Email</p>
-                            </div>
-                            <div class="col-sm-9">
-                                <input style={{ width: '70%', border: '0px' }} type="text" class="text-muted mb-0" value="animal@shelter.com"></input>
-                            </div>
-                        </div>
-<hr></hr>
+<hr style={{ padding: '15px'}}></hr>
                      <div class="row">
                             <div class="col-sm-3">
                                 <p class="mb-0">Website</p>
@@ -100,7 +129,7 @@ function EditShelterAccount(props){
                                 <input style={{ width: '70%', border: '0px' }} type="text" class="text-muted mb-0" value={website} onChange={e => setWebsite(e.target.value)}></input>
                             </div>
                         </div>
-<hr></hr>
+<hr style={{ padding: '15px'}}></hr>
                         <div class="row">
                             <div class="col-sm-3">
                                 <p class="mb-0">Phone</p>
@@ -109,7 +138,7 @@ function EditShelterAccount(props){
                                 <input style={{ width: '70%', border: '0px' }} type="text" class="text-muted mb-0" value={num} onChange={e => setNum(e.target.value)}></input>
                             </div>
                         </div>
-<hr></hr>
+<hr style={{ padding: '15px'}}></hr>
                         <div class="row">
                             <div class="col-sm-3">
                                 <p class="mb-0">Address</p>
@@ -118,15 +147,8 @@ function EditShelterAccount(props){
                                 <input style={{ width: '70%', border: '0px' }} type="text" class="text-muted mb-0" value={loc} onChange={e => setLoc(e.target.value)}></input>
                             </div>
                         </div>
-<hr></hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p class="mb-0">Manager Name</p>
-                            </div>
-                            <div class="col-sm-9">
-                                <input style={{ width: '70%', border: '0px' }} type="text" class="text-muted mb-0" value="Smith Don"></input>
-                            </div>
-                        </div>
+<hr style={{ padding: '15px'}}></hr>
+
                     </div>
                 </div>
             </div>
@@ -187,4 +209,4 @@ function EditShelterAccount(props){
 </>
 };
 
-export default EditShelterAccount;
+export default ShelterAccount;

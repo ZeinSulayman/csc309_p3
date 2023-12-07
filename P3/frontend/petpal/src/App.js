@@ -55,6 +55,7 @@ import Finder from './pages/Finder/index';
 import SeekerAccount from './pages/SeekerAccount/index';
 import EditSeekerAccount from './pages/SeekerAccount/ind';
 import EditShelterAccount from './pages/ShelterAccount/index';
+import ShelterAccount from './pages/ExistingShelter/index';
 
 import About from './components/About';
 import Layout from './components/Layout/index'
@@ -71,7 +72,7 @@ function App() {
                 <Route path='/about' element={<About/>} />
                 <Route path='/finder' element={<Finder/>} />
                 <Route path='/seeker' element={<SeekerAccount/>} />
-                <Route path='/shelter' element={<EditShelterAccount/>} />
+                <Route path='/shelter' element={<ShelterAccount/>} />
                 <Route path='/map' element={<Map/>} />
             </Route>
             <Route path='/api/newuser' element={<Register/>} />
