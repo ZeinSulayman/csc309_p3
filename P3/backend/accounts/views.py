@@ -3,7 +3,7 @@
 from rest_framework import generics,views
 from .models import User, PetSeeker, PetShelter
 from applications.models import PetApplication
-from .serializers import UserSerializer, CustomTokenObtainPairSerializer, PetSeekerSerializer, PetShelterSerializer
+from .serializers import UserSerializer, CustomTokenObtainPairSerializer, PetSeekerSerializer, PetShelterSerializer, UserGetSerializer
 from .permissions import IsShelter, IsPetSeeker
 from rest_framework.response import Response
 from rest_framework import status
@@ -20,7 +20,7 @@ class UserCreateView(generics.CreateAPIView):
     serializer_class = UserSerializer
 
 class UserRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
-    serializer_class = UserSerializer
+    serializer_class = UserGetSerializer
     def get_object(self):
         return self.request.user
 

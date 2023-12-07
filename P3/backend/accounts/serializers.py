@@ -24,6 +24,11 @@ class PetSeekerSerializer(serializers.ModelSerializer):
         model = PetSeeker
         fields = ('location', 'bio','pic','pref','phone_num')
 
+class UserGetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('email', 'username')
+
 class UserSerializer(serializers.ModelSerializer):
     password2 = serializers.CharField(write_only=True)
 

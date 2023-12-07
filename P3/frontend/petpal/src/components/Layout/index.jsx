@@ -40,13 +40,49 @@ function Layout(props){
         }
     };
 
+    const markAsRead = async (id) => {
+        //setNotiList((notiList) =>
+        //  notiList.map((notification) =>
+        //    notification.id === id ? { ...notification, read: true } : notification
+          //)
+        //);
+        console.log(id)
+        try {
+            // Create the POST request using the fetch API
+            const response = await fetch(`http://127.0.0.1:8000/noti/${id}/`, {
+                method: 'put',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+                },
+            });
+            // Check if the request was successful (status code in the range 200-299)
+            if (response.ok) {
+                //console.log('yes')
+                const data = await response.json();
+                get_noti();
+                //setNotiList(data.results)
+            } else {
+                // Handle error responses
+                console.error('Error:', response.statusText);
+            }
+        } catch (error) {
+            // Handle network errors
+            console.error('Network error:', error.message);
+        }
+    };
+
+
+
    useEffect(() => {
-     console.log()
+     console.log(localStorage.getItem('shelter') )
      if (localStorage.getItem('access_token') !== null) {
         setIsAuth(true);
         get_noti();
+        console.log(isAuth)
         console.log(notiList)
      }
+      console.log(notiList)
     }, [isAuth]);
 
     return <>
@@ -93,7 +129,7 @@ function Layout(props){
                 <a
                   className="nav-link active"
                   aria-current="page"
-                  href="api/newuser"
+                  href="api/user/"
                   style={{ fontWeight: 'bold', color: 'skyblue' }}
                 >
                   Login
@@ -102,7 +138,7 @@ function Layout(props){
               <li className="nav-item mx-2">
             <a className="nav-link" href="finder" style={{color: "white"}}>Finder</a>
           </li>
-           {localStorage.getItem('shelter') ? (
+           {localStorage.getItem('shelter') == 'true' ? (
                 <li className="nav-item dropdown mx-2">
             <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
               style={{color: "white"}}>
@@ -114,7 +150,7 @@ function Layout(props){
               <li><a className="dropdown-item" href="login.html">Sign-up</a></li>
             </ul>
           </li>
-              ) : (
+          ) : (
                <li className="nav-item dropdown mx-2">
             <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
               style={{color: "white"}}>
@@ -148,7 +184,19 @@ function Layout(props){
             <div class="modal-body">
               <ul class="list-group">
          {notiList && notiList.map((notification) => (
-                  <li class="list-group-item" key={notification.id}>{notification.content}</li>
+                  <li class="list-group-item" key={notification.id}>
+              <div
+                style={{
+                  width: '10px',
+                  height: '10px',
+                  borderRadius: '50%',
+                  display: 'inline-block',
+                  marginRight: '5px',
+                  backgroundColor: notification.read ? 'green' : 'red',
+                }}
+              />
+                  <a onClick={() => markAsRead(notification.id)} style={{ textDecoration: 'none', color: 'black', cursor: 'pointer' }} href={notification.link}>{notification.content}</a>
+              </li>
                 ))}
               </ul>
             </div>
