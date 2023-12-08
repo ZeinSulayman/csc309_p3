@@ -56,9 +56,7 @@ import SeekerAccount from './pages/SeekerAccount/index';
 import EditSeekerAccount from './pages/SeekerAccount/ind';
 import EditShelterAccount from './pages/ShelterAccount/index';
 import ShelterAccount from './pages/ExistingShelter/index';
-import PetCreate from './pages/CreatePet/index';
-import PetDetail from './pages/PetDetails/index';
-import PetEdit from './pages/UpdatePet/index'
+import PetApplication from "./pages/PetApplication";
 
 import About from './components/About';
 import Layout from './components/Layout/index'
@@ -70,9 +68,7 @@ function App() {
     <main>
       <UserProvider>
       <Router>
-
           <Routes>
-
             <Route path="/" element={<Layout />}>
                 <Route index element={<Home/>} />
                 <Route path='/about' element={<About/>} />
@@ -83,6 +79,7 @@ function App() {
                 <Route path='/pets/create' element={<PetCreate/>} />
                 <Route path="/pets/:petId" element={<PetDetail />} />
                 <Route path="/pets/edit/:petId" element={<PetEdit />} />
+                <Route path="/pets/:petId/application" element={<PetApplication />}/>
             </Route>
             <Route path='/api/newuser' element={<Register/>} />
             <Route path='/api/user' element={<Login/>} />
