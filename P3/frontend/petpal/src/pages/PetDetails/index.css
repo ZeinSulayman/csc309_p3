@@ -1,0 +1,79 @@
+
+  .detail .carousel-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .detail .carousel-inner img {
+    object-fit: contain;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+  }
+
+  .detail .carousel {
+    position: relative;
+    /* Adjust to your desired width or keep it at 100% for full width */
+    margin: 0 auto;
+    /* Center the carousel horizontally */
+    height: 50vh;
+    /* 50% of the viewport height */
+  }
+
+  .detail .carousel-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    /* Takes up the full height set by the .carousel class */
+    overflow: hidden;
+  }
+
+
+
+  .detail .carousel-control-prev,
+  .detail .carousel-control-next {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    /* Vertically centers the controls */
+    width: 10%;
+    /* Width of the control area */
+  }
+
+  .detail .carousel-control-prev {
+    left: 0;
+  }
+
+  .detail .carousel-control-next {
+    right: 0;
+  }
+
+  .detail .carousel-control-prev-icon,
+  .detail .carousel-control-next-icon {
+    width: 30px;
+    /* Adjust to desired icon size */
+    height: 30px;
+    filter: invert(1);
+  }
+
+  .detail .bi {
+    margin-right: 2px;
+  }
+
+  .detail .fa-solid {
+    margin-right: 2px;
+  }
+
+  .detail .card {
+    max-width: 18rem;
+    margin: 0 auto;
+    /* Centers the card when screen is smaller */
+  }
