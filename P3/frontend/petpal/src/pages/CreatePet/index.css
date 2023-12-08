@@ -1,0 +1,30 @@
+.adoptapp-background {
+    background-color: #7CB9E8;
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: lighten;
+    padding: 50px 0;
+    position: relative;
+    z-index: 1;
+}
+
+.adoptapp-background .card {
+    position: relative;
+    z-index: 2;
+}
+
+.centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    margin-bottom: 20px;
+}
+
+.centered-icon-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

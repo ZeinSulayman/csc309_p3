@@ -18,6 +18,6 @@ class PetFilter(filters.FilterSet):
             'status': ['exact'],
             'breed': ['exact', 'icontains'],
             'age': ['exact', 'lt', 'gt'],
-            'size': ['exact'],
+            'location': ['exact'],
             'gender': ['exact'],
         }
