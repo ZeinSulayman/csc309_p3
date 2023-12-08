@@ -56,13 +56,14 @@ import SeekerAccount from './pages/SeekerAccount/index';
 import EditSeekerAccount from './pages/SeekerAccount/ind';
 import EditShelterAccount from './pages/ShelterAccount/index';
 import ShelterAccount from './pages/ExistingShelter/index';
+import PetCreate from './pages/CreatePet/index';
+import PetDetail from './pages/PetDetails/index';
+import PetEdit from './pages/UpdatePet/index'
 
 import About from './components/About';
 import Layout from './components/Layout/index'
 import Map from './components/Map/index'
-import PetCreate from './pages/CreatePet/index';
-import PetDetail from './pages/PetDetails/index';
-import PetEdit from './pages/UpdatePet/index'
+
 
 function App() {
   return (
