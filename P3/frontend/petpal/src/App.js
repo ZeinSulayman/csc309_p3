@@ -56,7 +56,10 @@ import SeekerAccount from './pages/SeekerAccount/index';
 import EditSeekerAccount from './pages/SeekerAccount/ind';
 import EditShelterAccount from './pages/ShelterAccount/index';
 import ShelterAccount from './pages/ExistingShelter/index';
-import PetApplication from "./pages/PetApplication";
+import PetApplication from "./pages/PetApplication/index";
+import PetDetail from "./pages/PetDetails/index";
+import PetCreate from "./pages/CreatePet/index";
+import PetEdit from "./pages/UpdatePet/index";
 
 import About from './components/About';
 import Layout from './components/Layout/index'

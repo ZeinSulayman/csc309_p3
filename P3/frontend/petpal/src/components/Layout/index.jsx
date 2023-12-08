@@ -129,14 +129,14 @@ function Layout(props){
                 <a
                   className="nav-link active"
                   aria-current="page"
-                  href="api/user/"
+                  href="/api/user/"
                   style={{ fontWeight: 'bold', color: 'skyblue' }}
                 >
                   Login
                 </a>
               </li>
               <li className="nav-item mx-2">
-            <a className="nav-link" href="finder" style={{color: "white"}}>Finder</a>
+            <a className="nav-link" href="/finder" style={{color: "white"}}>Finder</a>
           </li>
            {localStorage.getItem('shelter') == 'true' ? (
                 <li className="nav-item dropdown mx-2">
