@@ -102,9 +102,9 @@ const Finder = () => {
       </select>
       <select className="form-control me-2" name="size" value={filters.size} onChange={handleFilterChange}>
         <option value="" >Select Size</option>
-        <option value="" >Small</option>
-        <option value="" >Medium</option>
-        <option value="" >Large</option>
+        <option value="small" >Small</option>
+        <option value="medium" >Medium</option>
+        <option value="large" >Large</option>
       </select>
       <select style={{width:'85%'}} className="form-control me-2" name="status" value={filters.status} onChange={handleFilterChange}>
         <option value="" >Select Status</option>
@@ -304,13 +304,12 @@ const Finder = () => {
                         <p className="card-text"><strong>Size:</strong> {currentPet.size}</p>
                         <p className="card-text"><strong>Description:</strong> {currentPet.description}</p>
                         <p className="card-text"><strong>Location:</strong> {currentPet.location}</p>
-                        <p className="card-text"><strong>Status:</strong> {currentPet.status}</p>
-                        <a href={`petdetailerror-${petIndex}.html`} className="btn btn-primary">
+                        <a href={`../pets/${pet.id}`} className="btn btn-primary">
                           Find out about {currentPet.name}
                         </a>
                       </div>
                       <div className="card-footer">
-                        <small className="text-body-secondary">Published: {currentPet.publishedDate}</small>
+                        <small className="text-body-secondary">Status: {currentPet.status}</small>
                       </div>
                     </div>
                   </div>

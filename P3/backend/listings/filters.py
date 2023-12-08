@@ -14,10 +14,8 @@ class PetFilter(filters.FilterSet):
     class Meta:
         model = Pet
         fields = {
-            'owner': ['exact'],
             'status': ['exact'],
             'breed': ['exact', 'icontains'],
-            'age': ['exact', 'lt', 'gt'],
             'location': ['exact'],
-            'gender': ['exact'],
+            'size': ['exact'],
         }
