@@ -4,17 +4,17 @@ import { Outlet, Link, useLocation } from "react-router-dom"
 //import { UserContext } from '../../contexts/UserContext';
 
 import { useUser } from '../../contexts/UserContext';
-
+import ListWithPagination from './pagination'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as Icon from 'react-bootstrap-icons';
 
 function Layout(props){
+
     const [isAuth, setIsAuth] = useState(false);
     const { user, updateUser } = useUser();
     const {filter, setFilter} = useState("False")
 
     const [notiList, setNotiList] = useState([]);
-
 
     const get_noti = async (e) => {
         try {
@@ -30,6 +30,31 @@ function Layout(props){
             if (response.ok) {
                 const data = await response.json();
                 setNotiList(data.results)
+            } else {
+                // Handle error responses
+                console.error('Error:', response.statusText);
+            }
+        } catch (error) {
+            // Handle network errors
+            console.error('Network error:', error.message);
+        }
+    };
+
+     const del = async (e) => {
+     console.log(e)
+        try {
+            // Create the POST request using the fetch API
+            const response = await fetch(`http://127.0.0.1:8000/noti/${e}/`, {
+                method: 'delete',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+                },
+            });
+            // Check if the request was successful (status code in the range 200-299)
+            if (response.ok) {
+                //const data = await response.json();
+                get_noti();
             } else {
                 // Handle error responses
                 console.error('Error:', response.statusText);
@@ -181,10 +206,11 @@ function Layout(props){
               <h5 class="modal-title" id="exampleModalLabel">Notifications</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+    <ListWithPagination items={notiList} itemsPerPage={2} />;
+            {/*<div class="modal-body">
               <ul class="list-group">
-         {notiList && notiList.map((notification) => (
-                  <li class="list-group-item" key={notification.id}>
+                {notiList && notiList.map((notification) => (
+                  <li class="list-group-item" key={notification.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div
                 style={{
                   width: '10px',
@@ -196,10 +222,16 @@ function Layout(props){
                 }}
               />
                   <a onClick={() => markAsRead(notification.id)} style={{ textDecoration: 'none', color: 'black', cursor: 'pointer' }} href={notification.link}>{notification.content}</a>
+                    <div>
+                    <button type="button" onClick={() => del(notification.id)}>
+                        <Icon.Trash className="bi bi-bell" style={{ color: 'black' }}></Icon.Trash>
+                </button>
+
+                      </div>
               </li>
                 ))}
               </ul>
-            </div>
+            </div>*/}
           </div>
         </div>
       </div>

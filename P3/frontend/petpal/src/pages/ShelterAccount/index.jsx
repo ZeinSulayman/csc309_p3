@@ -33,6 +33,7 @@ function EditShelterAccount(props){
             if (response.ok) {
                 const data = await response.json();
                 //console.log(localStorage.getItem('access_token'));
+
                 window.location.href = '/'
             } else {
                 // Handle error responses

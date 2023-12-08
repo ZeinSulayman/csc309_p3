@@ -27,7 +27,7 @@ class PetSeekerSerializer(serializers.ModelSerializer):
 class UserGetSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('email', 'username')
+        fields = ('email', 'username', 'is_pet_shelter')
 
 class UserSerializer(serializers.ModelSerializer):
     password2 = serializers.CharField(write_only=True)

@@ -9,6 +9,7 @@ function ShelterAccount(props){
     const [num, setNum] = useState('');
     const [name, setName] = useState('');
     const [website, setWebsite] = useState('');
+    const [pic, setPic] = useState('');
 
     const submit = async (e) => {
      //e.preventDefault();
@@ -68,6 +69,57 @@ function ShelterAccount(props){
                 setBio(data.description)
                 setNum(data.phone_num)
                 setWebsite(data.website)
+                setPic(data.pic)
+            } else {
+                // Handle error responses
+                console.error('Error:', response.statusText);
+            }
+        } catch (error) {
+            // Handle network errors
+            console.error('Network error:', error.message);
+        }
+    };
+
+    const del = async (e) => {
+        try {
+            // Create the POST request using the fetch API
+            const response = await fetch('http://127.0.0.1:8000/shelter/', {
+                method: 'delete',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+                },
+            });
+            // Check if the request was successful (status code in the range 200-299)
+            if (response.ok) {
+                //const data = await response.json();
+                del2();
+            } else {
+                // Handle error responses
+                console.error('Error:', response.statusText);
+            }
+        } catch (error) {
+            // Handle network errors
+            console.error('Network error:', error.message);
+        }
+    };
+
+    const del2 = async (e) => {
+        try {
+            // Create the POST request using the fetch API
+            const response = await fetch('http://127.0.0.1:8000/user/', {
+                method: 'delete',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+                },
+            });
+            // Check if the request was successful (status code in the range 200-299)
+            if (response.ok) {
+                //const data = await response.json();
+
+                window.location.href = '/'
+                 localStorage.clear();
             } else {
                 // Handle error responses
                 console.error('Error:', response.statusText);
@@ -92,7 +144,7 @@ function ShelterAccount(props){
                 <div class="card h-100">
                     <form onSubmit={submit}>
                         <div class="card-body text-center">
-                            <img src="./img/shelter-logo.png" alt="avatar"
+                            <img src={pic} alt="avatar"
                                  class="rounded-circle img-fluid" style={{width: "150px"}}></img>
                                 <input style={{ width: '100%', textAlign: 'center', border: '0px' }} type="text" class="my-3" style={{ width: '100%', border: '0px', textAlign: 'center', fontSize: '1.25rem', fontWeight: 500 }} value={name} onChange={e => setName(e.target.value)} required></input>
                             <input style={{ width: '100%', textAlign: 'center', border: '0px' }} type="text" class="text-muted mb-4" value={loc} onChange={e => setLoc(e.target.value)} required></input>
@@ -104,7 +156,9 @@ function ShelterAccount(props){
                             <textarea style={{ width: '100%', textAlign: 'center', border: '0px', wordWrap: 'normal' }} rows="2" class="mb-2" id value={bio} onChange={e => setBio(e.target.value)} required></textarea>
                         </div>
                         <div class="align-self-end mx-3" style={{ width: '100%', textAlign: 'right' }}>
+                            <button type="button" style={{ marginBottom: '10px', marginRight: '10px' }} class="btn btn-danger" onClick={() => del()} >Delete</button>
                             <input type="submit" style={{ marginBottom: '10px', marginRight: '30px' }} class="btn btn-outline-success" value="Save" ></input>
+
                         </div>
                     </form>
                 </div>

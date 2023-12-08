@@ -114,7 +114,7 @@ const getUser = async (e) => {
                             <input  id="form3Example3c" class="form-control" value={username}
                 required
                 onChange={e => setUsername(e.target.value)}/>
-                            <label class="form-label" for="form3Example3c">Your Email</label>
+                            <label class="form-label" for="form3Example3c">Your Username</label>
                           </div>
                         </div>
 
