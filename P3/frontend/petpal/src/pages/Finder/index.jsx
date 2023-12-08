@@ -304,7 +304,7 @@ const Finder = () => {
                         <p className="card-text"><strong>Size:</strong> {currentPet.size}</p>
                         <p className="card-text"><strong>Description:</strong> {currentPet.description}</p>
                         <p className="card-text"><strong>Location:</strong> {currentPet.location}</p>
-                        <a href={`../pets/${pet.id}`} className="btn btn-primary">
+                        <a href={`../pets/${currentPet.id}`} className="btn btn-primary">
                           Find out about {currentPet.name}
                         </a>
                       </div>
