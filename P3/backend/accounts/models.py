@@ -5,7 +5,6 @@ class User(AbstractUser):
     email = models.EmailField(unique=True)
     is_pet_shelter = models.BooleanField(default=False)
     is_pet_seeker = models.BooleanField(default=False)
-
     # Add a unique related_name for the groups field
     groups = models.ManyToManyField(
         'auth.Group',
@@ -25,7 +24,12 @@ class User(AbstractUser):
         verbose_name='user permissions',
         help_text='Specific permissions for this user.',
     )
-
+    def shelter_id(self):
+            # Retrieve the shelter_id from the related PetShelter model
+            if self.is_pet_shelter:
+                return self.pet_shelter.shelter_id
+            else:
+                return None
     def __str__(self):
         return self.username
 
