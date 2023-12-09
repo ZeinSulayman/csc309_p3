@@ -59,6 +59,7 @@ import ShelterAccount from './pages/ExistingShelter/index';
 import PetCreate from './pages/CreatePet/index';
 import PetDetail from './pages/PetDetails/index';
 import PetEdit from './pages/UpdatePet/index'
+import Applications from './pages/ApplicationView/index'
 
 import About from './components/About';
 import Layout from './components/Layout/index'
@@ -79,6 +80,7 @@ function App() {
                 <Route path='/finder' element={<Finder/>} />
                 <Route path='/seeker' element={<SeekerAccount/>} />
                 <Route path='/shelter' element={<ShelterAccount/>} />
+                <Route path='/applications' element={<Applications/>} />
                 <Route path='/map' element={<Map/>} />
                 <Route path='/pets/create' element={<PetCreate/>} />
                 <Route path="/pets/:petId" element={<PetDetail />} />
