@@ -60,8 +60,6 @@ import PetDetail from "./pages/PetDetails/index";
 import CreatePet from "./pages/CreatePet/index";
 import PetEdit from "./pages/UpdatePet/index";
 import Applications from './pages/ApplicationView/index'
-
-
 import About from './components/About';
 import Layout from './components/Layout/index'
 import Map from './components/Map/index'
