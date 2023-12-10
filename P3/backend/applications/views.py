@@ -104,6 +104,7 @@ class PetApplicationView(CreateAPIView):
     def create(self, request, *args, **kwargs):
         pet_id = self.kwargs.get('pet_id')
         pet = Pet.objects.get(pk=pet_id)
+        pet_name = pet.name
 
         # Check if the pet is available for adoption
         if not pet.status == 'available':
@@ -117,4 +118,4 @@ class PetApplicationView(CreateAPIView):
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
     def perform_create(self, serializer, pet):
-        serializer.save(pet=pet, applicant=self.request.user, status="pending")
+        serializer.save(pet=pet, applicant=self.request.user, status="pending", pet_name=pet.name, shelter_name=pet.owner.shelter_name)

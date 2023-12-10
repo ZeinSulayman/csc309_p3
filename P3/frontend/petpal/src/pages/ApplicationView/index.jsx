@@ -1,7 +1,6 @@
 // // PetList.jsx
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 const Applications = () => {
   let page = 1;
   const [applications, setApps] = useState([]);
@@ -79,12 +78,73 @@ const Applications = () => {
     // Combine base URL with parameters
     return `${baseUrl}?${params.toString()}`;
   };
-
+    const handleFilterChange = (event) => {
+        const { name, value } = event.target;
+        setFilters((prevFilters) => ({ ...prevFilters, [name]: value }));
+      };
   if (!applications.results || !Array.isArray(applications.results)) {
     return(<p>Loading...</p>)
   }
 return (
 <div>
+    <section>
+              <div className="container pt-4">
+                <div className="d-flex flex-column flex-md-row justify-content-between">
+                  <div className="row">
+                    <div className="mb-3 mb-md-0">
+                    <div style={{width:'105%'}} class="d-flex">
+
+          <select style={{width:'100%'}} className="form-control me-2" name="status" value={filters.status} onChange={handleFilterChange}>
+            <option value="" >Select Status</option>
+            <option value="pending" >Pending</option>
+            <option value="accepted" >Accepted</option>
+            <option value="denied" >Denied</option>
+            <option value="withdrawn" >Withdrawn</option>
+          </select>
+          </div>
+
+                          </div>
+                  </div>
+
+                  <div className="w-100 d-md-none d-block m-3"></div>
+
+                  <div className="row justify-content-end">
+                    <div style={{ marginLeft: '5px', marginBottom: '5px' }} className="col-md-auto">
+                      <div className="dropdown">
+                        <button
+                          className="btn btn-secondary dropdown-toggle"
+                          style={{ backgroundColor: '#2659F4', borderColor: '#2659F4' }}
+                          type="button"
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false"
+                        >
+                          Sort
+                        </button>
+                        <ul className="dropdown-menu">
+                          <li>
+                          <button style={{ paddingRight: '20px' }} className="dropdown-item" value="date_created" onClick={() => handleFilterChange({ target: { name: 'sort', value: 'age' } })}>
+                              Sort by Date Created
+                            </button>
+                          </li>
+                          <li>
+                          <button style={{ paddingRight: '20px' }} className="dropdown-item" value="-last_modified" onClick={() => handleFilterChange({ target: { name: 'sort', value: 'name' } })}>
+                              Sort by Last Modified
+                            </button>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+
+
+                    <div style={{ marginLeft: '5px', marginBottom: '5px' }} className="col-md-auto">
+                      <a className="btn btn-outline-success" href="../finder/">
+                        Reset Filter/Sort
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </section>
     <main className="container mt-5">
       <h2 className="title">Adoption Applications</h2>
 
@@ -99,8 +159,9 @@ return (
                         className="card-img-top"
                       />
                       <div className="card-body">
-<h5 className="card-title">Pet Name: {}</h5>
-                        <p className="card-text">Shelter: #{application.applications}</p>
+                        <h5 style={{paddingBottom:'10'}}className="card-title">Pet Name: {application.pet_name}</h5>
+                        <p style={{marginBottom:'2px'}} className="card-text">Shelter: {application.shelter_name}</p>
+                        <p className="card-text">Applicant: {application.first_name} {application.last_name}</p>
                       </div>
                       <div className="card-footer">
                         <div className="row">
@@ -114,10 +175,8 @@ return (
                             <button
                               type="button"
                               className="btn btn-primary"
-                              data-bs-toggle="modal"
-                              data-bs-target="#applicationModal"
                             >
-                              <i className="fas fa-eye"></i> View Application
+                              <a style={{color:'white', textDecoration:'None'}} href='/'>View Application</a>
                             </button>
                           </div>
                         </div>
@@ -128,75 +187,19 @@ return (
 
 
       </div>
+      <div>
+                <nav aria-label="Page navigation example">
+                  <ul className="pagination justify-content-center">
+                    <li className="page-item"><button className="page-link" onClick={() => handleFilterChange({ target: { name: 'page', value: page - 1 } })}>Previous</button></li>
+                    <li className="page-item"><button className="page-link" onClick={() => handleFilterChange({ target: { name: 'page', value: '1' } })}>1</button></li>
+                    <li className="page-item"><button className="page-link" onClick={() => handleFilterChange({ target: { name: 'page', value: '2' } })}>2</button></li>
+                    <li className="page-item"><button className="page-link" onClick={() => handleFilterChange({ target: { name: 'page', value: '3' } })}>3</button></li>
+                    <li className="page-item"><button className="page-link" onClick={() => handleFilterChange({ target: { name: 'page', value: page + 1 } })}>Next</button></li>
+                  </ul>
+                </nav>
+              </div>
     </main>
-    <div className="modal fade" id="applicationModal" tabIndex="-1" aria-labelledby="applicationModalLabel" aria-hidden="true">
-          <div className="modal-dialog modal-lg">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title" id="applicationModalLabel">Adoption Application</h5>
-                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div className="modal-body">
-                <div className="container mt-5 mb-5">
-                  <div className="row justify-content-center">
-                    <div className="col-md-8">
-                      <div className="card" style={{ backgroundColor: '#e6f7ff' }}>
-                        <div className="card-body">
-                          <h2 className="mb-4 text-center">Pet Adoption Application for Fredrick</h2>
 
-                          <form>
-                            {/* Applicant Information */}
-                            <div className="text-center mb-3">
-                              <img
-                                src="https://www.williamwalker.de/cdn/shop/articles/friendsofwilliamwalker_BreedProfileYorkshireTerrier4zu3_1024x.jpg?v=1628603961"
-                                alt="Pet Image"
-                                className="img-fluid rounded-circle"
-                                style={{ maxWidth: '150px' }}
-                              />
-                            </div>
-
-                            <h5 className="text-center mb-4"><strong>Pet Name: </strong> Fredrick</h5>
-                            <p className="text-center"><strong>Code: </strong> #12345</p>
-
-                            <div className="row">
-                              <div className="col-md-6 mb-3">
-                                <strong><label htmlFor="name" className="form-label">Name</label></strong>
-                                <div className="input-group">
-                                  <span className="input-group-text"><i className="fas fa-user"></i></span>
-                                  <input type="text" className="form-control bg-light" id="firstName" value="Mert" readOnly />
-                                </div>
-                              </div>
-
-                              <div className="col-md-6 mb-3">
-                                <strong><label htmlFor="surname" className="form-label">Surname</label></strong>
-                                <div className="input-group">
-                                  <span className="input-group-text"><i className="fas fa-user"></i></span>
-                                  <input type="text" className="form-control bg-light" id="surname" value="Akin" readOnly />
-                                </div>
-                              </div>
-                            </div>
-
-                            <strong><label htmlFor="age" className="form-label">Date of Birth</label></strong>
-                            <div className="mb-3 input-group">
-                              <span className="input-group-text"><i className="fas fa-birthday-cake"></i></span>
-                              <input type="number" className="form-control bg-light" id="age" value="21" readOnly />
-                            </div>
-
-                            {/* Add the rest of the form elements here */}
-
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="modal-footer">
-                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              </div>
-            </div>
-          </div>
-        </div>
     </div>
   );
 };
