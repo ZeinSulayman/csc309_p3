@@ -15,14 +15,16 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         return token
 
 class PetShelterSerializer(serializers.ModelSerializer):
+    shelter_id = serializers.ReadOnlyField()
     class Meta:
         model = PetShelter
-        fields = ('shelter_name', 'location', 'description','pic','phone_num','website')
+        fields = ('shelter_name', 'location', 'description','pic','phone_num','website','shelter_id')
 
 class PetSeekerSerializer(serializers.ModelSerializer):
+    id = serializers.ReadOnlyField()
     class Meta:
         model = PetSeeker
-        fields = ('location', 'bio','pic','pref','phone_num')
+        fields = ('location', 'bio','pic','pref','phone_num','id')
 
 class UserGetSerializer(serializers.ModelSerializer):
     class Meta:

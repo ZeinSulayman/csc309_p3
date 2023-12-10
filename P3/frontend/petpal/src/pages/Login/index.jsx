@@ -95,7 +95,7 @@ const getUser = async (e) => {
                 <div class="card-body p-md-5">
                     <ul class="nav nav-tabs" style={{position:"static; justify-content: center;"}}>
                         <li class="nav-item">
-                          <a class="nav-link" aria-current="page" href="newuser">Sign-up</a>
+                          <a class="nav-link" aria-current="page" href="/api/newuser">Sign-up</a>
                         </li>
                         <li class="nav-item">
                           <a class="nav-link active" href="login.html">Login</a>

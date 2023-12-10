@@ -6,6 +6,26 @@ function EditSeekerAccount(props){
     const [loc, setLoc] = useState('');
     const [bio, setBio] = useState('');
     const [num, setNum] = useState('');
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [pic, setPic] = useState('');
+    const [file,setFile] = useState(null);
+
+    const handleFileChange = (e) => {
+        const pic = e.target.files[0];
+        setFile(pic)
+        console.log(pic)
+        if (pic) {
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            setPic(reader.result);
+          };
+          reader.readAsDataURL(pic);
+        } else {
+          setPic(null);
+        }
+    };
+
 
     const submit = async (e) => {
         const seek = {
@@ -13,19 +33,26 @@ function EditSeekerAccount(props){
             bio: bio,
             phone_num: num,
         };
+
+          const formData = new FormData();
+    formData.append("phone_num", num);
+    formData.append("location", loc);
+    formData.append("bio", bio);
+        formData.append("pic", file);
         try {
             // Create the POST request using the fetch API
             const response = await fetch('http://127.0.0.1:8000/newuser/seeker/', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
+
                     'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
                 },
-                body: JSON.stringify(seek),
+                   body: formData,
             });
             // Check if the request was successful (status code in the range 200-299)
             if (response.ok) {
                 const data = await response.json();
+                 window.location.href = '/'
             } else {
                 // Handle error responses
                 console.error('Error:', response.statusText);
@@ -55,21 +82,9 @@ function EditSeekerAccount(props){
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label"><strong>Profile Picture</strong></label>
                             <div class="col-sm-9">
-                                <input type="file"></input>
+                                <input type="file" accept="image/*" onChange={handleFileChange}></input>
                                 <p class="my-2">Current Photo:</p>
-                                <img src="img/user.jpeg" class="mt-2" ></img>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label class="col-sm-3 col-form-label"><strong>Username</strong></label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control-plaintext" value="Petpal User"></input>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label class="col-sm-3 col-form-label"><strong>Email</strong></label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control-plaintext" value="petpaluser@gmail.com"></input>
+                               <img src={pic} class="mt-2" style={{ border: '1px solid black', borderRadius: '5px', maxWidth: '100%' }}></img>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -91,7 +106,7 @@ function EditSeekerAccount(props){
                             </div>
                         </div>
                             <div class="d-flex justify-content-end">
-                                <a class="btn btn-outline-success mb-3 mr-3" href="seeker-account.html" onClick={() => submit()}>Save</a>
+                                <a class="btn btn-outline-success mb-3 mr-3" onClick={() => submit()}>Save</a>
                             </div>
                         </div>
                     </div>

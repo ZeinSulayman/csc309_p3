@@ -162,8 +162,8 @@ function Layout(props){
               </li>
               <li className="nav-item mx-2">
             <a className="nav-link" href="finder" style={{color: "white"}}>Finder</a>
-          </li>
-           {localStorage.getItem('shelter') == 'true' ? (
+          </li>{isAuth ? (
+           localStorage.getItem('shelter') == 'true' ? (
                 <li className="nav-item dropdown mx-2">
             <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
               style={{color: "white"}}>
@@ -187,7 +187,7 @@ function Layout(props){
               <li><a className="dropdown-item" href="login.html">Sign-up</a></li>
             </ul>
           </li>
-              )}
+              )):null}
           <li class="nav-item mx-2">
             <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
               <Icon.Bell class="bi bi-bell" style={{color: "white"}}></Icon.Bell>
@@ -206,7 +206,7 @@ function Layout(props){
               <h5 class="modal-title" id="exampleModalLabel">Notifications</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-    <ListWithPagination items={notiList} itemsPerPage={2} />;
+    <ListWithPagination items={notiList} itemsPerPage={5} />;
             {/*<div class="modal-body">
               <ul class="list-group">
                 {notiList && notiList.map((notification) => (

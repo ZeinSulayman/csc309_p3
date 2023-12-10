@@ -121,7 +121,7 @@ const ListWithPagination = ({ items, itemsPerPage }) => {
               </li>
                 ))}
               </ul>
-      <div>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop:"15px" }}>
         {/* Pagination controls */}
         <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
           Previous
