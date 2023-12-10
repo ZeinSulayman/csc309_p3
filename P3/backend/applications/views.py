@@ -11,11 +11,10 @@ from rest_framework import status
 from .permissions import IsShelter, IsPetSeeker
 from rest_framework.pagination import PageNumberPagination
 from listings.models import Pet
-from accounts.models import PetShelter
+from accounts.models import PetShelter, PetSeeker
 
 
 class ShelterApplicationsListView(ListAPIView):
-    permission_classes = [IsShelter]
     serializer_class = PetApplicationSerializer
 
     def get_queryset(self):
@@ -25,7 +24,10 @@ class ShelterApplicationsListView(ListAPIView):
 
 
         # Apply status filter if provided
-        queryset = PetApplication.objects.filter(pet__owner=self.request.user)
+        if self.request.user.is_pet_shelter:
+            queryset = PetApplication.objects.filter(pet__owner=PetShelter.objects.get(shelter_id=self.request.user.shelter_id()))
+        else:
+            queryset = PetApplication.objects.filter(applicant=self.request.user)
         if status_filter:
             queryset = queryset.filter(status=status_filter)
         queryset = queryset.order_by('date_created')
@@ -102,6 +104,7 @@ class PetApplicationView(CreateAPIView):
     def create(self, request, *args, **kwargs):
         pet_id = self.kwargs.get('pet_id')
         pet = Pet.objects.get(pk=pet_id)
+        pet_name = pet.name
 
         # Check if the pet is available for adoption
         if not pet.status == 'available':
@@ -115,4 +118,4 @@ class PetApplicationView(CreateAPIView):
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
     def perform_create(self, serializer, pet):
-        serializer.save(pet=pet, applicant=self.request.user, status="pending")
+        serializer.save(pet=pet, applicant=self.request.user, status="pending", pet_name=pet.name, shelter_name=pet.owner.shelter_name)

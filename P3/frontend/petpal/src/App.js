@@ -41,7 +41,6 @@ class MyApp extends React.Component {
 
 export default MyApp;
 */
-
 import React, { useState, useEffect} from 'react';
 import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -60,12 +59,10 @@ import PetApplication from "./pages/PetApplication/index";
 import PetDetail from "./pages/PetDetails/index";
 import CreatePet from "./pages/CreatePet/index";
 import PetEdit from "./pages/UpdatePet/index";
-
+import Applications from './pages/ApplicationView/index'
 import About from './components/About';
 import Layout from './components/Layout/index'
 import Map from './components/Map/index'
-
-
 function App() {
   return (
     <main>
@@ -79,10 +76,11 @@ function App() {
                 <Route path='/seeker' element={<SeekerAccount/>} />
                 <Route path='/shelter' element={<ShelterAccount/>} />
                 <Route path='/map' element={<Map/>} />
-                <Route path='/pets/create' element={<CreatePet/>} /> 
+                <Route path='/pets/create' element={<CreatePet/>} />
                 <Route path="/pets/:petId" element={<PetDetail />} />
                 <Route path="/pets/edit/:petId" element={<PetEdit />} />
                 <Route path="/pets/:petId/application" element={<PetApplication />}/>
+                <Route path='/applications' element={<Applications/>} />
             </Route>
             <Route path='/api/newuser' element={<Register/>} />
             <Route path='/api/user' element={<Login/>} />
