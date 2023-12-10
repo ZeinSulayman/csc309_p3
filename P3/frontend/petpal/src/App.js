@@ -58,7 +58,7 @@ import EditShelterAccount from './pages/ShelterAccount/index';
 import ShelterAccount from './pages/ExistingShelter/index';
 import PetApplication from "./pages/PetApplication/index";
 import PetDetail from "./pages/PetDetails/index";
-import PetCreate from "./pages/CreatePet/index";
+import CreatePet from "./pages/CreatePet/index";
 import PetEdit from "./pages/UpdatePet/index";
 
 import About from './components/About';
@@ -79,7 +79,7 @@ function App() {
                 <Route path='/seeker' element={<SeekerAccount/>} />
                 <Route path='/shelter' element={<ShelterAccount/>} />
                 <Route path='/map' element={<Map/>} />
-                <Route path='/pets/create' element={<PetCreate/>} />
+                <Route path='/pets/create' element={<CreatePet/>} /> 
                 <Route path="/pets/:petId" element={<PetDetail />} />
                 <Route path="/pets/edit/:petId" element={<PetEdit />} />
                 <Route path="/pets/:petId/application" element={<PetApplication />}/>
