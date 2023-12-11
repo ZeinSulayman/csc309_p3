@@ -2,6 +2,8 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState, useEffect } from "react";
 import '../../App.css'; // Import the CSS file
+import Map from "../../components/Map/index";
+import {setKey} from "react-geocode";
 
 function ShelterAccount(props){
     const [loc, setLoc] = useState('');
@@ -9,6 +11,8 @@ function ShelterAccount(props){
     const [num, setNum] = useState('');
     const [name, setName] = useState('');
     const [website, setWebsite] = useState('');
+
+    setKey("AIzaSyDcX3F3pRrsiSNM-Ccda0G-a9ZD_BdCpvk");
 
     const submit = async (e) => {
      //e.preventDefault();
@@ -188,7 +192,14 @@ function ShelterAccount(props){
     </div>
   </section>
 
-<div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <section>
+        <div className="container">
+            <h4>Shelter Location</h4>
+            <Map locations={[{address: "toronto robarts library ontario", text: name}]}></Map>
+        </div>
+    </section>
+
+<div class="modal fade" id="Modal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">

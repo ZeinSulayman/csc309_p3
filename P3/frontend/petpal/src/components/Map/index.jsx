@@ -77,67 +77,136 @@ const Marker = props => {
   return <div className="SuperAwesomePin">afasdfasdfas</div>
 }
 */
-import { GoogleMap, MarkerF, useLoadScript } from "@react-google-maps/api";
-import React, {useMemo, useContext, useState, useEffect } from "react";
-import {
-  setKey,
-  setDefaults,
-  setLanguage,
-  setRegion,
-  fromAddress,
-  fromLatLng,
-  fromPlaceId,
-  setLocationType,
-  geocode,
-  RequestType,
-} from "react-geocode";
+// import { GoogleMap, MarkerF, useLoadScript } from "@react-google-maps/api";
+// import React, {useMemo, useContext, useState, useEffect } from "react";
+// import {
+//   setKey,
+//   setDefaults,
+//   setLanguage,
+//   setRegion,
+//   fromAddress,
+//   fromLatLng,
+//   fromPlaceId,
+//   setLocationType,
+//   geocode,
+//   RequestType,
+// } from "react-geocode";
+// import "./App.css";
+//
+// const Map = ({ location }) => {
+//   const { isLoaded } = useLoadScript({
+//     googleMapsApiKey: "AIzaSyDcX3F3pRrsiSNM-Ccda0G-a9ZD_BdCpvk",
+//   });
+//   const center = useMemo(() => ({ lat: 43.651070, lng: -79.347015}), []);
+//
+//   const [pos, setPos] = useState({long: 79.347015, lat: 43.651070});
+//
+//
+// // Set Google Maps Geocoding API key for quota management (optional but recommended).
+// // Use this if you want to set the API key independently.
+// setKey("AIzaSyDcX3F3pRrsiSNM-Ccda0G-a9ZD_BdCpvk"); // Your API key here.
+//
+// // Set default response language (optional).
+// // This sets the default language for geocoding responses.
+// setLanguage("en"); // Default language for responses.
+//
+// // Set default response region (optional).
+// // This sets the default region for geocoding responses.
+// setRegion("es"); // Default region for responses.
+//
+//
+//    useEffect(() => {
+//     const fetchCoordinates = async () => {
+//       try {
+//         const { results } = await fromAddress(location);
+//         const { lat, lng } = results[0].geometry.location;
+//         setPos({ long: lng, lat: lat });
+//       } catch (error) {
+//         console.error(error);
+//       }
+//     };
+//
+//     fetchCoordinates();
+//   }, [location]);
+//
+//
+//   return (
+//     <div className="App">
+//       {!isLoaded ? (
+//         <h1>Loading...</h1>
+//       ) : (
+//         <GoogleMap
+//           mapContainerClassName="map-container"
+//           center={center}
+//           zoom={12}
+//         >
+//         <MarkerF position={{lat:pos.lat, lng:pos.long}} />
+//         </GoogleMap>
+//       )}
+//     </div>
+//   );
+// };
+//
+// export default Map;
+
+import React, {useEffect, useMemo, useState} from "react";
+import {GoogleMap, Marker, useLoadScript} from "@react-google-maps/api";
+import {fromAddress} from "react-geocode";
 import "./App.css";
 
-const Map = () => {
+const Map = ({ locations }) => {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyDcX3F3pRrsiSNM-Ccda0G-a9ZD_BdCpvk",
   });
-  const center = useMemo(() => ({ lat: 43.651070, lng: -79.347015}), []);
 
-  const [pos, setPos] = useState({long: 79.347015, lat: 43.651070});
+  const [markers, setMarkers] = useState([]);
 
+  useEffect(() => {
+    const fetchCoordinates = async () => {
+      try {
+        const promises = locations.map(async (location) => {
+          const { results } = await fromAddress(location.address);
+          const { lat, lng } = results[0].geometry.location;
+          return { lat, lng, text: location.text };
+        });
 
-// Set Google Maps Geocoding API key for quota management (optional but recommended).
-// Use this if you want to set the API key independently.
-setKey("AIzaSyDcX3F3pRrsiSNM-Ccda0G-a9ZD_BdCpvk"); // Your API key here.
+        const newMarkers = await Promise.all(promises);
+        setMarkers(newMarkers);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-// Set default response language (optional).
-// This sets the default language for geocoding responses.
-setLanguage("en"); // Default language for responses.
+    fetchCoordinates();
+  }, [locations]);
 
-// Set default response region (optional).
-// This sets the default region for geocoding responses.
-setRegion("es"); // Default region for responses.
+  const mapCenter = useMemo(() => {
+    if (markers.length === 0) {
+      return { lat: 0, lng: 0 }; // Default center if no markers
+    }
 
+    // Calculate the bounds that encompass all markers
+    const bounds = new window.google.maps.LatLngBounds();
+    markers.forEach((marker) => {
+      bounds.extend({ lat: marker.lat, lng: marker.lng });
+    });
 
-   useEffect(() => {
-        const {long, lat} = pos;
-        fromAddress("robarts library toronto ontario")
-          .then(({ results }) => {
-            const { lat, lng } = results[0].geometry.location;
-            console.log(lat, lng);
-            setPos({long: lng,lat: lat});
-          })
-          .catch(console.error);
-   }, []);
-
+    // Get the center of the bounds
+    return {
+      lat: (bounds.getNorthEast().lat() + bounds.getSouthWest().lat()) / 2,
+      lng: (bounds.getNorthEast().lng() + bounds.getSouthWest().lng()) / 2,
+    };
+  }, [markers]);
 
   return (
     <div className="App">
       {!isLoaded ? (
         <h1>Loading...</h1>
       ) : (
-        <GoogleMap
-          mapContainerClassName="map-container"
-          center={center}
-          zoom={12}
-        >
-        <MarkerF position={{lat:pos.lat, lng:pos.long}} />
+        <GoogleMap mapContainerClassName="map-container" center={mapCenter} zoom={12}>
+          {markers.map((marker, index) => (
+            <Marker key={index} position={{ lat: marker.lat, lng: marker.lng }} label={marker.text} />
+          ))}
         </GoogleMap>
       )}
     </div>

@@ -46,7 +46,7 @@ class PetApplicationSeekerUpdateSerializer(serializers.ModelSerializer):
         current_status = self.instance.status if self.instance else None
 
         if user_is_seeker:
-            if value not in ["pending", "accepted"] and value != "withdrawn":
+            if current_status not in ["pending", "accepted"] or value != "withdrawn":
                 raise serializers.ValidationError('Invalid status transition for seeker')
 
         return value

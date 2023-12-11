@@ -52,7 +52,7 @@ const PetApplication = () => {
 
         try {
           // Create the POST request using the fetch API
-          const response = await fetch(`http://127.0.0.1:8000/pet/${petId}/application/`, {
+          const response = await fetch(`http://127.0.0.1:8000/pets/${petId}/application/`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -60,7 +60,7 @@ const PetApplication = () => {
             },
             body: JSON.stringify(petApplication),
           });
-
+          window.location.href = "/applications/";
         } catch (error) {
           // Handle network errors
           console.error('Network error:', error.message);
@@ -114,13 +114,6 @@ const PetApplication = () => {
 
                 <form className="needs-validation" onSubmit={handleSubmit}>
 
-                  <div className="text-center mb-3">
-                    <img
-                      src={pet.pic}
-                      alt="Pet Image" className="img-fluid rounded-circle" style={{ maxWidth: '150px' }}
-                    />
-                  </div>
-
                   <h5 className="text-center mb-4"><strong>Pet Name: </strong> {pet.name}</h5>
                   <p className="text-center"><strong>Code: </strong> #{petId}</p>
 
@@ -164,8 +157,7 @@ const PetApplication = () => {
                     <div className="col-md-6 mb-3">
                       <div className="input-group">
                         <span className="input-group-text"><i className="fas fa-clock"></i></span>
-                        <select className="form-select" id="awayWeekdays" required>
-                          <option selected disabled value="">Weekdays</option>
+                        <select className="form-select" id="awayWeekdays" defaultValue={""} required>
                           <option>1-3 hours</option>
                           <option>4-6 hours</option>
                           <option>7-9 hours</option>
@@ -177,8 +169,7 @@ const PetApplication = () => {
                     <div className="col-md-6 mb-3">
                       <div className="input-group">
                         <span className="input-group-text"><i className="fas fa-clock"></i></span>
-                        <select className="form-select" id="awayWeekends" required>
-                          <option selected disabled value="">Weekends</option>
+                        <select className="form-select" id="awayWeekends" required defaultValue={""}>
                           <option>1-3 hours</option>
                           <option>4-6 hours</option>
                           <option>7-9 hours</option>
@@ -190,8 +181,7 @@ const PetApplication = () => {
 
                   <div className="mb-3 input-group">
                     <span className="input-group-text"><i className="fas fa-heartbeat"></i></span>
-                    <select className="form-select" id="healthCondition" required>
-                      <option selected disabled value="">Health Condition</option>
+                    <select className="form-select" id="healthCondition" required defaultValue={""}>
                       <option>Healthy</option>
                       <option>Not Healthy</option>
                     </select>
@@ -199,8 +189,7 @@ const PetApplication = () => {
 
                   <div className="mb-3 input-group">
                     <span className="input-group-text"><i className="fas fa-gavel"></i></span>
-                    <select className="form-select" id="criminalHistory" required>
-                      <option selected disabled value="">Criminal History</option>
+                    <select className="form-select" id="criminalHistory" required defaultValue={""}>
                       <option>Exists</option>
                       <option>Doesn't Exist</option>
                     </select>
@@ -208,8 +197,7 @@ const PetApplication = () => {
 
                   <div className="mb-3 input-group">
                     <span className="input-group-text"><i className="fas fa-paw"></i></span>
-                    <select className="form-select" id="hadPetBefore">
-                      <option selected disabled value="">Have you ever had a pet before?</option>
+                    <select className="form-select" id="hadPetBefore" defaultValue={""}>
                       <option>Yes</option>
                       <option>No</option>
                     </select>
@@ -230,7 +218,7 @@ const PetApplication = () => {
                     </div>
                   </div>
 
-                  <button type="submit" className="btn btn-primary w-100 mt-3" onClick={() => window.location.href = '/applications'}>
+                  <button type="submit" className="btn btn-primary w-100 mt-3">
                     Submit Application
                   </button>
                 </form>

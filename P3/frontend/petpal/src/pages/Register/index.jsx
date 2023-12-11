@@ -43,7 +43,7 @@ const Register = () => {
                  localStorage.clear();
                  localStorage.setItem('access_token', data.access);
                  localStorage.setItem('refresh_token', data.refresh);
-                 submit2();
+                 await submit2();
                 // Initialize the access & refresh token in localstorage.
             } else {
                 // Handle error responses
@@ -102,62 +102,62 @@ const submit2 = async (e) => {
 
     return (<body style={{backgroundColor: "#eee;"}}>
     <section>
-        <div class="container p-3">
-          <div class="row d-flex justify-content-center align-items-center">
-            <div class="col-lg-12 col-xl-11">
-              <div class="card text-black" style={{borderRadius: "25px;"}}>
-                <div class="card-body p-md-5">
-                    <ul class="nav nav-tabs" style={{position:"static", justifyContent: "center"}}>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="signup.html">Sign-up</a>
+        <div className="container p-3">
+          <div className="row d-flex justify-content-center align-items-center">
+            <div className="col-lg-12 col-xl-11">
+              <div className="card text-black" style={{borderRadius: "25px;"}}>
+                <div className="card-body p-md-5">
+                    <ul className="nav nav-tabs" style={{position:"static", justifyContent: "center"}}>
+                        <li className="nav-item">
+                            <a className="nav-link active" aria-current="page">Sign-up</a>
                           </li>
-                          <li class="nav-item">
-                            <a class="nav-link" href="user">Login</a>
+                          <li className="nav-item">
+                            <a className="nav-link" href="/api/user">Login</a>
                         </li>
                     </ul>
-                  <div class="row justify-content-center">
-                    <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                  <div className="row justify-content-center">
+                    <div className="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
-                      <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+                      <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
 
-                      <form class="mx-1 mx-md-4" onSubmit={submit}>
+                      <form className="mx-1 mx-md-4" onSubmit={submit}>
 
-                        <div class="d-flex flex-row align-items-center mb-4">
-                          <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                          <div class="form-outline flex-fill mb-0">
-                            <input type="text" id="form3Example1c" class="form-control" required value={username} onChange={e => setUsername(e.target.value)}/>
-                            <label class="form-label" for="form3Example1c" >Your Name</label>
+                        <div className="d-flex flex-row align-items-center mb-4">
+                          <i className="fas fa-user fa-lg me-3 fa-fw"></i>
+                          <div className="form-outline flex-fill mb-0">
+                            <input type="text" id="form3Example1c" className="form-control" required value={username} onChange={e => setUsername(e.target.value)}/>
+                            <label className="form-label" htmlFor="form3Example1c" >Your Name</label>
                           </div>
                         </div>
 
-                        <div class="d-flex flex-row align-items-center mb-4">
-                          <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
-                          <div class="form-outline flex-fill mb-0">
-                            <input type="email" id="form3Example3c" class="form-control" required value={email} onChange={e => setEmail(e.target.value)}/>
-                            <label class="form-label" for="form3Example3c">Your Email</label>
+                        <div className="d-flex flex-row align-items-center mb-4">
+                          <i className="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                          <div className="form-outline flex-fill mb-0">
+                            <input type="email" id="form3Example3c" className="form-control" required value={email} onChange={e => setEmail(e.target.value)}/>
+                            <label className="form-label" htmlFor="form3Example3c">Your Email</label>
                           </div>
                         </div>
 
-                        <div class="d-flex flex-row align-items-center mb-4">
-                          <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
-                          <div class="form-outline flex-fill mb-0">
-                            <input type="password" id="form3Example4c" class="form-control" required value={password} onChange={e => setPassword(e.target.value)}/>
-                            <label class="form-label" for="form3Example4c">Password</label>
+                        <div className="d-flex flex-row align-items-center mb-4">
+                          <i className="fas fa-lock fa-lg me-3 fa-fw"></i>
+                          <div className="form-outline flex-fill mb-0">
+                            <input type="password" id="form3Example4c" className="form-control" required value={password} onChange={e => setPassword(e.target.value)}/>
+                            <label className="form-label" htmlFor="form3Example4c">Password</label>
                           </div>
                         </div>
 
-                        <div class="d-flex flex-row align-items-center mb-4">
-                          <i class="fas fa-key fa-lg me-3 fa-fw"></i>
-                          <div class="form-outline flex-fill mb-0">
-                            <input type="password" id="form3Example4cd" class="form-control" required value={password2} onChange={e => setPassword2(e.target.value)}/>
-                            <label class="form-label" for="form3Example4cd">Repeat your password</label>
+                        <div className="d-flex flex-row align-items-center mb-4">
+                          <i className="fas fa-key fa-lg me-3 fa-fw"></i>
+                          <div className="form-outline flex-fill mb-0">
+                            <input type="password" id="form3Example4cd" className="form-control" required value={password2} onChange={e => setPassword2(e.target.value)}/>
+                            <label className="form-label" htmlFor="form3Example4cd">Repeat your password</label>
                           </div>
                         </div>
 
-                        <div class="d-flex flex-row align-items-center mb-4">
-                            <i class="fas fa-key fa-lg me-3 fa-fw"></i>
-                            <div class="form-outline flex-fill mb-0">
-                            <select class="form-select" id="validationCustom04" required   value={seeker ? "Seeker" : shelter ? "Shelter" : ""}
+                        <div className="d-flex flex-row align-items-center mb-4">
+                            <i className="fas fa-key fa-lg me-3 fa-fw"></i>
+                            <div className="form-outline flex-fill mb-0">
+                            <select className="form-select" id="validationCustom04" required   value={seeker ? "Seeker" : shelter ? "Shelter" : ""}
   onChange={(e) => {
     const selectedValue = e.target.value;
     setSeeker(selectedValue === "Seeker");
@@ -167,31 +167,31 @@ const submit2 = async (e) => {
                               <option>Shelter</option>
                               <option>Seeker</option>
                             </select>
-                            <div class="invalid-feedback">
+                            <div className="invalid-feedback">
                               Please select an account type.
                             </div>
-                            <label for="validationCustom04" class="form-label">Account type</label>
+                            <label htmlFor="validationCustom04" className="form-label">Account type</label>
                             </div>
                           </div>
 
-                        <div class="form-check d-flex justify-content-center mb-5">
-                          <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" required/>
-                          <label class="form-check-label" for="form2Example3">
-                            I agree all statements in <a href="#!">Terms of service</a>
+                        <div className="form-check d-flex justify-content-center mb-5">
+                          <input className="form-check-input me-2" type="checkbox" value="" id="form2Example3c" required/>
+                          <label className="form-check-label" htmlFor="form2Example3">
+                            I agree all statements in <a href="">Terms of service</a>
                           </label>
                         </div>
 
-                        <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                          <button type="submit" class="btn btn-primary btn-lg">Register</button>
+                        <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                          <button type="submit" className="btn btn-primary btn-lg">Register</button>
                         </div>
 
                       </form>
 
                     </div>
-                    <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+                    <div className="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
 
                       <img src="https://static.vecteezy.com/system/resources/previews/018/871/715/original/happy-cat-transparent-background-png.png"
-                        class="img-fluid"></img>
+                        className="img-fluid" alt={"happy cat"}></img>
 
                     </div>
                   </div>

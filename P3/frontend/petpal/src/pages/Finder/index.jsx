@@ -93,7 +93,7 @@ const Finder = () => {
             <div className="d-flex flex-column flex-md-row justify-content-between">
               <div className="row">
                 <div className="mb-3 mb-md-0">
-                <div style={{width:'105%'}} class="d-flex">
+                <div style={{width:'105%'}} className="d-flex">
                   <select className="form-control me-2" name="location" value={filters.location} onChange={handleFilterChange}>
         <option value="">Select Location</option>
       </select>
@@ -208,7 +208,7 @@ const Finder = () => {
             <div className="d-flex flex-column flex-md-row justify-content-between">
               <div className="row">
                 <div className="mb-3 mb-md-0">
-                <div style={{width:'105%'}} class="d-flex">
+                <div style={{width:'105%'}} className="d-flex">
                   <select style={{marginBottom:'3px'}} className="form-control me-2" name="location" value={filters.location} onChange={handleFilterChange}>
         <option value="">Select Location</option>
         {locationOptions}
@@ -219,7 +219,7 @@ const Finder = () => {
       </select>
            
       </div>
-      <div style={{width:'105%'}} class="d-flex">
+      <div style={{width:'105%'}} className="d-flex">
       <select style={{marginTop:'3px'}} className="form-control me-2" name="size" value={filters.size} onChange={handleFilterChange}>
         <option value="" >Select Size</option>
         <option value="small" >Small</option>

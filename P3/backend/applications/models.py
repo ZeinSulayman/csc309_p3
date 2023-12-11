@@ -4,7 +4,6 @@ from accounts.models import User, PetShelter
 
 class PetApplication(models.Model):
     STATUS_CHOICES = [
-        ('available', 'Available'),
         ('pending', 'Pending'),
         ('withdrawn', 'Withdrawn'),
         ('denied', 'Denied'),
@@ -16,7 +15,7 @@ class PetApplication(models.Model):
     last_name = models.CharField(max_length=255)
     dob = models.DateField()
     email = models.EmailField()
-    address = models.CharField(max_length=255)
+    address = models.CharField(max_length=255, null=False)
     occupation = models.CharField(max_length=255)
     hours_away_weekdays = models.CharField(max_length=255)
     hours_away_weekends = models.CharField(max_length=255)

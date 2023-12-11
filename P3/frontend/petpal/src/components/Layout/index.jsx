@@ -60,7 +60,7 @@ function Layout(props){
             if (response.ok) {
                 //console.log('yes')
                 const data = await response.json();
-                get_noti();
+                await get_noti();
                 //setNotiList(data.results)
             } else {
                 // Handle error responses
@@ -138,16 +138,16 @@ function Layout(props){
               <li className="nav-item mx-2">
             <a className="nav-link" href="/finder" style={{color: "white"}}>Finder</a>
           </li>
-           {localStorage.getItem('shelter') == 'true' ? (
+           {localStorage.getItem('shelter') === 'true' ? (
                 <li className="nav-item dropdown mx-2">
             <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
               style={{color: "white"}}>
               Shelter
             </a>
             <ul className="dropdown-menu dropdown-menu-start">
-              <li><a className="dropdown-item" href="shelter">Manage Account</a></li>
-              <li><a className="dropdown-item" href="applications.html">Manage Adoptions</a></li>
-              <li><a className="dropdown-item" href="login.html">Sign-up</a></li>
+              <li><a className="dropdown-item" href="/shelter">Manage Account</a></li>
+              <li><a className="dropdown-item" href="/applications">Manage Adoptions</a></li>
+              <li><a className="dropdown-item" href="/api/newuser">Sign-up</a></li>
             </ul>
           </li>
           ) : (
@@ -157,15 +157,15 @@ function Layout(props){
               Seeker
             </a>
             <ul className="dropdown-menu dropdown-menu-start">
-              <li><a className="dropdown-item" href="seeker">Manage Account</a></li>
-              <li><a className="dropdown-item" href="applications.html">Manage Adoptions</a></li>
-              <li><a className="dropdown-item" href="login.html">Sign-up</a></li>
+              <li><a className="dropdown-item" href="/seeker">Manage Account</a></li>
+              <li><a className="dropdown-item" href="/applications">Manage Adoptions</a></li>
+              <li><a className="dropdown-item" href="/api/newuser">Sign-up</a></li>
             </ul>
           </li>
               )}
-          <li class="nav-item mx-2">
-            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-              <Icon.Bell class="bi bi-bell" style={{color: "white"}}></Icon.Bell>
+          <li className="nav-item mx-2">
+            <button type="button" className="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <Icon.Bell className="bi bi-bell" style={{color: "white"}}></Icon.Bell>
             </button>
             </li>
             </div>
@@ -174,17 +174,17 @@ function Layout(props){
       </section>
 
           <section>
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Notifications</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">Notifications</h5>
+              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-              <ul class="list-group">
+            <div className="modal-body">
+              <ul className="list-group">
          {notiList && notiList.map((notification) => (
-                  <li class="list-group-item" key={notification.id}>
+                  <li className="list-group-item" key={notification.id}>
               <div
                 style={{
                   width: '10px',
@@ -209,32 +209,32 @@ function Layout(props){
         <Outlet />
       </section>
 
-      <footer class="text-center text-lg-start bg-light text-muted foot">
+      <footer className="text-center text-lg-start bg-light text-muted foot">
 
-    <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom" style={{color: "white"}}>
+    <section className="d-flex justify-content-center justify-content-lg-between p-4 border-bottom" style={{color: "white"}}>
 
-      <div class="me-5 d-none d-lg-block">
+      <div className="me-5 d-none d-lg-block">
         <span>Get connected with us on social networks:</span>
       </div>
 
       <div>
-        <a href="" class="me-4 text-reset">
-          <i class="bi bi-instagram"></i>
+        <a href="" className="me-4 text-reset">
+          <i className="bi bi-instagram"></i>
         </a>
-        <a href="" class="me-4 text-reset">
-          <i class="bi bi-facebook"></i>
+        <a href="" className="me-4 text-reset">
+          <i className="bi bi-facebook"></i>
         </a>
       </div>
     </section>
 
-    <section class="text-white">
-      <div class="container text-center text-md-start mt-5">
+    <section className="text-white">
+      <div className="container text-center text-md-start mt-5">
 
-        <div class="row mt-3">
-          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+        <div className="row mt-3">
+          <div className="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
 
-            <h6 class="text-uppercase fw-bold mb-4">
-              <i class="fas fa-gem me-3"></i>Petpal Incorporated
+            <h6 className="text-uppercase fw-bold mb-4">
+              <i className="fas fa-gem me-3"></i>Petpal Incorporated
             </h6>
             <p style={{marginTop: "20px",}}>
               Our aim is to connect loving families with their perfect furry companions. We strive to promote
@@ -242,21 +242,21 @@ function Layout(props){
               creating forever homes, and supporting animal welfare organizations.
             </p>
           </div>
-          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+          <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
 
-            <h6 class="text-uppercase fw-bold mb-4" style={{marginLeft: "16px"}}>Contact</h6>
-            <p><i class="bi bi-house me-3"></i> 100 Petpal St, Toronto, Ontario</p>
+            <h6 className="text-uppercase fw-bold mb-4" style={{marginLeft: "16px"}}>Contact</h6>
+            <p><i className="bi bi-house me-3"></i> 100 Petpal St, Toronto, Ontario</p>
             <p>
-              <i class="bi bi-envelope me-3"></i>
+              <i className="bi bi-envelope me-3"></i>
               petpal@gmail.com
             </p>
-            <p><i class="bi bi-phone me-3"></i> + 01 234 567 88</p>
-            <p><i class="bi bi-printer me-3"></i> + 01 234 567 89</p>
+            <p><i className="bi bi-phone me-3"></i> + 01 234 567 88</p>
+            <p><i className="bi bi-printer me-3"></i> + 01 234 567 89</p>
           </div>
         </div>
       </div>
     </section>
-    <div class="text-center p-4 text-white" style={{backgroundColor: "rgba(0, 0, 0, 0.05)"}}>
+    <div className="text-center p-4 text-white" style={{backgroundColor: "rgba(0, 0, 0, 0.05)"}}>
       © 2021 Copyright Petpal
     </div>
   </footer>
