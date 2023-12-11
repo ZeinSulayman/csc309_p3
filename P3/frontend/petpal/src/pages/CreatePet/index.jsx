@@ -6,7 +6,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
 
 const CreatePet = () => {
-    const [pic, setPic] = useState(null);
     const [name, setName] = useState('');
     const [location, setLocation] = useState('');
     const [gender, setGender] = useState('male');
@@ -21,7 +20,6 @@ const CreatePet = () => {
    const submit = async (e) => {
         e.preventDefault();
         const pet = {
-            pic: pic,
             name: name,
             location: location,
             gender: gender,
@@ -32,33 +30,31 @@ const CreatePet = () => {
             description: description
         };
         console.log(pet.pic)
-
+        const formData = new FormData();
+        formData.append("name", name);
+        formData.append("location", location);
+        formData.append("gender", gender);
+        formData.append("age", age);
+        formData.append("size", size);
+        formData.append("breed", breed);
+        formData.append("color", color);
+        formData.append("description", description);
         try {
             console.log(pet);
             const response = await fetch('http://127.0.0.1:8000/pets/newpet/', {
               method: 'POST',
               headers: {
-                'Content-Type': 'application/json',
                 'Authorization': `Bearer ${localStorage.getItem('access_token')}`
               },
-              body: JSON.stringify(pet),
+              body: formData,
             });
 
             const data = await response.json();
             console.log('Pet created successfully:', data);
+            window.location.href = `/finder/`
             // You can redirect to the pet list page or perform other actions here
           } catch (error) {
             console.error('Error creating pet:', error);
-          }
-        };
-
-        const handleFileChange = (event) => {
-
-          // Check if a file was selected before accessing its properties
-          if (event.target.files && event.target.files.length > 0) {
-            setPic(event.target.files[0]);
-
-            // You can perform further actions with the file, such as uploading it to a server.
           }
         };
 
