@@ -30,7 +30,7 @@ const ShelterMaps = () => {
       } catch (error) {
         console.error('Error fetching shelters data:', error.message);
       }
-    };
+    }
 
     fetchShelters();
   }, []);
