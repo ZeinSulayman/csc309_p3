@@ -291,7 +291,7 @@ const Finder = () => {
                 return (
                   <div key={`card-${petIndex}`} className="col">
                     <div className="card">
-                      <img src={currentPet.image} className="card-img-top" style={{ height: '30%' }} alt="..." />
+                      <img src={currentPet.pic} className="card-img-top" style={{ height: '30%' }} alt="..." />
                       <div className="card-body">
                         <h5 className="card-title">
                           <a style={{ textDecoration: 'none', color: 'black' }} href={`./petdetail-${petIndex}.html`}>

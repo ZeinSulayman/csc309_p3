@@ -5,9 +5,9 @@ from .models import AppComments, ShelterComments
 class AppCommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = AppComments
-        fields = ('content')
+        fields = ('content','name')
 
 class ShelterCommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = ShelterComments
-        fields = ('content','name')
+        fields = ('content','name','rating')

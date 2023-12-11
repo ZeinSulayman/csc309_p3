@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
 
 const CreatePet = () => {
-    const [pic, setPic] = useState(null);
+    //const [pic, setPic] = useState(null);
     const [name, setName] = useState('');
     const [location, setLocation] = useState('');
     const [gender, setGender] = useState('male');
@@ -15,7 +15,23 @@ const CreatePet = () => {
     const [breed, setBreed] = useState('');
     const [color, setColor] = useState('');
     const [description, setDescription] = useState('');
+    const [pic, setPic] = useState('');
+    const [file,setFile] = useState(null);
 
+ const handleFileChange = (e) => {
+        const pic = e.target.files[0];
+        setFile(pic)
+        console.log(pic)
+        if (pic) {
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            setPic(reader.result);
+          };
+          reader.readAsDataURL(pic);
+        } else {
+          setPic(null);
+        }
+    };
 
 
    const submit = async (e) => {
@@ -31,28 +47,40 @@ const CreatePet = () => {
             color: color,
             description: description
         };
-        console.log(pet.pic)
+        const petFormData = new FormData();
+
+        petFormData.append('pic', file);
+        petFormData.append('name', name);
+        petFormData.append('location', location);
+        petFormData.append('gender', gender);
+        petFormData.append('age', age);
+        petFormData.append('size', size);
+        petFormData.append('breed', breed);
+        petFormData.append('color', color);
+        petFormData.append('description', description);
+
 
         try {
             console.log(pet);
             const response = await fetch('http://127.0.0.1:8000/pets/newpet/', {
               method: 'POST',
               headers: {
-                'Content-Type': 'application/json',
                 'Authorization': `Bearer ${localStorage.getItem('access_token')}`
               },
-              body: JSON.stringify(pet),
+              //body: JSON.stringify(pet),
+               body: petFormData,
             });
 
             const data = await response.json();
             console.log('Pet created successfully:', data);
+             window.location.href = '/pets/manage/'
             // You can redirect to the pet list page or perform other actions here
           } catch (error) {
             console.error('Error creating pet:', error);
           }
         };
 
-        const handleFileChange = (event) => {
+        /*const handleFileChange = (event) => {
 
           // Check if a file was selected before accessing its properties
           if (event.target.files && event.target.files.length > 0) {
@@ -60,7 +88,7 @@ const CreatePet = () => {
 
             // You can perform further actions with the file, such as uploading it to a server.
           }
-        };
+        };*/
 
     return (<body>
 
@@ -157,6 +185,11 @@ const CreatePet = () => {
                 </h5>
                 <textarea className="form-control mb-3" id="allergies1" rows="3" required value={description} onChange={e => setDescription(e.target.value)}></textarea>
               </div>
+              <div class="col-sm-9">
+                                <input type="file" accept="image/*" onChange={handleFileChange}></input>
+                                <p class="my-2">Current Photo:</p>
+                               <img src={pic} class="mt-2" style={{ border: '1px solid black', borderRadius: '5px', maxWidth: '100%' }}></img>
+                            </div>
             </div>
 
             <button type="submit" className="btn btn-primary mt-3" href="../../finder/">
