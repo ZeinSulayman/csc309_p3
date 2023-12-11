@@ -63,7 +63,7 @@ function SeekerAccount(props){
         console.log(formData)
         try {
             // Create the POST request using the fetch API
-            const response = await fetch('http://127.0.0.1:8000/seeker/', {
+            const response = await fetch('https://three09-p3-backend.onrender.com/seeker/', {
                 method: 'PUT',
                 headers: {
                     //'Content-Type': 'application/json',
@@ -95,7 +95,7 @@ function SeekerAccount(props){
         };
         try {
             // Create the POST request using the fetch API
-            const response = await fetch('http://127.0.0.1:8000/user/', {
+            const response = await fetch('https://three09-p3-backend.onrender.com/user/', {
                 method: 'put',
                 headers: {
                     'Content-Type': 'application/json',
@@ -121,7 +121,7 @@ function SeekerAccount(props){
     const del = async (e) => {
         try {
             // Create the POST request using the fetch API
-            const response = await fetch('http://127.0.0.1:8000/seeker/', {
+            const response = await fetch('https://three09-p3-backend.onrender.com/seeker/', {
                 method: 'delete',
                 headers: {
                     'Content-Type': 'application/json',
@@ -147,7 +147,7 @@ function SeekerAccount(props){
     const del2 = async (e) => {
         try {
             // Create the POST request using the fetch API
-            const response = await fetch('http://127.0.0.1:8000/user/', {
+            const response = await fetch('https://three09-p3-backend.onrender.com/user/', {
                 method: 'delete',
                 headers: {
                     'Content-Type': 'application/json',
@@ -171,7 +171,7 @@ function SeekerAccount(props){
 
 
     useEffect(() => {
-         fetch('http://127.0.0.1:8000/seeker/', {
+         fetch('https://three09-p3-backend.onrender.com/seeker/', {
                 method: 'get',
                 headers: {
                     'Content-Type': 'application/json',
@@ -186,7 +186,7 @@ function SeekerAccount(props){
             setLoc(json['location'])
             setPic(json['pic'])
         });
-         fetch('http://127.0.0.1:8000/user/', {
+         fetch('https://three09-p3-backend.onrender.com/user/', {
                 method: 'get',
                 headers: {
                     'Content-Type': 'application/json',

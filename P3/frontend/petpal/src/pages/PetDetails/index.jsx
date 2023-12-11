@@ -10,7 +10,7 @@ const PetDetail = () => {
     const fetchPetAndShelter = async () => {
       try {
         // Fetch pet details
-        const petResponse = await fetch(`http://127.0.0.1:8000/pets/details/${petId}/`, {
+        const petResponse = await fetch(`https://three09-p3-backend.onrender.com/pets/details/${petId}/`, {
               method: 'GET',
               headers: {
                 'Authorization': `Bearer ${localStorage.getItem('access_token')}`
@@ -20,7 +20,7 @@ const PetDetail = () => {
         setPet(petData);
         console.log(petData.owner)
         // Fetch shelter details using the foreign key
-        const shelterResponse = await fetch(`http://127.0.0.1:8000/shelter/${petData.owner}/`, {
+        const shelterResponse = await fetch(`https://three09-p3-backend.onrender.com/shelter/${petData.owner}/`, {
               method: 'GET',
               headers: {
                 'Authorization': `Bearer ${localStorage.getItem('access_token')}`

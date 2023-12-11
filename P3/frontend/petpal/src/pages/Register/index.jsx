@@ -27,7 +27,7 @@ const Register = () => {
 
         try {
             // Create the POST request using the fetch API
-            const response = await fetch('http://127.0.0.1:8000/api/newuser/', {
+            const response = await fetch('https://three09-p3-backend.onrender.com/api/newuser/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -76,7 +76,7 @@ const submit2 = async (e) => {
 
     try {
         // Create the POST request using the fetch API
-        const response = await fetch('http://127.0.0.1:8000/api/user/', {
+        const response = await fetch('https://three09-p3-backend.onrender.com/api/user/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

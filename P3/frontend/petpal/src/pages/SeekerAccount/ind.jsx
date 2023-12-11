@@ -41,7 +41,7 @@ function EditSeekerAccount(props){
         formData.append("pic", file);
         try {
             // Create the POST request using the fetch API
-            const response = await fetch('http://127.0.0.1:8000/newuser/seeker/', {
+            const response = await fetch('https://three09-p3-backend.onrender.com/newuser/seeker/', {
                 method: 'POST',
                 headers: {
 

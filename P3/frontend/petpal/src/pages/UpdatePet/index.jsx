@@ -40,7 +40,7 @@ const CreatePet = () => {
        const fetchPet = async () => {
          try {
            // Fetch pet details
-           const petResponse = await fetch(`http://127.0.0.1:8000/pets/details/${petId}/`, {
+           const petResponse = await fetch(`https://three09-p3-backend.onrender.com/pets/details/${petId}/`, {
                  method: 'GET',
                  headers: {
                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`
@@ -59,7 +59,7 @@ const CreatePet = () => {
      const deletePet = async (e) => {
         try {
                     console.log(pet);
-                    const response = await fetch(`http://127.0.0.1:8000/pets/${petId}/`, {
+                    const response = await fetch(`https://three09-p3-backend.onrender.com/pets/${petId}/`, {
                       method: 'DELETE',
                       headers: {
                         'Authorization': `Bearer ${localStorage.getItem('access_token')}`
@@ -101,7 +101,7 @@ const CreatePet = () => {
 
         try {
             console.log(pet);
-            const response = await fetch(`http://127.0.0.1:8000/pets/${petId}/`, {
+            const response = await fetch(`https://three09-p3-backend.onrender.com/pets/${petId}/`, {
               method: 'PUT',
               headers: {
                 'Authorization': `Bearer ${localStorage.getItem('access_token')}`
