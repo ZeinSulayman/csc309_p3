@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const Finder = () => {
+const ShelterPets = () => {
   let page = 1;
   const [allPets, setAll] = useState([]);
   const [pets, setPets] = useState([]);
@@ -11,7 +11,7 @@ const Finder = () => {
     breed: '',
     sort: '',
   });
- 
+
 
   useEffect(() => {
     const fetchPets = async () => {
@@ -33,7 +33,7 @@ const Finder = () => {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('access_token')}`
-          } 
+          }
         });
         const data = await response.json();
         setPets(data);
@@ -41,7 +41,7 @@ const Finder = () => {
         console.error('Error fetching pets:', error);
       }
     };
-  
+
     fetchPets();
   }, [filters]);// Trigger the effect whenever filters change
 
@@ -80,7 +80,7 @@ const Finder = () => {
     // Combine base URL with parameters
     return `${baseUrl}?${params.toString()}`;
   };
- 
+
   // Function to handle filter changes
   const handleFilterChange = (event) => {
     const { name, value } = event.target;
@@ -112,14 +112,14 @@ const Finder = () => {
         <option value="Adopted" >Adopted</option>
         <option value="Pending" >Pending</option>
         <option value="Withdrawn" >Withdrawn</option>
-      </select> 
+      </select>
       </div>
-      
+
                       </div>
               </div>
-    
+
               <div className="w-100 d-md-none d-block m-3"></div>
-    
+
               <div className="row justify-content-end">
                 <div style={{ marginLeft: '5px', marginBottom: '5px' }} className="col-md-auto">
                   <div className="dropdown">
@@ -146,8 +146,8 @@ const Finder = () => {
                     </ul>
                   </div>
                 </div>
-    
-                
+
+
                 <div style={{ marginLeft: '5px', marginBottom: '5px' }} className="col-md-auto">
                   <a className="btn btn-outline-success" href="../finder/">
                     Reset Filter/Sort
@@ -169,7 +169,7 @@ const Finder = () => {
           </nav>
         </div>
       </div>
-      ); 
+      );
   }
   const uniqueBreeds = new Set();
 
@@ -199,7 +199,7 @@ const Finder = () => {
       );
     }
 
-    return null; 
+    return null;
   });
   return (
     <div>
@@ -217,7 +217,7 @@ const Finder = () => {
         <option value="" >Select Breed </option>
         {breedOptions}
       </select>
-           
+
       </div>
       <div style={{width:'105%'}} class="d-flex">
       <select style={{marginTop:'3px'}} className="form-control me-2" name="size" value={filters.size} onChange={handleFilterChange}>
@@ -233,13 +233,13 @@ const Finder = () => {
         <option value="adopted" >Adopted</option>
         <option value="pending" >Pending</option>
         <option value="withdrawn" >Withdrawn</option>
-      </select> 
+      </select>
       </div>
                       </div>
               </div>
-    
+
               <div className="w-100 d-md-none d-block m-3"></div>
-    
+
               <div className="row justify-content-end">
                 <div style={{ marginLeft: '5px', marginBottom: '5px' }} className="col-md-auto">
                   <div className="dropdown">
@@ -266,13 +266,20 @@ const Finder = () => {
                     </ul>
                   </div>
                 </div>
-    
-                
+
+
                 <div style={{ marginLeft: '5px', marginBottom: '5px' }} className="col-md-auto">
                   <a className="btn btn-outline-success" href="">
                     Reset Filter/Sort
                   </a>
                 </div>
+
+                <div style={{ marginLeft: '5px', marginBottom: '5px', marginRight:'0px', width:'69.5%'}} className="row">
+                                  <a className="btn btn-primary" href="/pets/create/">
+                                    Add Pet
+                                  </a>
+                                </div>
+
               </div>
             </div>
           </div>
@@ -281,14 +288,15 @@ const Finder = () => {
         <div className="container text-center" style={{ marginTop: '30px' }}>
         <div>
       {pets.results.map((pet, index) => (
-        index % 3 === 0 && (
+        index % 3 === 0  && (
           <div key={`row-${index}`} className="row py-2">
             {[0, 1, 2].map((cardIndex) => {
               const petIndex = index + cardIndex;
               if (petIndex < pets.results.length) {
                 const currentPet = pets.results[petIndex];
-    
+
                 return (
+
                   <div key={`card-${petIndex}`} className="col">
                     <div className="card h-100">
                       <img src={currentPet.pic} className="card-img-top" style={{ height: '30%' }} alt="..." />
@@ -304,8 +312,8 @@ const Finder = () => {
                         <p className="card-text"><strong>Size:</strong> {currentPet.size}</p>
                         <p className="card-text"><strong>Description:</strong> {currentPet.description}</p>
                         <p className="card-text"><strong>Location:</strong> {currentPet.location}</p>
-                        <a href={`../pets/${currentPet.id}`} className="btn btn-primary">
-                          Find out about {currentPet.name}
+                        <a href={`../pets/edit/${currentPet.id}`} style={{width:'100%'}}className="btn btn-primary">
+                          Edit
                         </a>
                       </div>
                       <div className="card-footer">
@@ -334,12 +342,12 @@ const Finder = () => {
           </nav>
         </div>
       </div>
-    </section>                    
+    </section>
     </div>
       );
     };
-    
-    export default Finder;
+
+    export default ShelterPets;
 
 /*// // PetList.jsx
 import React, { useState, useEffect } from 'react';
@@ -364,7 +372,7 @@ const Finder = () => {
       }
     };
 
-    fetchPets();  
+    fetchPets();
   }, []);
   if (!pets.results || !Array.isArray(pets.results)) {
     return null; // or handle the error appropriately
@@ -579,7 +587,7 @@ return (
       </nav>
     </div>
   </div>
-</section>                    
+</section>
 </div>
   );
 };

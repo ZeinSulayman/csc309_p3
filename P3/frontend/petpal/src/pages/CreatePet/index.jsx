@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
 
 const CreatePet = () => {
-    //const [pic, setPic] = useState(null);
+
     const [name, setName] = useState('');
     const [location, setLocation] = useState('');
     const [gender, setGender] = useState('male');
@@ -37,7 +37,6 @@ const CreatePet = () => {
    const submit = async (e) => {
         e.preventDefault();
         const pet = {
-            pic: pic,
             name: name,
             location: location,
             gender: gender,
@@ -59,7 +58,6 @@ const CreatePet = () => {
         petFormData.append('color', color);
         petFormData.append('description', description);
 
-
         try {
             console.log(pet);
             const response = await fetch('http://127.0.0.1:8000/pets/newpet/', {
@@ -69,26 +67,19 @@ const CreatePet = () => {
               },
               //body: JSON.stringify(pet),
                body: petFormData,
+
             });
 
             const data = await response.json();
             console.log('Pet created successfully:', data);
-             window.location.href = '/pets/manage/'
+//              window.location.href = '/pets/manage/'
+
             // You can redirect to the pet list page or perform other actions here
           } catch (error) {
             console.error('Error creating pet:', error);
           }
         };
 
-        /*const handleFileChange = (event) => {
-
-          // Check if a file was selected before accessing its properties
-          if (event.target.files && event.target.files.length > 0) {
-            setPic(event.target.files[0]);
-
-            // You can perform further actions with the file, such as uploading it to a server.
-          }
-        };*/
 
     return (<body>
 
@@ -107,6 +98,17 @@ const CreatePet = () => {
                 </h5>
                 <div className="mb-3">
                     <div className="mb-3">
+                    <label class="form-label fw-bold">Pet Images:</label>
+
+
+                                                    <div class="row mb-2">
+                                                        <div class="col-12">
+                                                            <input type="file" accept="image/*" className="form-control" onChange={handleFileChange}></input>
+                                                        </div>
+                                                    </div>
+
+                                                    <p class="my-2">Current Photo:</p>
+                                                   <img src={pic} class="mt-2" style={{ border: '1px solid black', borderRadius: '5px', maxWidth: '100%' }}></img>
                   <div className="col-md-12">
                     <label htmlFor="petName" className="form-label">
                       <strong>Pet Name</strong>
@@ -185,14 +187,10 @@ const CreatePet = () => {
                 </h5>
                 <textarea className="form-control mb-3" id="allergies1" rows="3" required value={description} onChange={e => setDescription(e.target.value)}></textarea>
               </div>
-              <div class="col-sm-9">
-                                <input type="file" accept="image/*" onChange={handleFileChange}></input>
-                                <p class="my-2">Current Photo:</p>
-                               <img src={pic} class="mt-2" style={{ border: '1px solid black', borderRadius: '5px', maxWidth: '100%' }}></img>
-                            </div>
+
             </div>
 
-            <button type="submit" className="btn btn-primary mt-3" href="../../finder/">
+            <button type="submit" className="btn btn-primary mt-3" >
               Create Pet
             </button>
           </form>
