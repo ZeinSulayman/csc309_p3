@@ -10,6 +10,7 @@ pip install pytz==2023.3.post1
 pip install sqlparse==0.4.4 
 pip install typing_extensions==4.8.0
 pip install drf_yasg==1.21.7
+python -m pip install django-cors-headers
 poetry install
 python3 manage.py makemigrations
 python3 manage.py migrate
