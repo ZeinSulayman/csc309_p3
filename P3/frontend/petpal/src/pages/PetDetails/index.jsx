@@ -67,7 +67,7 @@ return(
           <div className="carousel-inner">
             <div className="carousel-item active">
               <img
-                src="https://img.freepik.com/free-vector/group-pet-white-background_1308-53630.jpg?w=900&t=st=1702268627~exp=1702269227~hmac=4578050b550bdf1a20a63b1101fdaa40b991a2086123e474e89cffe7706d65d6"
+                src={pet.pic}
                 className="d-block w-100"
               />
             </div>

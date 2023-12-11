@@ -118,6 +118,57 @@ function SeekerAccount(props){
         }
     };
 
+    const del = async (e) => {
+        try {
+            // Create the POST request using the fetch API
+            const response = await fetch('http://127.0.0.1:8000/seeker/', {
+                method: 'delete',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+                },
+            });
+            // Check if the request was successful (status code in the range 200-299)
+            if (response.ok) {
+                //const data = await response.json();
+                del2();
+                 localStorage.clear();
+                window.location.href = '/'
+            } else {
+                // Handle error responses
+                console.error('Error:', response.statusText);
+            }
+        } catch (error) {
+            // Handle network errors
+            console.error('Network error:', error.message);
+        }
+    };
+
+    const del2 = async (e) => {
+        try {
+            // Create the POST request using the fetch API
+            const response = await fetch('http://127.0.0.1:8000/user/', {
+                method: 'delete',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+                },
+            });
+            // Check if the request was successful (status code in the range 200-299)
+            if (response.ok) {
+                //const data = await response.json();
+                localStorage.clear();
+                window.location.href = '/'
+            } else {
+                // Handle error responses
+                console.error('Error:', response.statusText);
+            }
+        } catch (error) {
+            // Handle network errors
+            console.error('Network error:', error.message);
+        }
+    };
+
 
     useEffect(() => {
          fetch('http://127.0.0.1:8000/seeker/', {
@@ -218,7 +269,9 @@ return( <section>
                                 <textarea class="form-control" rows="3" value={bio} onChange={e => setBio(e.target.value)}></textarea>
                             </div>
                         </div>
+
                             <div class="d-flex justify-content-end">
+                              <button type="button" style={{ marginBottom: '10px', marginRight: '10px' }} class="btn btn-danger" onClick={() => del()} >Delete</button>
                                 <a class="btn btn-outline-success mb-3 mr-3" style={{cursor: 'pointer' }} onClick={() => submit()} data-bs-toggle="modal" data-bs-target="#sucModal">Save</a>
                             </div>
                         </div>

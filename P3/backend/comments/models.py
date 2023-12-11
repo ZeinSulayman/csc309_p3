@@ -1,9 +1,11 @@
 from django.db import models
 # from p2test.accounts.models import User, PetShelter, Application
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 class AppComments(models.Model):
     content = models.TextField()
+    name = models.CharField(max_length=255)
     user = models.ForeignKey("accounts.User", on_delete=models.CASCADE)
     #app = models.ForeignKey("accounts.Application", on_delete=models.CASCADE)
     app = models.ForeignKey("applications.PetApplication", on_delete=models.CASCADE)
@@ -13,6 +15,9 @@ class AppComments(models.Model):
 class ShelterComments(models.Model):
     name = models.CharField(max_length=255)
     content = models.TextField()
+    rating = models.IntegerField(
+        validators=[MinValueValidator(0), MaxValueValidator(5)]
+    )
     user = models.ForeignKey("accounts.User", on_delete=models.CASCADE)
     shelter = models.ForeignKey("accounts.PetShelter", on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)

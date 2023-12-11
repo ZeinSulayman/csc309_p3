@@ -16,6 +16,16 @@ function Layout(props){
 
     const [notiList, setNotiList] = useState([]);
 
+  const [showRead, setShowRead] = useState(false);
+
+    /*const filteredNotifications = showUnread
+    ? notiList.filter(notification => !notification.read)
+    : notiList;*/
+     const filteredNotifications = showRead
+    ? notiList.filter(notification => notification.read)
+    : notiList.filter(notification => !notification.read);
+
+
     const get_noti = async (e) => {
         try {
             // Create the POST request using the fetch API
@@ -204,9 +214,14 @@ function Layout(props){
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">Notifications</h5>
+
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-    <ListWithPagination items={notiList} itemsPerPage={5} />;
+<button onClick={() => setShowRead(!showRead)}>
+        {showRead ? 'Show Unread Notifications' : 'Show Read Notifications'}
+      </button>
+    <ListWithPagination items={filteredNotifications} itemsPerPage={5} />;
+
             {/*<div class="modal-body">
               <ul class="list-group">
                 {notiList && notiList.map((notification) => (

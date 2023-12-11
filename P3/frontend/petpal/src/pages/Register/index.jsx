@@ -10,6 +10,7 @@ const Register = () => {
     const [password2, setPassword2] = useState('');
     const [seeker, setSeeker] = useState(false);
     const [shelter, setShelter] = useState(false);
+     const [error, setError] = useState(null);
 
 
    const submit = async (e) => {
@@ -48,6 +49,13 @@ const Register = () => {
                 // Initialize the access & refresh token in localstorage.
             } else {
                 // Handle error responses
+                const data = await response.json();
+                const usernameError = data.username;
+                console.error('Username Error:', usernameError);
+                setError(usernameError);
+                const p2Error = data.password2;
+                if (p2Error){setError(p2Error);}
+                console.error('Username Error:', p2Error);
                 console.error('Error:', response.statusText);
             }
         } catch (error) {
@@ -123,6 +131,8 @@ const submit2 = async (e) => {
                       <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
 
                       <form class="mx-1 mx-md-4" onSubmit={submit}>
+                        {/* Display the error message if there is one */}
+      {error && <div style={{ color: 'red' }}>{error}</div>}
 
                         <div class="d-flex flex-row align-items-center mb-4">
                           <i class="fas fa-user fa-lg me-3 fa-fw"></i>
