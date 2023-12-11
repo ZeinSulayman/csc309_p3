@@ -293,7 +293,7 @@ function ShelterAccount(props){
     <section>
         <div className="container">
             <h4>Shelter Location</h4>
-            <Map locations={[{address: "toronto robarts library ontario", text: name}]}></Map>
+            <Map locations={[{address: loc, text: name}]}></Map>
         </div>
     </section>
 
