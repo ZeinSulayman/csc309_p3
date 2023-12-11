@@ -290,7 +290,7 @@ function ShelterAccount(props){
    )}
 
     <section>
-        <div className="container">
+        <div className="container" style={{paddingBottom: "30px"}}>
             <h4>Shelter Location</h4>
             <Map locations={[{address: loc, text: name}]}></Map>
         </div>

@@ -34,6 +34,7 @@ const ShelterMaps = () => {
 
     fetchShelters();
   }, []);
+  console.log("Shelters: ", locations);
 
   return <Map locations={locations}></Map>;
 
