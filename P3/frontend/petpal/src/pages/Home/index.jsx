@@ -167,7 +167,7 @@ const Home = () => {
               alt="..."></img>
           </div>
           <div class="col">
-            <a href="signup.html" class="get-started-text">
+            <a href="/api/newuser" class="get-started-text">
               <div class="get-started-button d-flex justify-content-center align-items-center" style={{color: "white"}}>
                 <p class="mb-0">Get Started Today!</p>
               </div>

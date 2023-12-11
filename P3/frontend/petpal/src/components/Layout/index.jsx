@@ -7,6 +7,7 @@ import { useUser } from '../../contexts/UserContext';
 import ListWithPagination from './pagination'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as Icon from 'react-bootstrap-icons';
+import '../../App.css'; // Import the CSS file
 
 function Layout(props){
 
@@ -141,38 +142,27 @@ function Layout(props){
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
               <ul className="navbar-nav me-auto mb-2 mb-lg-0"></ul>
               <li className="nav-item mx-2">
-                <a
-                  className="nav-link active"
-                  aria-current="page"
-                  href="/"
-                  style={{ fontWeight: 'bold', color: 'skyblue' }}
-                >
-                  Home
-                </a>
-              </li>
-                <li className="nav-item mx-2">
-                <a
-                  className="nav-link active"
-                  aria-current="page"
-                  href="/map"
-                  style={{ fontWeight: 'bold', color: 'skyblue' }}
-                >
-                  Map
-                </a>
-              </li>
-              <li className="nav-item mx-2">
-                <a
-                  className="nav-link active"
-                  aria-current="page"
-                  href="/api/user/"
-                  style={{ fontWeight: 'bold', color: 'skyblue' }}
-                >
-                  Login
-                </a>
-              </li>
-              <li className="nav-item mx-2">
-            <a className="nav-link" href="finder" style={{color: "white"}}>Finder</a>
-          </li>{isAuth ? (
+          <Link
+            to="/"
+            className="nav-link"
+            activeClassName="active-link" // This class will be applied when the link is active
+            style={{  color: 'white' }}
+          >
+            Home
+          </Link>
+        </li>
+        <li className="nav-item mx-2">
+          <Link
+            to="/api/user/"
+            className="nav-link"
+            activeClassName="active-link" // Apply the class for the active link
+            style={{  color: 'white' }}
+          >
+            Login
+          </Link>
+        </li>
+
+          {isAuth ? (
            localStorage.getItem('shelter') == 'true' ? (
                 <li className="nav-item dropdown mx-2">
             <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
@@ -181,8 +171,10 @@ function Layout(props){
             </a>
             <ul className="dropdown-menu dropdown-menu-start">
               <li><a className="dropdown-item" href="/shelter">Manage Account</a></li>
-              <li><a className="dropdown-item" href="/applications">Manage Adoptions</a></li>
-              <li><a className="dropdown-item" href="/api/newuser">Sign-up</a></li>
+              <li><a className="dropdown-item" href="/applications">Manage Applications</a></li>
+              <li>
+            <a className="dropdown-item" href="/pets/manage" >Manage Pets</a>
+          </li>
             </ul>
           </li>
           ) : (
@@ -194,7 +186,9 @@ function Layout(props){
             <ul className="dropdown-menu dropdown-menu-start">
               <li><a className="dropdown-item" href="/seeker">Manage Account</a></li>
               <li><a className="dropdown-item" href="/applications">Manage Adoptions</a></li>
-              <li><a className="dropdown-item" href="/api/newuser">Sign-up</a></li>
+              <li>
+            <a className="dropdown-item" href="/finder">Finder</a>
+          </li>
             </ul>
           </li>
               )):null}

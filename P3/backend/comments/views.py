@@ -39,7 +39,7 @@ class ShelterCommentListCreateView(generics.ListCreateAPIView):
 
 ##need to make sure permissions work
 class AppCommentListCreateView(generics.ListCreateAPIView):
-    permission_classes = [IsAuthenticated, IsShelterOwner, IsAppOwner]
+    #permission_classes = [IsAuthenticated, IsShelterOwner, IsAppOwner]
     pagination_class = PetPagination
 
     def get_queryset(self):

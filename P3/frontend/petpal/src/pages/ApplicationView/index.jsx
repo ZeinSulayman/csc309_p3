@@ -152,12 +152,11 @@ return (
         {applications.results.map((application) => (
                   <div key={application.id} className="col-md-6 col-lg-4 mb-4">
                     <div className="card h-100">
-                      <img
+                      {/*<img
                         src={application.pet_pic}
                         style={{ height: '50%' }}
-                        alt="Pet Image"
                         className="card-img-top"
-                      />
+                      />*/}
                       <div className="card-body">
                         <h5 style={{paddingBottom:'10'}}className="card-title">Pet Name: {application.pet_name}</h5>
                         <p style={{marginBottom:'2px'}} className="card-text">Shelter: {application.shelter_name}</p>
@@ -169,9 +168,15 @@ return (
                             {application.status}
                           </div>
                           <div className="col-12 col-sm-4 d-flex justify-content-center mb-2 mb-sm-0">
-
+<button
+                                  type="button"
+                                  className="btn btn-secondary"
+                                >
+                                  <a style={{color:'white', textDecoration:'None'}} href={`/chat/${application.id}`}>Comments</a>
+                             </button>
                           </div>
                           <div className="col-12 col-sm-4 d-flex justify-content-center">
+
                             <button
                               type="button"
                               className="btn btn-primary"

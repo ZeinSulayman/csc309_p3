@@ -74,6 +74,8 @@ const getUser = async (e) => {
                 const userInfo = { id: data['id'], name: data['username'], seeker: data['is_pet_seeker']};
                 updateUser(userInfo);
                 localStorage.setItem('shelter',data['is_pet_shelter']);
+                localStorage.setItem('id',data['id']);
+                localStorage.setItem('name',data['username']);
                 handleUpdateUser();
                 console.log(userInfo)
                 window.location.href = '/'

@@ -24,6 +24,11 @@
   color: white;
 }
 
+.active-link {
+  background-color: #3498db; /* Set the background color for the active link */
+  color: blue !important; /* Set the color for the active link with !important to override inline styles */
+}
+
 .App-link {
   color: #61dafb;
 }

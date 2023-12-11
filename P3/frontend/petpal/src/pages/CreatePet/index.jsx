@@ -72,7 +72,7 @@ const CreatePet = () => {
 
             const data = await response.json();
             console.log('Pet created successfully:', data);
-//              window.location.href = '/pets/manage/'
+            window.location.href = '/pets/manage/'
 
             // You can redirect to the pet list page or perform other actions here
           } catch (error) {

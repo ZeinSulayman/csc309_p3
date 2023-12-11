@@ -24,6 +24,7 @@ const Finder = () => {
           }
         });
         const aldata = await allresponse.json();
+        console.log(aldata)
         setAll(aldata);
       } catch (error) {
         console.error('Error fetching pets:', error);

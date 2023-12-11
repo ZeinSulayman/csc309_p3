@@ -49,6 +49,9 @@ const CreatePet = () => {
            const petData = await petResponse.json();
            setPet(petData);
 
+
+
+
          } catch (error) {
            console.error('Error fetching pet details:', error);
          }
