@@ -191,9 +191,6 @@ return (
                 <nav aria-label="Page navigation example">
                   <ul className="pagination justify-content-center">
                     <li className="page-item"><button className="page-link" onClick={() => handleFilterChange({ target: { name: 'page', value: page - 1 } })}>Previous</button></li>
-                    <li className="page-item"><button className="page-link" onClick={() => handleFilterChange({ target: { name: 'page', value: '1' } })}>1</button></li>
-                    <li className="page-item"><button className="page-link" onClick={() => handleFilterChange({ target: { name: 'page', value: '2' } })}>2</button></li>
-                    <li className="page-item"><button className="page-link" onClick={() => handleFilterChange({ target: { name: 'page', value: '3' } })}>3</button></li>
                     <li className="page-item"><button className="page-link" onClick={() => handleFilterChange({ target: { name: 'page', value: page + 1 } })}>Next</button></li>
                   </ul>
                 </nav>
