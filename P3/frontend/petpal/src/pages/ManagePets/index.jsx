@@ -161,9 +161,7 @@ const ShelterPets = () => {
           <nav aria-label="Page navigation example">
             <ul className="pagination justify-content-center">
               <li className="page-item"><button className="page-link" onClick={() => handleFilterChange({ target: { name: 'page', value: page - 1 } })}>Previous</button></li>
-              <li className="page-item"><button className="page-link" onClick={() => handleFilterChange({ target: { name: 'page', value: '1' } })}>1</button></li>
-              <li className="page-item"><button className="page-link" onClick={() => handleFilterChange({ target: { name: 'page', value: '2' } })}>2</button></li>
-              <li className="page-item"><button className="page-link" onClick={() => handleFilterChange({ target: { name: 'page', value: '3' } })}>3</button></li>
+
               <li className="page-item"><button className="page-link" onClick={() => handleFilterChange({ target: { name: 'page', value: page + 1 } })}>Next</button></li>
             </ul>
           </nav>
@@ -307,6 +305,7 @@ const ShelterPets = () => {
                           </a>
                         </h5>
                         <p className="card-text"><strong>Breed:</strong> {currentPet.breed}</p>
+                        <p className="card-text"><strong>Color:</strong> {currentPet.color}</p>
                         <p className="card-text"><strong>Gender:</strong> {currentPet.gender}</p>
                         <p className="card-text"><strong>Age:</strong> {currentPet.age} yrs old</p>
                         <p className="card-text"><strong>Size:</strong> {currentPet.size}</p>
@@ -334,9 +333,7 @@ const ShelterPets = () => {
           <nav aria-label="Page navigation example">
             <ul className="pagination justify-content-center">
               <li className="page-item"><button className="page-link" onClick={() => handleFilterChange({ target: { name: 'page', value: page - 1 } })}>Previous</button></li>
-              <li className="page-item"><button className="page-link" onClick={() => handleFilterChange({ target: { name: 'page', value: '1' } })}>1</button></li>
-              <li className="page-item"><button className="page-link" onClick={() => handleFilterChange({ target: { name: 'page', value: '2' } })}>2</button></li>
-              <li className="page-item"><button className="page-link" onClick={() => handleFilterChange({ target: { name: 'page', value: '3' } })}>3</button></li>
+
               <li className="page-item"><button className="page-link" onClick={() => handleFilterChange({ target: { name: 'page', value: page + 1 } })}>Next</button></li>
             </ul>
           </nav>
