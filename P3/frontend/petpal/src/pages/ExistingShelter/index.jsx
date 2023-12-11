@@ -14,6 +14,10 @@ function ShelterAccount(props){
     const [website, setWebsite] = useState('');
     const [pic, setPic] = useState('');
     const [comments, setCom] = useState([]);
+    const [id, setID] = useState('');
+
+    const [content, setContent] = useState("");
+     const [rating, setRating] = useState(1);
 
     /*const comments = [
     { author: 'John Doglover', title: 'This place is good', content: 'This is a positive review', rating: 4.5 },
@@ -83,6 +87,7 @@ function ShelterAccount(props){
                 setNum(data.phone_num)
                 setWebsite(data.website)
                 setPic(data.pic)
+                setID(data.shelter_id)
                 //console.log(data)
                 get_comments(data.shelter_id);
             } else {
@@ -121,6 +126,41 @@ function ShelterAccount(props){
             console.error('Network error:', error.message);
         }
     };
+
+    const com = {
+            content: content,
+            name:localStorage.getItem('name'),
+            rating:rating
+        };
+    const post_comments = async (e) => {
+        try {
+            // Create the POST request using the fetch API
+            const response = await fetch(`http://127.0.0.1:8000/shelters/${id}/comments/`, {
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+                },
+                 body: JSON.stringify(com),
+            });
+            // Check if the request was successful (status code in the range 200-299)
+            if (response.ok) {
+            //console.log(data)
+                const data = await response.json();
+                setCom(data.results)
+                console.log(data)
+                window.location.href = `/shelter`
+
+            } else {
+                // Handle error responses
+                console.error('Error:', response.statusText);
+            }
+        } catch (error) {
+            // Handle network errors
+            console.error('Network error:', error.message);
+        }
+    };
+
 
     const del = async (e) => {
         try {
@@ -304,12 +344,12 @@ function ShelterAccount(props){
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <textarea class="form-control" aria-label="With textarea" placeholder="Reply to review" id="review"></textarea>
+         <textarea class="form-control" aria-label="With textarea" placeholder="Reply to review" id="review" value={content} onChange={e => setContent(e.target.value)}></textarea>
 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+         <button type="button" class="btn btn-primary" onClick={() => post_comments()} >Save changes</button>
       </div>
     </div>
   </div>

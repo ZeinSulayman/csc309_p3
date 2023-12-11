@@ -36,7 +36,6 @@ const Chat = () => {
         }
     };
 
-console.log(content)
   const com = {
             content: content,
             name:localStorage.getItem('name')
