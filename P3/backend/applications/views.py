@@ -72,12 +72,15 @@ class PetApplicationUpdateView(CreateAPIView):
         application = self.get_object(application_id)
 
         # Check if the user has permission to update the application
-        if (request.user.is_pet_shelter and application.status == "pending") or \
-                (request.user.is_pet_seeker and application.status in ["pending", "accepted"]):
+        if (request.user.is_pet_shelter and
+            application.status == "pending" and
+            request.data.get('status') in ["accepted", "denied"]) or \
+                (request.user.is_pet_seeker and
+                 application.status in ["pending", "accepted"] and
+                 request.data.get('status') == "withdrawn"):
             # Get the appropriate serializer class based on user type
             serializer_class = self.get_serializer_class()
             serializer = serializer_class(application, data=request.data)
-
 
             if serializer.is_valid():
                 serializer.save()
@@ -92,7 +95,11 @@ class PetApplicationDetailView(APIView):
     permission_classes = [IsShelter | IsPetSeeker]
 
     def get(self, request, application_id):
-        application = get_object_or_404(PetApplication, pk=application_id, applicant=request.user)
+        if request.user.is_pet_seeker:
+            application = get_object_or_404(PetApplication, pk=application_id, applicant=request.user)
+        else:
+            application = get_object_or_404(PetApplication, pk=application_id,
+                                            pet__owner=PetShelter.objects.get(shelter_id=request.user.shelter_id()))
         serializer = PetApplicationDetailSerializer(application)
         return Response(serializer.data, status=status.HTTP_200_OK)
 

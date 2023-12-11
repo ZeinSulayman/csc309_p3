@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { useParams } from 'react-router-dom';
 
 const PetApplication = () => {
+  const [id, setID] = useState(0);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [dob, setDOB] = useState('');
@@ -36,6 +37,7 @@ const PetApplication = () => {
 
       const handleSubmit = async (e) => {
         const petApplication = {
+          id: id,
           first_name: firstName,
           last_name: lastName,
           dob: dob,
@@ -50,8 +52,6 @@ const PetApplication = () => {
           description: reasonForAdoption
         }
 
-        console.log("Pet Application: ", petApplication)
-
         try {
           // Create the POST request using the fetch API
           const response = await fetch(`http://127.0.0.1:8000/pets/${petId}/application/`, {
@@ -62,6 +62,20 @@ const PetApplication = () => {
             },
             body: JSON.stringify(petApplication),
           });
+          if (response.ok) {
+            const noti_body = {
+              content: `Adoption application for ${pet.name} has been created!`,
+              link: `http://127.0.0.1:8000/application-view/${id}/`
+            }
+            const noti_response = await fetch(`http://127.0.0.1:8000/noti/newnoti/unread/`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+              },
+              body: JSON.stringify(noti_body),
+            });
+          }
           window.location.href = "/applications/";
         } catch (error) {
           // Handle network errors

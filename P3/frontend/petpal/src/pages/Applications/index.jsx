@@ -1,7 +1,7 @@
 // // PetList.jsx
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-const Application = () => {
+const Applications = () => {
   let page = 1;
   const [applications, setApps] = useState([]);
   const [filters, setFilters] = useState({
@@ -152,11 +152,12 @@ return (
         {applications.results.map((application) => (
                   <div key={application.id} className="col-md-6 col-lg-4 mb-4">
                     <div className="card h-100">
-                      {/*<img
+                      <img
                         src={application.pet_pic}
                         style={{ height: '50%' }}
+                        alt="Pet Image"
                         className="card-img-top"
-                      />*/}
+                      />
                       <div className="card-body">
                         <h5 style={{paddingBottom:'10'}}className="card-title">Pet Name: {application.pet_name}</h5>
                         <p style={{marginBottom:'2px'}} className="card-text">Shelter: {application.shelter_name}</p>
@@ -168,20 +169,14 @@ return (
                             {application.status}
                           </div>
                           <div className="col-12 col-sm-4 d-flex justify-content-center mb-2 mb-sm-0">
-<button
-                                  type="button"
-                                  className="btn btn-secondary"
-                                >
-                                  <a style={{color:'white', textDecoration:'None'}} href={`/chat/${application.id}`}>Comments</a>
-                             </button>
+
                           </div>
                           <div className="col-12 col-sm-4 d-flex justify-content-center">
-
                             <button
                               type="button"
                               className="btn btn-primary"
                             >
-                              <a style={{color:'white', textDecoration:'None'}} href='/'>View Application</a>
+                              <a style={{color:'white', textDecoration:'None'}} href={`/application-view/${application.id}`}>View Application</a>
                             </button>
                           </div>
                         </div>
@@ -196,6 +191,9 @@ return (
                 <nav aria-label="Page navigation example">
                   <ul className="pagination justify-content-center">
                     <li className="page-item"><button className="page-link" onClick={() => handleFilterChange({ target: { name: 'page', value: page - 1 } })}>Previous</button></li>
+                    <li className="page-item"><button className="page-link" onClick={() => handleFilterChange({ target: { name: 'page', value: '1' } })}>1</button></li>
+                    <li className="page-item"><button className="page-link" onClick={() => handleFilterChange({ target: { name: 'page', value: '2' } })}>2</button></li>
+                    <li className="page-item"><button className="page-link" onClick={() => handleFilterChange({ target: { name: 'page', value: '3' } })}>3</button></li>
                     <li className="page-item"><button className="page-link" onClick={() => handleFilterChange({ target: { name: 'page', value: page + 1 } })}>Next</button></li>
                   </ul>
                 </nav>
