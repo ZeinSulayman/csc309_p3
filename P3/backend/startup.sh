@@ -1,8 +1,4 @@
 #!/bin/bash
-sudo apt install python3.10
-sudo apt install python3-venv
-python3 -m venv petpal/venv
-. petpal/venv/bin/activate
 pip install asgiref==3.7.2 
 pip install Django==4.2.7 
 pip install django-filter==23.3 
@@ -14,5 +10,6 @@ pip install pytz==2023.3.post1
 pip install sqlparse==0.4.4 
 pip install typing_extensions==4.8.0
 pip install drf_yasg==1.21.7
-python3 petpal/manage.py makemigrations
-python3 petpal/manage.py migrate
+poetry install
+python3 manage.py makemigrations
+python3 manage.py migrate
