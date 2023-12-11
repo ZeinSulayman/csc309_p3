@@ -153,7 +153,7 @@ return (
                   <div key={application.id} className="col-md-6 col-lg-4 mb-4">
                     <div className="card h-100">
                       <img
-                        src={application.petImage}
+                        src={application.pet_pic}
                         style={{ height: '50%' }}
                         alt="Pet Image"
                         className="card-img-top"
