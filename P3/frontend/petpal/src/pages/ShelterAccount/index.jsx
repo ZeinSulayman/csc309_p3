@@ -92,6 +92,7 @@ function EditShelterAccount(props){
                             <div class="col-sm-9">
                                 <input type="file" accept="image/*" onChange={handleFileChange}></input>
                             </div>
+
                         </div>
                             <h6 class="mt-4 text-left">Description:</h6>
                             <textarea style={{ width: '100%', textAlign: 'center', border: '0px', wordWrap: 'normal' }} rows="2" class="mb-2" id value={bio} onChange={e => setBio(e.target.value)} required></textarea>

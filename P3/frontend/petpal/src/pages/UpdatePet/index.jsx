@@ -9,7 +9,8 @@ const CreatePet = () => {
     const [pet, setPet] = useState(null);
         const { petId } = useParams();
 
-    const [pic, setPic] = useState(null);
+    const [file, setFile] = useState(null);
+    const [pic, setPic] = useState('');
     const [name, setName] = useState('');
     const [location, setLocation] = useState('');
     const [gender, setGender] = useState('');
@@ -19,18 +20,20 @@ const CreatePet = () => {
     const [color, setColor] = useState('');
     const [status, setStatus] = useState('');
     const [description, setDescription] = useState('');
-    const convertBlobToBase64 = (blob) => {
-        return new Promise((resolve, reject) => {
-          const reader = new FileReader();
-          reader.onload = () => {
-            const base64String = reader.result.split(',')[1];
-            resolve(base64String);
-          };
-          reader.onerror = (error) => {
-            reject(error);
-          };
-          reader.readAsDataURL(blob);
-        });
+
+    const handleFileChange = (e) => {
+            const pic = e.target.files[0];
+            setFile(pic)
+            console.log(pic)
+            if (pic) {
+              const reader = new FileReader();
+              reader.onloadend = () => {
+                setPic(reader.result);
+              };
+              reader.readAsDataURL(pic);
+            } else {
+              setPic(null);
+            }
         };
 
    useEffect(() => {
@@ -63,9 +66,8 @@ const CreatePet = () => {
                       },
                     });
 
-                    const data = await response.json();
-                    console.log('Pet created successfully:', data);
-                    window.location.href = '../../finder/'
+
+                    window.location.href = '/pets/manage/'
                     // You can redirect to the pet list page or perform other actions here
                   } catch (error) {
                     console.error('Error creating pet:', error);
@@ -74,7 +76,6 @@ const CreatePet = () => {
    const submit = async (e) => {
         e.preventDefault();
         const pet = {
-            pic: pic,
             name: name,
             location: location,
             gender: gender,
@@ -82,19 +83,30 @@ const CreatePet = () => {
             size: size,
             breed: breed,
             color: color,
-            description: description
+            description: description,
+            status: status
         };
-        console.log(pet.pic)
+        const petFormData = new FormData();
+
+                petFormData.append('pic', file);
+                petFormData.append('name', name);
+                petFormData.append('location', location);
+                petFormData.append('gender', gender);
+                petFormData.append('age', age);
+                petFormData.append('size', size);
+                petFormData.append('breed', breed);
+                petFormData.append('color', color);
+                petFormData.append('description', description);
+                petFormData.append('status', status)
 
         try {
             console.log(pet);
             const response = await fetch(`http://127.0.0.1:8000/pets/${petId}/`, {
               method: 'PUT',
               headers: {
-                'Content-Type': 'application/json',
                 'Authorization': `Bearer ${localStorage.getItem('access_token')}`
               },
-              body: JSON.stringify(pet),
+              body: petFormData,
             });
 
             const data = await response.json();
@@ -106,21 +118,7 @@ const CreatePet = () => {
           }
         };
 
-        const handleFileChange = (event) => {
 
-          // Check if a file was selected before accessing its properties
-          if (event.target.files && event.target.files.length > 0) {
-            const blob = event.target.files[0];
-            const pict = convertBlobToBase64(blob)
-            pict.then((result) => {
-              // 'result' contains the value of the fulfilled promise
-              console.log(result);
-              setPic(result);
-            });
-
-            // You can perform further actions with the file, such as uploading it to a server.
-          }
-        };
 
     if(!pet || !pet.id){
     return(<p>Loading...</p>);
@@ -147,7 +145,19 @@ const CreatePet = () => {
                 </h5>
                 <div className="mb-3">
                     <div className="mb-3">
+<label class="form-label fw-bold">Pet Images:</label>
 
+
+                                                    <div class="row mb-2">
+                                                        <div class="col-12">
+                                                            <input type="file" accept="image/*" className="form-control" onChange={handleFileChange}></input>
+                                                        </div>
+                                                    </div>
+
+                                                    <p class="my-2">Old Photo:</p>
+                                                   <img src={pet.pic} class="mt-2" style={{ border: '1px solid black', borderRadius: '5px', maxWidth: '100%' }}></img>
+                                                    <p class="my-2">Current Photo:</p>
+                                                   <img src={pic} class="mt-2" style={{ border: '1px solid black', borderRadius: '5px', maxWidth: '100%' }}></img>
 
                   <div className="col-md-12">
                     <label htmlFor="petName" className="form-label">
@@ -223,10 +233,10 @@ const CreatePet = () => {
                                       <option selected disabled value="">
                                           Select a Status
                                           </option>
-                                          <option value="Available" >Available</option>
-                                                  <option value="Adopted" >Adopted</option>
-                                                  <option value="Pending" >Pending</option>
-                                                  <option value="Withdrawn" >Withdrawn</option>
+                                          <option value="available" >Available</option>
+                                                  <option value="adopted" >Adopted</option>
+                                                  <option value="pending" >Pending</option>
+                                                  <option value="withdrawn" >Withdrawn</option>
                                       </select>
                                       <div className="invalid-feedback">Please provide a status.</div>
                                     </div>
