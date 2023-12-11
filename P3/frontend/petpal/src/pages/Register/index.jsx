@@ -43,7 +43,8 @@ const Register = () => {
                  localStorage.clear();
                  localStorage.setItem('access_token', data.access);
                  localStorage.setItem('refresh_token', data.refresh);
-                 await submit2();
+                 localStorage.setItem('shelter', shelter);
+                 submit2();
                 // Initialize the access & refresh token in localstorage.
             } else {
                 // Handle error responses
@@ -82,6 +83,7 @@ const submit2 = async (e) => {
              localStorage.clear();
              localStorage.setItem('access_token', data.access);
              localStorage.setItem('refresh_token', data.refresh);
+             localStorage.setItem('shelter', shelter);
               if (seeker){
                      window.location.href = '/newuser/seeker'
                  }else{
@@ -160,6 +162,7 @@ const submit2 = async (e) => {
                             <select className="form-select" id="validationCustom04" required   value={seeker ? "Seeker" : shelter ? "Shelter" : ""}
   onChange={(e) => {
     const selectedValue = e.target.value;
+    console.log(selectedValue === "Shelter")
     setSeeker(selectedValue === "Seeker");
     setShelter(selectedValue === "Shelter");
   }}>

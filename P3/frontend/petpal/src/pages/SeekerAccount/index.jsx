@@ -8,6 +8,24 @@ function SeekerAccount(props){
     const [num, setNum] = useState('');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
+    const [pic, setPic] = useState('');
+    const [file,setFile] = useState(null);
+
+    const handleFileChange = (e) => {
+        const pic = e.target.files[0];
+        setFile(pic)
+        console.log(pic)
+        if (pic) {
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            setPic(reader.result);
+          };
+          reader.readAsDataURL(pic);
+        } else {
+          setPic(null);
+        }
+    };
+
 
     const [showSuccessModal, setShowSuccessModal] = useState(false);
 
@@ -23,21 +41,37 @@ function SeekerAccount(props){
     setShowSuccessModal(false);
   };
 
-    const submit = async (e) => {
+   const submit = async (e) => {
+      //e.preventDefault();
         const seek = {
             location: loc,
             bio: bio,
             phone_num: num,
+            //pic: pic
         };
+
+    const formData = new FormData();
+    formData.append("phone_num", num);
+    formData.append("location", loc);
+    formData.append("bio", bio);
+        formData.append("pic", file);
+        //const formData = new FormData();
+        //formData.append('pic', file);
+        //formData.append('phone_num', num);
+        //formData.append('location', loc);
+        //formData.append('bio', bio);
+        console.log(formData)
         try {
             // Create the POST request using the fetch API
             const response = await fetch('http://127.0.0.1:8000/seeker/', {
-                method: 'put',
+                method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json',
+                    //'Content-Type': 'application/json',
+                    //'Content-Type': 'multipart/form-data',
                     'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
                 },
-                body: JSON.stringify(seek),
+                //body: JSON.stringify(seek),
+                body: formData,
             });
             // Check if the request was successful (status code in the range 200-299)
             if (response.ok) {
@@ -95,10 +129,11 @@ function SeekerAccount(props){
                 )
         .then(response => response.json())
         .then(json => {
-            console.log(json);
+            console.log(json['pic']);
             setBio(json['bio'])
             setNum(json['phone_num'])
             setLoc(json['location'])
+            setPic(json['pic'])
         });
          fetch('http://127.0.0.1:8000/user/', {
                 method: 'get',
@@ -145,12 +180,12 @@ return( <section>
                                 <input type="color" value="#5f9ea0"></input>
                             </div>
                         </div>
-                        <div className="row mb-3">
-                            <label className="col-sm-3 col-form-label"><strong>Profile Picture</strong></label>
-                            <div className="col-sm-9">
-                                <input type="file"></input>
-                                <p className="my-2">Current Photo:</p>
-                                <img src="img/user.jpeg" className="mt-2" style={{ border: '1px solid black', borderRadius: '5px', maxWidth: '100%' }} alt={"User image"}></img>
+                        <div class="row mb-3">
+                            <label class="col-sm-3 col-form-label"><strong>Profile Picture</strong></label>
+                            <div class="col-sm-9">
+                                <input type="file" accept="image/*" onChange={handleFileChange}></input>
+                                <p class="my-2">Current Photo:</p>
+                                <img src={pic} class="mt-2" style={{ border: '1px solid black', borderRadius: '5px', maxWidth: '100%' }}></img>
                             </div>
                         </div>
                         <div className="row mb-3">
@@ -198,4 +233,3 @@ return( <section>
 }
 
 export default SeekerAccount;
-

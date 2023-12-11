@@ -87,15 +87,15 @@ const getUser = async (e) => {
     }
 };
 
-  return ( <section className="vh-100" style={{backgroundColor: "#eee"}}>
-        <div className="container h-100">
-          <div className="row d-flex justify-content-center align-items-center h-100">
-            <div className="col-lg-12 col-xl-11">
-              <div className="card text-black" style={{borderRadius: "25px"}}>
-                <div className="card-body p-md-5">
-                    <ul className="nav nav-tabs" style={{position:"static; justify-content: center"}}>
-                        <li className="nav-item">
-                          <a className="nav-link" aria-current="page" href="/api/newuser">Sign-up</a>
+  return ( <section class="vh-100" style={{backgroundColor: "#eee;"}}>
+        <div class="container h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-12 col-xl-11">
+              <div class="card text-black" style={{borderRadius: "25px;"}}>
+                <div class="card-body p-md-5">
+                    <ul class="nav nav-tabs" style={{position:"static; justify-content: center;"}}>
+                        <li class="nav-item">
+                          <a class="nav-link" aria-current="page" href="/api/newuser">Sign-up</a>
                         </li>
                         <li className="nav-item">
                           <a className="nav-link active">Login</a>
@@ -114,7 +114,7 @@ const getUser = async (e) => {
                             <input  id="form3Example3c" className="form-control" value={username}
                 required
                 onChange={e => setUsername(e.target.value)}/>
-                            <label className="form-label" htmlFor="form3Example3c">Your Email</label>
+                            <label class="form-label" for="form3Example3c">Your Username</label>
                           </div>
                         </div>
 

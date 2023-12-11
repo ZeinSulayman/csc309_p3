@@ -31,7 +31,10 @@ class PetListView(generics.ListAPIView):
     serializer_class = PetListSerializer
 
     def get_queryset(self):
-        queryset = Pet.objects.all()
+        if self.request.user.is_pet_shelter:
+            queryset = Pet.objects.filter(owner=PetShelter.objects.get(shelter_id=self.request.user.shelter_id()))
+        else:
+            queryset = Pet.objects.all()
 
         status_param = self.request.query_params.get('status', 'available')
         if status_param.lower() != 'all':
