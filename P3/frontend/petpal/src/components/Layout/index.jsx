@@ -154,7 +154,7 @@ function Layout(props){
                 <a
                   className="nav-link active"
                   aria-current="page"
-                  href="api/user/"
+                  href="/api/user/"
                   style={{ fontWeight: 'bold', color: 'skyblue' }}
                 >
                   Login
