@@ -1,209 +1,188 @@
-// // PetList.jsx
-import React, { useEffect, useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-const Application = () => {
-  let page = 1;
-  const [applications, setApps] = useState([]);
-  const [filters, setFilters] = useState({
-    status: '',
-    sort: '',
-  });
-  const [shelter, setShelter] = useState('');
+import React, {useEffect, useState} from 'react';
+import { useParams } from 'react-router-dom';
 
+const ApplicationView = () => {
+  const [status, setStatus] = useState("");
+  const [app, setApp] = useState(null);
+  const { appId } = useParams();
 
-
-  useEffect(() => {
-    const fetchApps = async () => {
-      const url = buildApiUrl();
-
-      try {
-        const response = await fetch(url, {
+    useEffect(() => {
+      const fetchApp = async () => {
+        // Fetch app details
+        const appResponse = await fetch(`http://127.0.0.1:8000/application/${appId}/`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('access_token')}`
           }
         });
-        const data = await response.json();
-        console.log(data);
-        setApps(data);
-      } catch (error) {
-        console.error('Error fetching applications:', error);
+        const appData = await appResponse.json();
+        setApp(appData);
+        console.log("AppData: ", appData)
       }
+      fetchApp();
+      console.log("App: ", app)
+      }, [appId]);
 
-    }
+      const handleStatusChange = async (e) => {
+        const statusJSON = {
+          status: status
+        }
 
-
-
-
-    fetchApps();
-  }, [filters]);// Trigger the effect whenever filters change
-   const getInfo = async(petId) => {
-   try {
-                 // Fetch pet details
-                 const petResponse = await fetch(`http://127.0.0.1:8000/pets/details/${petId}/`, {
-                       method: 'GET',
-                       headers: {
-                         'Authorization': `Bearer ${localStorage.getItem('access_token')}`
-                       }
-                     });
-                 const petData = await petResponse.json();
-                 return(petData.name)
-               } catch (error) {
-                 console.error('Error fetching pet details:', error);
-               }
-
-               }
-  // Function to build API URL with filters
-  const buildApiUrl = () => {
-    const baseUrl = 'http://127.0.0.1:8000/shelter/applications/'; // Replace with your Django API endpoint
-    const params = new URLSearchParams();
-
-    if (filters.status)  {
-      params.append('status', filters.status);
-    }
-    if (filters.sort) {
-      params.append('sort', filters.sort);
-    }
-
-    if(filters.page){
-      if(filters.page > 0 && applications.count >= (filters.page-1)*10){
-        page = filters.page
-        params.append('page', filters.page);
-      }
-      else{
-        params.append('page', page);
-      }
-    }
-
-    // Combine base URL with parameters
-    return `${baseUrl}?${params.toString()}`;
-  };
-    const handleFilterChange = (event) => {
-        const { name, value } = event.target;
-        setFilters((prevFilters) => ({ ...prevFilters, [name]: value }));
+        try {
+          // Create the POST request using the fetch API
+          const response = await fetch(`http://127.0.0.1:8000/application/${appId}/status/`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+            },
+            body: JSON.stringify(statusJSON),
+          });
+        } catch (error) {
+          // Handle network errors
+          console.error('Network error:', error.message);
+        }
+        window.location.href = "/applications/";
+        // Reset form fields after submission
+        setStatus('');
       };
-  if (!applications.results || !Array.isArray(applications.results)) {
-    return(<p>Loading...</p>)
+
+  if (!app) {
+    return <p>Loading...</p>;
   }
-return (
-<div>
-    <section>
-              <div className="container pt-4">
-                <div className="d-flex flex-column flex-md-row justify-content-between">
+
+  return (
+    <section className="adoptapp-background">
+      <div className="container mt-5 mb-5">
+        <div className="row justify-content-center">
+          <div className="col-md-8">
+            <div className="card" style={{ backgroundColor: '#e6f7ff' }}>
+              <div className="card-body">
+                <h2 className="mb-4 text-center">Pet Adoption Application for {app.pet_name}</h2>
+                  <h5 className="text-center mb-4"><strong>Pet Name: </strong> {app.pet_name}</h5>
+                  <p className="text-center"><strong>Code: </strong> #{app.pet}</p>
+
                   <div className="row">
-                    <div className="mb-3 mb-md-0">
-                    <div style={{width:'105%'}} class="d-flex">
+                    <div className="col-md-6 mb-3">
+                      <div className="input-group">
+                        <span className="input-group-text" style={{height: "40px"}}><i className="fas fa-comment">First Name:</i></span>
+                        <p className={"form-control"} style={{height: "40px"}}>First Name: {app.first_name}</p>
+                      </div>
+                    </div>
 
-          <select style={{width:'100%'}} className="form-control me-2" name="status" value={filters.status} onChange={handleFilterChange}>
-            <option value="" >Select Status</option>
-            <option value="pending" >Pending</option>
-            <option value="accepted" >Accepted</option>
-            <option value="denied" >Denied</option>
-            <option value="withdrawn" >Withdrawn</option>
-          </select>
+                    <div className="col-md-6 mb-3">
+                      <div className="input-group">
+                        <span className="input-group-text" style={{height: "40px"}}><i className="fas fa-comment">Surname:</i></span>
+                        <p className={"form-control"} style={{height: "40px"}}>{app.last_name}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mb-3 input-group">
+                    <span className="input-group-text" style={{height: "40px"}}><i className="fas fa-comment">Date of Birth:</i></span>
+                    <p className={"form-control"} style={{height: "40px"}}>{app.dob}</p>
+                  </div>
+
+                  <div className="mb-3 input-group">
+                    <span className="input-group-text" style={{height: "40px"}}><i className="fas fa-comment">Email:</i></span>
+                    <p className={"form-control"} style={{height: "40px"}}>{app.email}</p>
+                  </div>
+
+                  <div className="mb-3 input-group">
+                    <span className="input-group-text" style={{height: "40px"}}><i className="fas fa-comment">Address:</i></span>
+                    <p className={"form-control"} style={{height: "40px"}}>{app.address}</p>
+                  </div>
+
+                  <div className="mb-3 input-group">
+                    <span className="input-group-text" style={{height: "40px"}}><i className="fas fa-comment">Occupation:</i></span>
+                    <p className={"form-control"} style={{height: "40px"}}>{app.occupation}</p>
+                  </div>
+
+                  <div className="row">
+                    <div className="col-md-6 mb-3">
+                      <div className="input-group">
+                        <span className="input-group-text" style={{height: "40px"}}><i className="fas fa-comment">Hours away on Weekdays:</i></span>
+                        <p className={"form-control"} style={{height: "40px"}}>{app.hours_away_weekdays}</p>
+                      </div>
+                    </div>
+
+                    <div className="col-md-6 mb-3">
+                      <div className="input-group">
+                        <span className="input-group-text" style={{height: "40px"}}><i className="fas fa-comment">Hours away on Weekends:</i></span>
+                        <p className={"form-control"} style={{height: "40px"}}>{app.hours_away_weekends}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mb-3 input-group">
+                    <span className="input-group-text" style={{height: "40px"}}><i className="fas fa-comment">Health Condition:</i></span>
+                    <p className={"form-control"} style={{height: "40px"}}>{app.medical_history}</p>
+                  </div>
+
+                  <div className="mb-3 input-group">
+                    <span className="input-group-text" style={{height: "40px"}}><i className="fas fa-comment">Criminal History:</i></span>
+                    <p className={"form-control"} style={{height: "40px"}}>{app.criminal_history}</p>
+                  </div>
+
+                  <div className="mb-3 input-group">
+                    <span className="input-group-text" style={{height: "40px"}}><i className="fas fa-comment">Had you owned a pet before?</i></span>
+                    <p className={"form-control"} style={{height: "40px"}}> {app.first_time_pet_owner ? (
+                        <>
+                          Yes
+                        </>
+                      ) : (
+                        <>
+                          No
+                        </>
+                      )}</p>
+                  </div>
+
+                  <div className="mb-3 input-group">
+                    <span className="input-group-text" style={{height: "120px"}}><i className="fas fa-comment">Reason for Adoption</i></span>
+                    <p className={"form-control"} style={{height: "120px"}}>{app.description}</p>
+                  </div>
+                {app.status === "pending"? (
+                    <form className="needs-validation" onSubmit={handleStatusChange}>
+                  <div className="input-group">
+                    <span className="input-group-text"><i className="fas fa-clock"></i></span>
+                    <select className="form-select" id="status" required defaultValue={""} onChange={e => setStatus(e.target.value)}>
+                      <option>{app.status}</option>
+                      {!localStorage.getItem("shelter") ? (
+                        <>
+                          <option>withdrawn</option>
+                        </>
+                      ) : (
+                        <>
+                          <option>accepted</option>
+                          <option>denied</option>
+                        </>
+                      )}
+                    </select>
+                  </div>
+                  <button type="submit" className="btn btn-primary w-100 mt-3">
+                    Edit Status
+                  </button>
+                </form>
+                ) : (
+                    <>
+                      <div className="mb-3 input-group">
+                        <span className="input-group-text" style={{height: "40px"}}><i className="fas fa-comment">Status</i></span>
+                        <p className={"form-control"} style={{height: "40px"}}>{app.status}</p>
+                      </div>
+                      <button type="submit" className="btn btn-primary w-100 mt-3" >
+                        <a style={{color: "#ffffff", textDecoration: "None"}} href={"/applications/"}>
+                          Back to Applications
+                        </a>
+                      </button>
+                    </>
+                )}
+              </div>
+            </div>
           </div>
-
-                          </div>
-                  </div>
-
-                  <div className="w-100 d-md-none d-block m-3"></div>
-
-                  <div className="row justify-content-end">
-                    <div style={{ marginLeft: '5px', marginBottom: '5px' }} className="col-md-auto">
-                      <div className="dropdown">
-                        <button
-                          className="btn btn-secondary dropdown-toggle"
-                          style={{ backgroundColor: '#2659F4', borderColor: '#2659F4' }}
-                          type="button"
-                          data-bs-toggle="dropdown"
-                          aria-expanded="false"
-                        >
-                          Sort
-                        </button>
-                        <ul className="dropdown-menu">
-                          <li>
-                          <button style={{ paddingRight: '20px' }} className="dropdown-item" value="date_created" onClick={() => handleFilterChange({ target: { name: 'sort', value: 'age' } })}>
-                              Sort by Date Created
-                            </button>
-                          </li>
-                          <li>
-                          <button style={{ paddingRight: '20px' }} className="dropdown-item" value="-last_modified" onClick={() => handleFilterChange({ target: { name: 'sort', value: 'name' } })}>
-                              Sort by Last Modified
-                            </button>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-
-
-                    <div style={{ marginLeft: '5px', marginBottom: '5px' }} className="col-md-auto">
-                      <a className="btn btn-outline-success" href="../finder/">
-                        Reset Filter/Sort
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-          </section>
-    <main className="container mt-5">
-      <h2 className="title">Adoption Applications</h2>
-
-      <div className="row">
-        {applications.results.map((application) => (
-                  <div key={application.id} className="col-md-6 col-lg-4 mb-4">
-                    <div className="card h-100">
-                      {/*<img
-                        src={application.pet_pic}
-                        style={{ height: '50%' }}
-                        className="card-img-top"
-                      />*/}
-                      <div className="card-body">
-                        <h5 style={{paddingBottom:'10'}}className="card-title">Pet Name: {application.pet_name}</h5>
-                        <p style={{marginBottom:'2px'}} className="card-text">Shelter: {application.shelter_name}</p>
-                        <p className="card-text">Applicant: {application.first_name} {application.last_name}</p>
-                      </div>
-                      <div className="card-footer">
-                        <div className="row">
-                          <div className="col-12 col-sm-4 text-warning d-flex align-items-center justify-content-center mb-2 mb-sm-0">
-                            {application.status}
-                          </div>
-                          <div className="col-12 col-sm-4 d-flex justify-content-center mb-2 mb-sm-0">
-<button
-                                  type="button"
-                                  className="btn btn-secondary"
-                                >
-                                  <a style={{color:'white', textDecoration:'None'}} href={`/chat/${application.id}`}>Comments</a>
-                             </button>
-                          </div>
-                          <div className="col-12 col-sm-4 d-flex justify-content-center">
-
-                            <button
-                              type="button"
-                              className="btn btn-primary"
-                            >
-                              <a style={{color:'white', textDecoration:'None'}} href='/'>View Application</a>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-
-
+        </div>
       </div>
-      <div>
-                <nav aria-label="Page navigation example">
-                  <ul className="pagination justify-content-center">
-                    <li className="page-item"><button className="page-link" onClick={() => handleFilterChange({ target: { name: 'page', value: page - 1 } })}>Previous</button></li>
-                    <li className="page-item"><button className="page-link" onClick={() => handleFilterChange({ target: { name: 'page', value: page + 1 } })}>Next</button></li>
-                  </ul>
-                </nav>
-              </div>
-    </main>
-
-    </div>
+    </section>
   );
 };
 
-    export default Applications;
+export default ApplicationView;
