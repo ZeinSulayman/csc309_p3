@@ -95,7 +95,7 @@ const getUser = async (e) => {
                 <div class="card-body p-md-5">
                     <ul class="nav nav-tabs" style={{position:"static; justify-content: center;"}}>
                         <li class="nav-item">
-                          <a class="nav-link" aria-current="page" href="newuser">Sign-up</a>
+                          <a class="nav-link" aria-current="page" href="/api/newuser">Sign-up</a>
                         </li>
                         <li class="nav-item">
                           <a class="nav-link active" href="login.html">Login</a>
@@ -114,7 +114,7 @@ const getUser = async (e) => {
                             <input  id="form3Example3c" class="form-control" value={username}
                 required
                 onChange={e => setUsername(e.target.value)}/>
-                            <label class="form-label" for="form3Example3c">Your Email</label>
+                            <label class="form-label" for="form3Example3c">Your Username</label>
                           </div>
                         </div>
 

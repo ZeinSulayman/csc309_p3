@@ -60,6 +60,7 @@ import PetDetail from "./pages/PetDetails/index";
 import CreatePet from "./pages/CreatePet/index";
 import PetEdit from "./pages/UpdatePet/index";
 import Applications from './pages/ApplicationView/index'
+
 import About from './components/About';
 import Layout from './components/Layout/index'
 import Map from './components/Map/index'
@@ -76,6 +77,7 @@ function App() {
                 <Route path='/seeker' element={<SeekerAccount/>} />
                 <Route path='/shelter' element={<ShelterAccount/>} />
                 <Route path='/map' element={<Map/>} />
+
                 <Route path='/pets/create' element={<CreatePet/>} />
                 <Route path="/pets/:petId" element={<PetDetail />} />
                 <Route path="/pets/edit/:petId" element={<PetEdit />} />

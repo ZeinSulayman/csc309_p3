@@ -33,7 +33,7 @@ class ShelterCommentListCreateView(generics.ListCreateAPIView):
         # Automatically set the user based on the logged-in user
         shelter_id = self.kwargs.get('shelter_id')
         shelter = get_object_or_404(PetShelter, shelter_id=shelter_id)
-        serializer.save(user=self.request.user, shelter=shelter)
+        serializer.save(user=self.request.user, shelter=shelter, name = self.request.user.username)
 
     serializer_class = ShelterCommentSerializer
 

@@ -27,7 +27,9 @@ class NotifListView(generics.ListAPIView):
     permission_classes = [IsNotiOwner]
 
     def get_queryset(self):
-        queryset = Notification.objects.all()
+        #queryset = Notification.objects.all()
+
+        queryset = Notification.objects.filter(user=self.request.user)
 
         # Filtering by status
 

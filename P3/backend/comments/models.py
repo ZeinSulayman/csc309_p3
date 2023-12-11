@@ -11,6 +11,7 @@ class AppComments(models.Model):
 
 
 class ShelterComments(models.Model):
+    name = models.CharField(max_length=255)
     content = models.TextField()
     user = models.ForeignKey("accounts.User", on_delete=models.CASCADE)
     shelter = models.ForeignKey("accounts.PetShelter", on_delete=models.CASCADE)

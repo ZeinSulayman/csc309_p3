@@ -2,6 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState, useEffect } from "react";
 import '../../App.css'; // Import the CSS file
+import CommentList from '../../components/Comments/index'
 
 function ShelterAccount(props){
     const [loc, setLoc] = useState('');
@@ -9,6 +10,15 @@ function ShelterAccount(props){
     const [num, setNum] = useState('');
     const [name, setName] = useState('');
     const [website, setWebsite] = useState('');
+    const [pic, setPic] = useState('');
+    const [comments, setCom] = useState([]);
+
+    /*const comments = [
+    { author: 'John Doglover', title: 'This place is good', content: 'This is a positive review', rating: 4.5 },
+    { author: 'Jack Doghater', title: 'This place stinks', content: 'This is a negative review', rating: 1.0 },
+    { author: 'Norm Normalson', title: 'Solid place for pets', content: 'This is a mediocre review', rating: 3.0 },
+    // Add more comments as needed
+    ];*/
 
     const submit = async (e) => {
      //e.preventDefault();
@@ -68,6 +78,87 @@ function ShelterAccount(props){
                 setBio(data.description)
                 setNum(data.phone_num)
                 setWebsite(data.website)
+                setPic(data.pic)
+                //console.log(data)
+                get_comments(data.shelter_id);
+            } else {
+                // Handle error responses
+                console.error('Error:', response.statusText);
+            }
+        } catch (error) {
+            // Handle network errors
+            console.error('Network error:', error.message);
+        }
+    };
+
+    const get_comments = async (e) => {
+        try {
+            // Create the POST request using the fetch API
+            const response = await fetch(`http://127.0.0.1:8000/shelters/${e}/comments/`, {
+                method: 'get',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+                },
+            });
+            // Check if the request was successful (status code in the range 200-299)
+            if (response.ok) {
+            //console.log(data)
+                const data = await response.json();
+                setCom(data.results)
+                console.log(data)
+
+            } else {
+                // Handle error responses
+                console.error('Error:', response.statusText);
+            }
+        } catch (error) {
+            // Handle network errors
+            console.error('Network error:', error.message);
+        }
+    };
+
+    const del = async (e) => {
+        try {
+            // Create the POST request using the fetch API
+            const response = await fetch('http://127.0.0.1:8000/shelter/', {
+                method: 'delete',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+                },
+            });
+            // Check if the request was successful (status code in the range 200-299)
+            if (response.ok) {
+                //const data = await response.json();
+                del2();
+                 localStorage.clear();
+                window.location.href = '/'
+            } else {
+                // Handle error responses
+                console.error('Error:', response.statusText);
+            }
+        } catch (error) {
+            // Handle network errors
+            console.error('Network error:', error.message);
+        }
+    };
+
+    const del2 = async (e) => {
+        try {
+            // Create the POST request using the fetch API
+            const response = await fetch('http://127.0.0.1:8000/user/', {
+                method: 'delete',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+                },
+            });
+            // Check if the request was successful (status code in the range 200-299)
+            if (response.ok) {
+                //const data = await response.json();
+                localStorage.clear();
+                window.location.href = '/'
             } else {
                 // Handle error responses
                 console.error('Error:', response.statusText);
@@ -92,7 +183,7 @@ function ShelterAccount(props){
                 <div class="card h-100">
                     <form onSubmit={submit}>
                         <div class="card-body text-center">
-                            <img src="./img/shelter-logo.png" alt="avatar"
+                            <img src={pic} alt="avatar"
                                  class="rounded-circle img-fluid" style={{width: "150px"}}></img>
                                 <input style={{ width: '100%', textAlign: 'center', border: '0px' }} type="text" class="my-3" style={{ width: '100%', border: '0px', textAlign: 'center', fontSize: '1.25rem', fontWeight: 500 }} value={name} onChange={e => setName(e.target.value)} required></input>
                             <input style={{ width: '100%', textAlign: 'center', border: '0px' }} type="text" class="text-muted mb-4" value={loc} onChange={e => setLoc(e.target.value)} required></input>
@@ -104,7 +195,9 @@ function ShelterAccount(props){
                             <textarea style={{ width: '100%', textAlign: 'center', border: '0px', wordWrap: 'normal' }} rows="2" class="mb-2" id value={bio} onChange={e => setBio(e.target.value)} required></textarea>
                         </div>
                         <div class="align-self-end mx-3" style={{ width: '100%', textAlign: 'right' }}>
+                            <button type="button" style={{ marginBottom: '10px', marginRight: '10px' }} class="btn btn-danger" onClick={() => del()} >Delete</button>
                             <input type="submit" style={{ marginBottom: '10px', marginRight: '30px' }} class="btn btn-outline-success" value="Save" ></input>
+
                         </div>
                     </form>
                 </div>
@@ -156,7 +249,7 @@ function ShelterAccount(props){
     </div>
 </section>
 
-<section class="pb-5">
+{/*<section class="pb-5">
     <div class="container">
       <h4>Top Reviews:</h4>
       <ol class="list-group list-group-numbered">
@@ -186,7 +279,12 @@ function ShelterAccount(props){
         </li>
       </ol>
     </div>
-  </section>
+  </section>*/}
+   {comments ? (
+        <CommentList comments={comments} />
+      ) : (
+        <p>Loading comments...</p> // You can render a loading message or anything else while comments are being fetched or initialized
+   )}
 
 <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
