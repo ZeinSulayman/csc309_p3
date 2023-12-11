@@ -158,7 +158,7 @@ return(
           </div>
         </div>
         <div className="mt-4 text-center">
-          <button className="btn btn-primary" onClick={() => window.location.href = 'petadopt.html'}>
+          <button className="btn btn-primary" onClick={() => window.location.href = `/pets/${petId}/application`}>
             Submit an Application to Adopt
           </button>
         </div>
