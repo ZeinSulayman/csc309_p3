@@ -61,8 +61,9 @@ import PetDetail from "./pages/PetDetails/index";
 import CreatePet from "./pages/CreatePet/index";
 import PetEdit from "./pages/UpdatePet/index";
 import ShelterMaps from "./pages/ShelterMaps";
-import Applications from './pages/ApplicationView/index'
+import Applications from './pages/Applications/index'
 import ShelterPets from './pages/ManagePets/index'
+import ApplicationView from "./pages/ApplicationView";
 
 import About from './components/About';
 import Layout from './components/Layout/index'
@@ -88,6 +89,7 @@ function App() {
                 <Route path="/pets/:petId/application" element={<PetApplication />}/>
                 <Route path='/applications' element={<Applications/>} />
                 <Route path='/pets/manage' element={<ShelterPets/>} />
+                <Route path='/application-view/:appId' element={<ApplicationView/>}/>
             </Route>
             <Route path='/api/newuser' element={<Register/>} />
             <Route path='/api/user' element={<Login/>} />

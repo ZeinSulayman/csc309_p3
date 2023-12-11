@@ -171,9 +171,9 @@ function Layout(props){
                 </a>
               </li>
               <li className="nav-item mx-2">
-            <a className="nav-link" href="finder" style={{color: "white"}}>Finder</a>
+            <a className="nav-link" href="/finder" style={{color: "white"}}>Finder</a>
           </li>{isAuth ? (
-           localStorage.getItem('shelter') == 'true' ? (
+           localStorage.getItem('shelter') === 'true' ? (
                 <li className="nav-item dropdown mx-2">
             <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
               style={{color: "white"}}>
