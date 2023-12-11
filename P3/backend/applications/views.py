@@ -118,4 +118,4 @@ class PetApplicationView(CreateAPIView):
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
     def perform_create(self, serializer, pet):
-        serializer.save(pet=pet, applicant=self.request.user, status="pending", pet_name=pet.name, shelter_name=pet.owner.shelter_name)
+        serializer.save(pet=pet, applicant=self.request.user, status="pending", pet_name=pet.name, pet_pic=pet.pic, shelter_name=pet.owner.shelter_name)
