@@ -9,28 +9,91 @@ import {useParams} from "react-router-dom";
 
 function ViewShelter(){
     const [shelter, setShelter] = useState(null);
+    const [comments, setComments] = useState(null)
+    const [rating, setRating] = useState(-1);
+    const [content, setContent] = useState("");
 
     const { shelterId } = useParams();
 
     setKey("AIzaSyDcX3F3pRrsiSNM-Ccda0G-a9ZD_BdCpvk");
 
-    useEffect(() => {
-        const fetchShelter = async () => {
+    const fetchShelter = async () => {
+        // Create the POST request using the fetch API
+        const response = await fetch(`http://127.0.0.1:8000/shelter/${shelterId}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+            }
+        });
+        const shelterData = await response.json();
+        setShelter(shelterData);
+        get_comments(shelterId);
+    };
+
+    const get_comments = async (ID) => {
+        try {
             // Create the POST request using the fetch API
-            const response = await fetch(`http://127.0.0.1:8000/shelter/${shelterId}`, {
-                method: 'GET',
+            const response = await fetch(`http://127.0.0.1:8000/shelters/${ID}/comments/`, {
+                method: 'get',
                 headers: {
+                    'Content-Type': 'application/json',
                     'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
-                }
+                },
             });
-            const shelterData = await response.json();
-            setShelter(shelterData);
+            // Check if the request was successful (status code in the range 200-299)
+            if (response.ok) {
+            //console.log(data)
+                const data = await response.json();
+                setComments(data.results)
+                console.log(data)
+
+            } else {
+                // Handle error responses
+                console.error('Error:', response.statusText);
+            }
+        } catch (error) {
+            // Handle network errors
+            console.error('Network error:', error.message);
         }
+    };
+
+    const com = {
+            content: "Hello",
+            name:localStorage.getItem('name'),
+            rating:5
+        };
+    const post_comments = async (e) => {
+        try {
+            // Create the POST request using the fetch API
+            const response = await fetch(`http://127.0.0.1:8000/shelters/${shelterId}/comments/`, {
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+                },
+                 body: JSON.stringify(com),
+            });
+            // Check if the request was successful (status code in the range 200-299)
+            if (response.ok) {
+            //console.log(data)
+                const data = await response.json();
+                setComments(data.results)
+                console.log(data)
+                window.location.reload();
+
+            } else {
+                // Handle error responses
+                console.error('Error:', response.statusText);
+            }
+        } catch (error) {
+            // Handle network errors
+            console.error('Network error:', error.message);
+        }
+    };
+
+    useEffect(() => {
         fetchShelter();
     }, [shelterId]);
-
-    console.log("shelter", shelter)
-    console.log("shelterId", shelterId)
 
     return shelter ? (<> <section>
     <div class="container py-5">
@@ -130,10 +193,14 @@ function ViewShelter(){
     </div>
   </section>*/}
 
-
+{comments ? (
+        <CommentList comments={comments} />
+      ) : (
+        <p>Loading comments...</p> // You can render a loading message or anything else while comments are being fetched or initialized
+   )}
     <section>
         <div className="container" style={{paddingBottom: "30px"}}>
-            <h4>Shelter Location</h4>
+            <h4>Shelter Location:</h4>
             <Map locations={[{address: shelter.location, text: shelter.shelter_name}]}></Map>
         </div>
     </section>
@@ -146,12 +213,12 @@ function ViewShelter(){
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-         <textarea class="form-control" aria-label="With textarea" placeholder="Reply to review" id="review" value={""}></textarea>
+         <textarea class="form-control" aria-label="With textarea" placeholder="Reply to review" id="review" value={content} onChange={e => setContent(e.target.value)}></textarea>
 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-         <button type="button" class="btn btn-primary">Save changes</button>
+         <button type="button" class="btn btn-primary" onClick={() => post_comments()} >Save changes</button>
       </div>
     </div>
   </div>

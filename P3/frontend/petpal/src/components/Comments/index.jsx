@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Pagination } from 'react-bootstrap';
+import CustomPagination from "./pagination";
 
 const CommentList = ({ comments }) => {
   const itemsPerPage = 5;
@@ -17,7 +18,10 @@ const CommentList = ({ comments }) => {
     <section className="pb-5 d-flex flex-column align-items-center" style={{marginTop:"35px"}}>
       <div className="container">
         <h4>Top Reviews:</h4>
-        <ol className="list-group list-group-numbered">
+          {currentComments.length === 0 ? (
+              <p style={{paddingLeft: "7px", fontSize: "16px"}}>No Reviews Yet!</p>
+          ) : (
+              <ol className="list-group list-group-numbered">
           {currentComments.map((comment, index) => (
             <li key={index} className="list-group-item d-flex justify-content-between align-items-start">
               <div className="ms-2 me-auto">
@@ -33,14 +37,9 @@ const CommentList = ({ comments }) => {
             </li>
           ))}
         </ol>
+          )}
       </div>
-      <Pagination style={{marginTop:"35px"}}>
-        {Array.from({ length: Math.ceil(comments.length / itemsPerPage) }, (_, index) => (
-          <Pagination.Item key={index} active={index + 1 === currentPage} onClick={() => paginate(index + 1)}>
-            {index + 1}
-          </Pagination.Item>
-        ))}
-      </Pagination>
+      <CustomPagination comments={comments} itemsPerPage={itemsPerPage} currentPage={currentPage} paginate={paginate} />
     </section>
   );
 };
