@@ -37,13 +37,10 @@ class ShelterApplicationsListView(ListAPIView):
         queryset = queryset.order_by('-date_created')
         # Apply sorting if provided
         if sort_by:
-            print("sort is" + str(sort_by))
             if sort_by == 'date_created':
                 queryset = queryset.order_by('date_created')
             elif sort_by == 'last_modified':
                 queryset = queryset.order_by('-last_modified')
-            for box in queryset:
-                print("box: " + str(box.date_created))
 
         return queryset
 
@@ -150,6 +147,7 @@ class PetApplicationView(CreateAPIView):
                     pet_name=pet.name,
                     pet_pic=pet.pic,
                     shelter_name=pet.owner.shelter_name,
+                    shelter_id=pet.owner.shelter_id,
                 )
             else:
                 # There are applications with statuses other than 'withdrawn'
@@ -167,4 +165,5 @@ class PetApplicationView(CreateAPIView):
                 pet_name=pet.name,
                 pet_pic=pet.pic,
                 shelter_name=pet.owner.shelter_name,
+                shelter_id=pet.owner.shelter_id,
             )

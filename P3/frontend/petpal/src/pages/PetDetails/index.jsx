@@ -152,7 +152,7 @@ return(
               data-bs-parent="#accordionExample"
             >
               <div className="accordion-body">
-                <strong>{shelter.shelter_name}, Rating: </strong> 4.2/5
+                <strong>{shelter.shelter_name}</strong>
               </div>
               <button className="btn btn-primary mb-2" onClick={() => window.location.href = `/shelter/${pet.owner}`}>
                 Learn More

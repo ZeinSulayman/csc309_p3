@@ -10,15 +10,9 @@ from applications.models import PetApplication
 from django.utils import timezone
 #from .permissions import IsCommentOwner
 
-class PetPagination(PageNumberPagination):
-    page_size = 5
-    page_size_query_param = 'page_size'
-    max_page_size = 100
-
 
 class ShelterCommentListCreateView(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
-    pagination_class = PetPagination
 
     def get_queryset(self):
         # Filter comments based on the specific shelter or pet seeker
@@ -37,15 +31,15 @@ class ShelterCommentListCreateView(generics.ListCreateAPIView):
 
     serializer_class = ShelterCommentSerializer
 
+
 ##need to make sure permissions work
 class AppCommentListCreateView(generics.ListCreateAPIView):
     #permission_classes = [IsAuthenticated, IsShelterOwner, IsAppOwner]
-    pagination_class = PetPagination
 
     def get_queryset(self):
         # Filter comments based on the specific shelter or pet seeker
         application_id = self.kwargs.get('application_id')  # Adjust based on your URL pattern
-        queryset =  AppComments.objects.filter(app_id=application_id)
+        queryset = AppComments.objects.filter(app_id=application_id)
         queryset = queryset.order_by('-created_at')
         return queryset
 

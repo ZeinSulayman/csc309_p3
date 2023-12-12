@@ -69,7 +69,7 @@ const PetApplication = () => {
             console.log("supposed to navigate1")
             const noti_body = {
               content: `Adoption application for ${pet.name} has been created!`,
-              link: `http://127.0.0.1:8000/application-view/${id}/`
+              link: `http://localhost:3000/application-view/${id}/`
             }
             const noti_response = await fetch(`http://127.0.0.1:8000/noti/newnoti/unread/`, {
               method: 'POST',

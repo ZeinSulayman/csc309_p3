@@ -17,7 +17,12 @@ const CommentList = ({ comments }) => {
   return (
     <section className="pb-5 d-flex flex-column align-items-center" style={{marginTop:"35px"}}>
       <div className="container">
-        <h4>Top Reviews:</h4>
+       <div className="d-flex justify-content-between align-items-start" style={{paddingBottom: "10px"}}>
+          <h4 className="mb-0">Top Reviews:</h4>
+          <button type="button" className="btn btn-primary rounded-pill mx-2" data-bs-toggle="modal" data-bs-target="#Modal">
+            Submit a Comment!
+          </button>
+        </div>
           {currentComments.length === 0 ? (
               <p style={{paddingLeft: "7px", fontSize: "16px"}}>No Reviews Yet!</p>
           ) : (
@@ -28,9 +33,6 @@ const CommentList = ({ comments }) => {
                 <div className="fw-bold">{comment.name}</div>
                 {comment.content}
               </div>
-              <button type="button" className="btn btn-primary rounded-pill mx-2" data-bs-toggle="modal" data-bs-target="#Modal">
-                Reply
-              </button>
               {comment.rating ? (
                 <span className="badge bg-primary rounded-pill">{comment.rating}/5</span>
               ) : null}

@@ -10,7 +10,7 @@ import {useParams} from "react-router-dom";
 function ViewShelter(){
     const [shelter, setShelter] = useState(null);
     const [comments, setComments] = useState(null)
-    const [rating, setRating] = useState(-1);
+    const [rating, setRating] = useState("");
     const [content, setContent] = useState("");
 
     const { shelterId } = useParams();
@@ -58,9 +58,9 @@ function ViewShelter(){
     };
 
     const com = {
-            content: "Hello",
+            content: content,
             name:localStorage.getItem('name'),
-            rating:5
+            rating: rating
         };
     const post_comments = async (e) => {
         try {
@@ -80,6 +80,9 @@ function ViewShelter(){
                 setComments(data.results)
                 console.log(data)
                 window.location.reload();
+
+                setContent("")
+                setRating("")
 
             } else {
                 // Handle error responses
@@ -209,16 +212,24 @@ function ViewShelter(){
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Reply</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Submit a Comment</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-         <textarea class="form-control" aria-label="With textarea" placeholder="Reply to review" id="review" value={content} onChange={e => setContent(e.target.value)}></textarea>
-
+         <textarea class="form-control" style={{marginBottom: "10px"}} aria-label="With textarea" placeholder="Comment" id="review" onChange={e => setContent(e.target.value)}></textarea>
+          <label htmlFor="rating" style={{paddingRight: "5px"}}>Select Rating:</label>
+      <select id="rating" onChange={e => setRating(e.target.value)}>
+        <option value="">Select...</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-         <button type="button" class="btn btn-primary" onClick={() => post_comments()} >Save changes</button>
+         <button type="button" class="btn btn-primary" onClick={() => post_comments()} >Submit</button>
       </div>
     </div>
   </div>

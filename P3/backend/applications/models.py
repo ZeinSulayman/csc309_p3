@@ -25,6 +25,7 @@ class PetApplication(models.Model):
     description = models.CharField(max_length=255)
     pet_name = models.CharField(max_length=255)
     pet_pic = models.ImageField(upload_to='pics/', blank=True, null=True)
+    shelter_id = models.CharField(max_length=255)
     shelter_name = models.CharField(max_length=255)
     pet = models.ForeignKey("listings.Pet", on_delete=models.CASCADE)
     status = models.CharField(
