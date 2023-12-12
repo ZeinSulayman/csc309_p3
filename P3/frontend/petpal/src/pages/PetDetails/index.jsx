@@ -2,11 +2,65 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
+import fetchApps from '../Applications/index'
 const PetDetail = () => {
+  const [canApply, setCanApply] = useState(false);
   const { petId } = useParams();
   const [pet, setPet] = useState(null);
   const [shelter, setShelter] = useState(null);
+  const [viewAppId, setViewAppId] = useState('');
+
   useEffect(() => {
+    const checkCanApply = async () => {
+      try {
+        const paramsWithdrawn = new URLSearchParams();
+        paramsWithdrawn.append('status', 'withdrawn');
+        paramsWithdrawn.append('pet', petId);
+
+        const url_withdrawn = `http://127.0.0.1:8000/shelter/applications/?${paramsWithdrawn.toString()}`;
+
+        const appsWithdrawnResponse = await fetch(url_withdrawn, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+          }
+        });
+        const appWithdrawnData = await appsWithdrawnResponse.json();
+
+        const params = new URLSearchParams();
+        params.append('pet', petId);
+
+        const url = `http://127.0.0.1:8000/shelter/applications/?${params.toString()}`;
+
+        const appsResponse = await fetch(url, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+          }
+        });
+        const appData = await appsResponse.json();
+
+        console.log(appData)
+        console.log(appWithdrawnData)
+
+        if (appData.count === appWithdrawnData.count) {
+          setCanApply(true);
+        } else {
+          appData.results.forEach(app => {
+            if (app.status !== "withdrawn") {
+              // Found an application with a status other than "withdrawn"
+              // Store its id
+              setViewAppId(app.id);
+
+            }
+          });
+        }
+
+      } catch (error) {
+        console.log("Error fetching applications")
+      }
+    }
+
     const fetchPetAndShelter = async () => {
       try {
         // Fetch pet details
@@ -32,7 +86,7 @@ const PetDetail = () => {
         console.error('Error fetching pet details:', error);
       }
     };
-
+    checkCanApply();
     fetchPetAndShelter();
   }, [petId]);
 
@@ -100,7 +154,7 @@ return(
               <div className="accordion-body">
                 <strong>{shelter.shelter_name}, Rating: </strong> 4.2/5
               </div>
-              <button className="btn btn-primary mb-2" onClick={() => window.location.href = 'shelter.html'}>
+              <button className="btn btn-primary mb-2" onClick={() => window.location.href = `/shelter/${pet.owner}`}>
                 Learn More
               </button>
             </div>
@@ -158,9 +212,15 @@ return(
           </div>
         </div>
         <div className="mt-4 text-center">
-          <button className="btn btn-primary" onClick={() => window.location.href = `/pets/${petId}/application`}>
-            Submit an Application to Adopt
-          </button>
+          {canApply ? (
+              <button className="btn btn-primary" onClick={() => window.location.href = `/pets/${petId}/application`}>
+               Submit an Application to Adopt
+              </button>
+          ) : (
+              <button className="btn btn-primary" onClick={() => window.location.href = `/application-view/${viewAppId}`}>
+               View latest application
+              </button>
+          )}
         </div>
       </div>
     </section>

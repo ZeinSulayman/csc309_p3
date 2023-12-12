@@ -24,7 +24,7 @@ class PetApplication(models.Model):
     first_time_pet_owner = models.BooleanField()
     description = models.CharField(max_length=255)
     pet_name = models.CharField(max_length=255)
-    pet_pic = models.ImageField(upload_to='pet_pics/', blank=True, null=True)
+    pet_pic = models.ImageField(upload_to='pics/', blank=True, null=True)
     shelter_name = models.CharField(max_length=255)
     pet = models.ForeignKey("listings.Pet", on_delete=models.CASCADE)
     status = models.CharField(

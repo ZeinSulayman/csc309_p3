@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate} from 'react-router-dom';
 
 const PetApplication = () => {
+  const [id, setID] = useState(0);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [dob, setDOB] = useState('');
@@ -18,6 +19,8 @@ const PetApplication = () => {
 
   const { petId } = useParams();
   const [pet, setPet] = useState(null);
+
+  const navigate = useNavigate();
 
     useEffect(() => {
       const fetchPet = async () => {
@@ -36,6 +39,7 @@ const PetApplication = () => {
 
       const handleSubmit = async (e) => {
         const petApplication = {
+          id: id,
           first_name: firstName,
           last_name: lastName,
           dob: dob,
@@ -50,8 +54,6 @@ const PetApplication = () => {
           description: reasonForAdoption
         }
 
-        console.log("Pet Application: ", petApplication)
-
         try {
           // Create the POST request using the fetch API
           const response = await fetch(`http://127.0.0.1:8000/pets/${petId}/application/`, {
@@ -62,27 +64,28 @@ const PetApplication = () => {
             },
             body: JSON.stringify(petApplication),
           });
-          window.location.href = "/applications/";
+          console.log("supposed to navigate0")
+          if (response.ok) {
+            console.log("supposed to navigate1")
+            const noti_body = {
+              content: `Adoption application for ${pet.name} has been created!`,
+              link: `http://127.0.0.1:8000/application-view/${id}/`
+            }
+            const noti_response = await fetch(`http://127.0.0.1:8000/noti/newnoti/unread/`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+              },
+              body: JSON.stringify(noti_body),
+            });
+            console.log("supposed to navigate2")
+            navigate("/applications");
+          }
         } catch (error) {
           // Handle network errors
           console.error('Network error:', error.message);
         }
-
-        console.log({
-          firstName,
-          lastName,
-          dob,
-          address,
-          occupation,
-          email,
-          hoursAwayWeekdays,
-          hoursAwayWeekends,
-          medicalHistory,
-          criminalHistory,
-          previousPet,
-          reasonForAdoption,
-          termsAgreement,
-        });
 
         // Reset form fields after submission
         setFirstName('');

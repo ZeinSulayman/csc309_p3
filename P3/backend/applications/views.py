@@ -1,3 +1,4 @@
+from django.utils import timezone
 from rest_framework.permissions import IsAuthenticated
 
 from .serializers import PetApplicationSerializer, PetApplicationDetailSerializer, \
@@ -20,7 +21,8 @@ class ShelterApplicationsListView(ListAPIView):
     def get_queryset(self):
         # Retrieve query parameters for status filtering, sorting, and pagination
         status_filter = self.request.query_params.get('status', None)
-        sort_by = self.request.query_params.get('sort_by', None)
+        pet_filter = self.request.query_params.get('pet', None)
+        sort_by = self.request.query_params.get('sort', None)
 
 
         # Apply status filter if provided
@@ -30,14 +32,18 @@ class ShelterApplicationsListView(ListAPIView):
             queryset = PetApplication.objects.filter(applicant=self.request.user)
         if status_filter:
             queryset = queryset.filter(status=status_filter)
-        queryset = queryset.order_by('date_created')
-        queryset = queryset.order_by('-last_modified')
+        if pet_filter:
+            queryset = queryset.filter(pet=pet_filter)
+        queryset = queryset.order_by('-date_created')
         # Apply sorting if provided
-        """if sort_by:
-            if sort_by == 'created':
+        if sort_by:
+            print("sort is" + str(sort_by))
+            if sort_by == 'date_created':
                 queryset = queryset.order_by('date_created')
-            elif sort_by == 'modified':
-                queryset = queryset.order_by('-last_modified')"""
+            elif sort_by == 'last_modified':
+                queryset = queryset.order_by('-last_modified')
+            for box in queryset:
+                print("box: " + str(box.date_created))
 
         return queryset
 
@@ -72,14 +78,18 @@ class PetApplicationUpdateView(CreateAPIView):
         application = self.get_object(application_id)
 
         # Check if the user has permission to update the application
-        if (request.user.is_pet_shelter and application.status == "pending") or \
-                (request.user.is_pet_seeker and application.status in ["pending", "accepted"]):
+        if (request.user.is_pet_shelter and
+            application.status == "pending" and
+            request.data.get('status') in ["accepted", "denied"]) or \
+                (request.user.is_pet_seeker and
+                 application.status in ["pending", "accepted"] and
+                 request.data.get('status') == "withdrawn"):
             # Get the appropriate serializer class based on user type
             serializer_class = self.get_serializer_class()
             serializer = serializer_class(application, data=request.data)
 
-
             if serializer.is_valid():
+                application.last_modified = timezone.now()
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -92,7 +102,11 @@ class PetApplicationDetailView(APIView):
     permission_classes = [IsShelter | IsPetSeeker]
 
     def get(self, request, application_id):
-        application = get_object_or_404(PetApplication, pk=application_id, applicant=request.user)
+        if request.user.is_pet_seeker:
+            application = get_object_or_404(PetApplication, pk=application_id, applicant=request.user)
+        else:
+            application = get_object_or_404(PetApplication, pk=application_id,
+                                            pet__owner=PetShelter.objects.get(shelter_id=request.user.shelter_id()))
         serializer = PetApplicationDetailSerializer(application)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -118,6 +132,39 @@ class PetApplicationView(CreateAPIView):
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
     def perform_create(self, serializer, pet):
-        #serializer.save(** serializer.validated_data, pet=pet, applicant=self.request.user, status="pending", pet_name=pet.name,shelter_name=pet.owner.shelter_name)
+        # Check if there are any existing applications for the same pet by the same user
+        existing_applications = PetApplication.objects.filter(
+            pet=pet, applicant=self.request.user
+        )
 
-        serializer.save(pet=pet, applicant=self.request.user, status="pending", pet_name=pet.name, pet_pic=pet.pic, shelter_name=pet.owner.shelter_name)
+        if existing_applications.exists():
+            # There are existing applications
+            # Check if all previous applications have status 'withdrawn'
+            if existing_applications.filter(status='withdrawn').count() == existing_applications.count():
+                # All previous applications have status 'withdrawn'
+                # Proceed with creating the new application
+                serializer.save(
+                    pet=pet,
+                    applicant=self.request.user,
+                    status="pending",
+                    pet_name=pet.name,
+                    pet_pic=pet.pic,
+                    shelter_name=pet.owner.shelter_name,
+                )
+            else:
+                # There are applications with statuses other than 'withdrawn'
+                return Response(
+                    {"error": "You can only apply if all previous applications for this pet were withdrawn."},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+        else:
+            # No existing applications for the same pet by the same user
+            # Proceed with creating the new application
+            serializer.save(
+                pet=pet,
+                applicant=self.request.user,
+                status="pending",
+                pet_name=pet.name,
+                pet_pic=pet.pic,
+                shelter_name=pet.owner.shelter_name,
+            )
