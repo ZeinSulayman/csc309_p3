@@ -85,6 +85,7 @@ const Applications = () => {
   if (!applications.results || !Array.isArray(applications.results)) {
     return(<p>Loading...</p>)
   }
+  console.log("pet pic", applications)
 return (
 <div>
     <section>
@@ -122,12 +123,12 @@ return (
                         </button>
                         <ul className="dropdown-menu">
                           <li>
-                          <button style={{ paddingRight: '20px' }} className="dropdown-item" value="date_created" onClick={() => handleFilterChange({ target: { name: 'sort', value: 'age' } })}>
+                          <button style={{ paddingRight: '20px' }} className="dropdown-item" value="date_created" onClick={() => handleFilterChange({ target: { name: 'sort', value: 'date_created' } })}>
                               Sort by Date Created
                             </button>
                           </li>
                           <li>
-                          <button style={{ paddingRight: '20px' }} className="dropdown-item" value="-last_modified" onClick={() => handleFilterChange({ target: { name: 'sort', value: 'name' } })}>
+                          <button style={{ paddingRight: '20px' }} className="dropdown-item" value="-last_modified" onClick={() => handleFilterChange({ target: { name: 'sort', value: 'last_modified' } })}>
                               Sort by Last Modified
                             </button>
                           </li>
@@ -137,7 +138,7 @@ return (
 
 
                     <div style={{ marginLeft: '5px', marginBottom: '5px' }} className="col-md-auto">
-                      <a className="btn btn-outline-success" href="../finder/">
+                      <a className="btn btn-outline-success" href="/applications/">
                         Reset Filter/Sort
                       </a>
                     </div>
@@ -152,20 +153,14 @@ return (
         {applications.results.map((application) => (
                   <div key={application.id} className="col-md-6 col-lg-4 mb-4">
                     <div className="card h-100">
-                      <img
-                        src={application.pet_pic}
-                        style={{ height: '50%' }}
-                        alt="Pet Image"
-                        className="card-img-top"
-                      />
                       <div className="card-body">
-                        <h5 style={{paddingBottom:'10'}}className="card-title">Pet Name: {application.pet_name}</h5>
+                        <h5 style={{paddingBottom:'10'}} className="card-title">Pet Name: {application.pet_name}</h5>
                         <p style={{marginBottom:'2px'}} className="card-text">Shelter: {application.shelter_name}</p>
                         <p className="card-text">Applicant: {application.first_name} {application.last_name}</p>
                       </div>
                       <div className="card-footer">
                         <div className="row">
-                          <div className="col-12 col-sm-4 text-warning d-flex align-items-center justify-content-center mb-2 mb-sm-0">
+                          <div className="col-12 col-sm-4 d-flex align-items-center justify-content-center mb-2 mb-sm-0" style={{color: "#aaaa22"}}>
                             {application.status}
                           </div>
                           <div className="col-12 col-sm-4 d-flex justify-content-center mb-2 mb-sm-0">
@@ -191,9 +186,6 @@ return (
                 <nav aria-label="Page navigation example">
                   <ul className="pagination justify-content-center">
                     <li className="page-item"><button className="page-link" onClick={() => handleFilterChange({ target: { name: 'page', value: page - 1 } })}>Previous</button></li>
-                    <li className="page-item"><button className="page-link" onClick={() => handleFilterChange({ target: { name: 'page', value: '1' } })}>1</button></li>
-                    <li className="page-item"><button className="page-link" onClick={() => handleFilterChange({ target: { name: 'page', value: '2' } })}>2</button></li>
-                    <li className="page-item"><button className="page-link" onClick={() => handleFilterChange({ target: { name: 'page', value: '3' } })}>3</button></li>
                     <li className="page-item"><button className="page-link" onClick={() => handleFilterChange({ target: { name: 'page', value: page + 1 } })}>Next</button></li>
                   </ul>
                 </nav>

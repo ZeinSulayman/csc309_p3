@@ -66,7 +66,7 @@ const ApplicationView = () => {
                     <div className="col-md-6 mb-3">
                       <div className="input-group">
                         <span className="input-group-text" style={{height: "40px"}}><i className="fas fa-comment">First Name:</i></span>
-                        <p className={"form-control"} style={{height: "40px"}}>First Name: {app.first_name}</p>
+                        <p className={"form-control"} style={{height: "40px"}}>{app.first_name}</p>
                       </div>
                     </div>
 
@@ -147,7 +147,7 @@ const ApplicationView = () => {
                     <span className="input-group-text"><i className="fas fa-clock"></i></span>
                     <select className="form-select" id="status" required defaultValue={""} onChange={e => setStatus(e.target.value)}>
                       <option>{app.status}</option>
-                      {!localStorage.getItem("shelter") ? (
+                      {localStorage.getItem('shelter') === "false"? (
                         <>
                           <option>withdrawn</option>
                         </>
@@ -162,6 +162,11 @@ const ApplicationView = () => {
                   <button type="submit" className="btn btn-primary w-100 mt-3">
                     Edit Status
                   </button>
+                  <button type="submit" className="btn btn-primary w-100 mt-3" >
+                        <a style={{color: "#ffffff", textDecoration: "None"}} href={"/applications/"}>
+                          Back to Applications
+                        </a>
+                      </button>
                 </form>
                 ) : (
                     <>

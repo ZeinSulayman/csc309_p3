@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate} from 'react-router-dom';
 
 const PetApplication = () => {
   const [id, setID] = useState(0);
@@ -19,6 +19,8 @@ const PetApplication = () => {
 
   const { petId } = useParams();
   const [pet, setPet] = useState(null);
+
+  const navigate = useNavigate();
 
     useEffect(() => {
       const fetchPet = async () => {
@@ -62,7 +64,9 @@ const PetApplication = () => {
             },
             body: JSON.stringify(petApplication),
           });
+          console.log("supposed to navigate0")
           if (response.ok) {
+            console.log("supposed to navigate1")
             const noti_body = {
               content: `Adoption application for ${pet.name} has been created!`,
               link: `http://127.0.0.1:8000/application-view/${id}/`
@@ -75,28 +79,13 @@ const PetApplication = () => {
               },
               body: JSON.stringify(noti_body),
             });
+            console.log("supposed to navigate2")
+            navigate("/applications");
           }
-          window.location.href = "/applications/";
         } catch (error) {
           // Handle network errors
           console.error('Network error:', error.message);
         }
-
-        console.log({
-          firstName,
-          lastName,
-          dob,
-          address,
-          occupation,
-          email,
-          hoursAwayWeekdays,
-          hoursAwayWeekends,
-          medicalHistory,
-          criminalHistory,
-          previousPet,
-          reasonForAdoption,
-          termsAgreement,
-        });
 
         // Reset form fields after submission
         setFirstName('');

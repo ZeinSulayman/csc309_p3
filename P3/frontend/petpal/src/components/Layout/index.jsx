@@ -151,6 +151,29 @@ function Layout(props){
             Home
           </Link>
         </li>
+
+        <li className="nav-item mx-2">
+          <Link
+            to="/map/"
+            className="nav-link"
+            activeClassName="active-link" // Apply the class for the active link
+            style={{  color: 'white' }}
+          >
+            Map
+          </Link>
+        </li>
+
+        <li className="nav-item mx-2">
+          <Link
+            to="/shelters/"
+            className="nav-link"
+            activeClassName="active-link" // Apply the class for the active link
+            style={{  color: 'white' }}
+          >
+            Shelters
+          </Link>
+        </li>
+
         <li className="nav-item mx-2">
           <Link
             to="/api/user/"
