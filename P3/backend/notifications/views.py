@@ -29,7 +29,10 @@ class NotifListView(generics.ListAPIView):
     def get_queryset(self):
         #queryset = Notification.objects.all()
 
-        queryset = Notification.objects.filter(user=self.request.user)
+        if self.request.user.is_pet_seeker:
+            queryset = Notification.objects.filter(user=self.request.user)
+        else:
+            queryset = Notification.objects.filter(receiver_id=self.request.user.id)
 
         # Filtering by status
 

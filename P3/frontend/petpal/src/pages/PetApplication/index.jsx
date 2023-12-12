@@ -56,7 +56,7 @@ const PetApplication = () => {
 
         try {
           // Create the POST request using the fetch API
-          const response = await fetch(`http://127.0.0.1:8000/pets/${petId}/application/`, {
+          const response = await fetch(`https://1208-52-14-206-42.ngrok-free.app/pets/${petId}/application/`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -65,23 +65,7 @@ const PetApplication = () => {
             body: JSON.stringify(petApplication),
           });
           console.log("supposed to navigate0")
-          if (response.ok) {
-            console.log("supposed to navigate1")
-            const noti_body = {
-              content: `Adoption application for ${pet.name} has been created!`,
-              link: `http://localhost:3000/application-view/${id}/`
-            }
-            const noti_response = await fetch(`http://127.0.0.1:8000/noti/newnoti/unread/`, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              'Authorization': `Bearer ${localStorage.getItem('access_token')}`
-              },
-              body: JSON.stringify(noti_body),
-            });
-            console.log("supposed to navigate2")
-            navigate("/applications");
-          }
+
         } catch (error) {
           // Handle network errors
           console.error('Network error:', error.message);

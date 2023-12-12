@@ -7,7 +7,7 @@ class NotifSerializer(serializers.ModelSerializer):
     read = serializers.ReadOnlyField()
     class Meta:
         model = Notification
-        fields = ('content','link','id', 'read')
+        fields = ('content','link','id', 'read', 'created_at', 'receiver_id')
 
 
 class NotifEditSerializer(serializers.ModelSerializer):

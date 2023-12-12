@@ -17,7 +17,7 @@ const ShelterPets = () => {
     const fetchPets = async () => {
       const url = buildApiUrl();
       try {
-        const allresponse = await fetch('http://127.0.0.1:8000/pets/', {
+        const allresponse = await fetch('https://1208-52-14-206-42.ngrok-free.app/pets/', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('access_token')}`
@@ -47,7 +47,7 @@ const ShelterPets = () => {
 
   // Function to build API URL with filters
   const buildApiUrl = () => {
-    const baseUrl = 'http://127.0.0.1:8000/pets/'; // Replace with your Django API endpoint
+    const baseUrl = 'https://1208-52-14-206-42.ngrok-free.app/pets/'; // Replace with your Django API endpoint
     const params = new URLSearchParams();
 
     // Add filters to the URL parameters

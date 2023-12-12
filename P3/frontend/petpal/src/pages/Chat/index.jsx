@@ -12,7 +12,7 @@ const Chat = () => {
     const get_comments = async (e) => {
         try {
             // Create the POST request using the fetch API
-            const response = await fetch(`http://127.0.0.1:8000/apps/${id}/comments/`, {
+            const response = await fetch(`https://1208-52-14-206-42.ngrok-free.app/apps/${id}/comments/`, {
                 method: 'get',
                 headers: {
                     'Content-Type': 'application/json',
@@ -43,7 +43,7 @@ const Chat = () => {
     const post_comments = async (e) => {
         try {
             // Create the POST request using the fetch API
-            const response = await fetch(`http://127.0.0.1:8000/apps/${id}/comments/`, {
+            const response = await fetch(`https://1208-52-14-206-42.ngrok-free.app/apps/${id}/comments/`, {
                 method: 'post',
                 headers: {
                     'Content-Type': 'application/json',

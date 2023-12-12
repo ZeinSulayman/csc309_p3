@@ -13,7 +13,7 @@ const ApplicationView = () => {
     useEffect(() => {
       const fetchApp = async () => {
         // Fetch app details
-        const appResponse = await fetch(`http://127.0.0.1:8000/application/${appId}/`, {
+        const appResponse = await fetch(`https://1208-52-14-206-42.ngrok-free.app/application/${appId}/`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('access_token')}`
@@ -31,7 +31,7 @@ const ApplicationView = () => {
       const get_comments = async () => {
         try {
             // Create the GET request using the fetch API
-            const response = await fetch(`http://127.0.0.1:8000/apps/${appId}/comments/`, {
+            const response = await fetch(`https://1208-52-14-206-42.ngrok-free.app/apps/${appId}/comments/`, {
                 method: 'get',
                 headers: {
                     'Content-Type': 'application/json',
@@ -62,7 +62,7 @@ const ApplicationView = () => {
     const post_comments = async (e) => {
         try {
             // Create the POST request using the fetch API
-            const response = await fetch(`http://127.0.0.1:8000/apps/${appId}/comments/`, {
+            const response = await fetch(`https://1208-52-14-206-42.ngrok-free.app/apps/${appId}/comments/`, {
                 method: 'post',
                 headers: {
                     'Content-Type': 'application/json',
@@ -97,7 +97,7 @@ const ApplicationView = () => {
 
         try {
           // Create the POST request using the fetch API
-          const response = await fetch(`http://127.0.0.1:8000/application/${appId}/status/`, {
+          const response = await fetch(`https://1208-52-14-206-42.ngrok-free.app/application/${appId}/status/`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

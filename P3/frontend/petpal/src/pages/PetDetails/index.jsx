@@ -17,7 +17,7 @@ const PetDetail = () => {
         paramsWithdrawn.append('status', 'withdrawn');
         paramsWithdrawn.append('pet', petId);
 
-        const url_withdrawn = `http://127.0.0.1:8000/shelter/applications/?${paramsWithdrawn.toString()}`;
+        const url_withdrawn = `https://1208-52-14-206-42.ngrok-free.app/shelter/applications/?${paramsWithdrawn.toString()}`;
 
         const appsWithdrawnResponse = await fetch(url_withdrawn, {
           method: 'GET',
@@ -30,7 +30,7 @@ const PetDetail = () => {
         const params = new URLSearchParams();
         params.append('pet', petId);
 
-        const url = `http://127.0.0.1:8000/shelter/applications/?${params.toString()}`;
+        const url = `https://1208-52-14-206-42.ngrok-free.app/shelter/applications/?${params.toString()}`;
 
         const appsResponse = await fetch(url, {
           method: 'GET',
@@ -64,7 +64,7 @@ const PetDetail = () => {
     const fetchPetAndShelter = async () => {
       try {
         // Fetch pet details
-        const petResponse = await fetch(`http://127.0.0.1:8000/pets/details/${petId}/`, {
+        const petResponse = await fetch(`https://1208-52-14-206-42.ngrok-free.app/pets/details/${petId}/`, {
               method: 'GET',
               headers: {
                 'Authorization': `Bearer ${localStorage.getItem('access_token')}`
@@ -74,7 +74,7 @@ const PetDetail = () => {
         setPet(petData);
         console.log(petData.owner)
         // Fetch shelter details using the foreign key
-        const shelterResponse = await fetch(`http://127.0.0.1:8000/shelter/${petData.owner}/`, {
+        const shelterResponse = await fetch(`https://1208-52-14-206-42.ngrok-free.app/shelter/${petData.owner}/`, {
               method: 'GET',
               headers: {
                 'Authorization': `Bearer ${localStorage.getItem('access_token')}`

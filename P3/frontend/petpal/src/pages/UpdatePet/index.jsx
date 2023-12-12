@@ -40,7 +40,7 @@ const CreatePet = () => {
        const fetchPet = async () => {
          try {
            // Fetch pet details
-           const petResponse = await fetch(`http://127.0.0.1:8000/pets/details/${petId}/`, {
+           const petResponse = await fetch(`https://1208-52-14-206-42.ngrok-free.app/pets/details/${petId}/`, {
                  method: 'GET',
                  headers: {
                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`
@@ -62,7 +62,7 @@ const CreatePet = () => {
      const deletePet = async (e) => {
         try {
                     console.log(pet);
-                    const response = await fetch(`http://127.0.0.1:8000/pets/${petId}/`, {
+                    const response = await fetch(`https://1208-52-14-206-42.ngrok-free.app/pets/${petId}/`, {
                       method: 'DELETE',
                       headers: {
                         'Authorization': `Bearer ${localStorage.getItem('access_token')}`
@@ -104,7 +104,7 @@ const CreatePet = () => {
 
         try {
             console.log(pet);
-            const response = await fetch(`http://127.0.0.1:8000/pets/${petId}/`, {
+            const response = await fetch(`https://1208-52-14-206-42.ngrok-free.app/pets/${petId}/`, {
               method: 'PUT',
               headers: {
                 'Authorization': `Bearer ${localStorage.getItem('access_token')}`

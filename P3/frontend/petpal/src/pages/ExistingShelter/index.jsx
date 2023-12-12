@@ -39,7 +39,7 @@ function ShelterAccount(props){
         };
         try {
             // Create the POST request using the fetch API
-            const response = await fetch('http://127.0.0.1:8000/shelter/', {
+            const response = await fetch('https://1208-52-14-206-42.ngrok-free.app/shelter/', {
                 method: 'put',
                 headers: {
                     'Content-Type': 'application/json',
@@ -71,7 +71,7 @@ function ShelterAccount(props){
         };
         try {
             // Create the POST request using the fetch API
-            const response = await fetch('http://127.0.0.1:8000/shelter/', {
+            const response = await fetch('https://1208-52-14-206-42.ngrok-free.app/shelter/', {
                 method: 'get',
                 headers: {
                     'Content-Type': 'application/json',
@@ -103,7 +103,7 @@ function ShelterAccount(props){
     const get_comments = async (e) => {
         try {
             // Create the POST request using the fetch API
-            const response = await fetch(`http://127.0.0.1:8000/shelters/${e}/comments/`, {
+            const response = await fetch(`https://1208-52-14-206-42.ngrok-free.app/shelters/${e}/comments/`, {
                 method: 'get',
                 headers: {
                     'Content-Type': 'application/json',
@@ -135,7 +135,7 @@ function ShelterAccount(props){
     const post_comments = async (e) => {
         try {
             // Create the POST request using the fetch API
-            const response = await fetch(`http://127.0.0.1:8000/shelters/${id}/comments/`, {
+            const response = await fetch(`https://1208-52-14-206-42.ngrok-free.app/shelters/${id}/comments/`, {
                 method: 'post',
                 headers: {
                     'Content-Type': 'application/json',
@@ -165,7 +165,7 @@ function ShelterAccount(props){
     const del = async (e) => {
         try {
             // Create the POST request using the fetch API
-            const response = await fetch('http://127.0.0.1:8000/shelter/', {
+            const response = await fetch('https://1208-52-14-206-42.ngrok-free.app/shelter/', {
                 method: 'delete',
                 headers: {
                     'Content-Type': 'application/json',
@@ -191,7 +191,7 @@ function ShelterAccount(props){
     const del2 = async (e) => {
         try {
             // Create the POST request using the fetch API
-            const response = await fetch('http://127.0.0.1:8000/user/', {
+            const response = await fetch('https://1208-52-14-206-42.ngrok-free.app/user/', {
                 method: 'delete',
                 headers: {
                     'Content-Type': 'application/json',

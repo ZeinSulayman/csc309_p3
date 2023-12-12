@@ -11,7 +11,7 @@ const ShelterList = () => {
   useEffect(() => {
     const fetchPets = async () => {
       try {
-        const allResponse = await fetch('http://127.0.0.1:8000/shelters/', {
+        const allResponse = await fetch('https://1208-52-14-206-42.ngrok-free.app/shelters/', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('access_token')}`

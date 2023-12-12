@@ -19,7 +19,7 @@ function ViewShelter(){
 
     const fetchShelter = async () => {
         // Create the POST request using the fetch API
-        const response = await fetch(`http://127.0.0.1:8000/shelter/${shelterId}`, {
+        const response = await fetch(`https://1208-52-14-206-42.ngrok-free.app/shelter/${shelterId}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
@@ -33,7 +33,7 @@ function ViewShelter(){
     const get_comments = async (ID) => {
         try {
             // Create the POST request using the fetch API
-            const response = await fetch(`http://127.0.0.1:8000/shelters/${ID}/comments/`, {
+            const response = await fetch(`https://1208-52-14-206-42.ngrok-free.app/shelters/${ID}/comments/`, {
                 method: 'get',
                 headers: {
                     'Content-Type': 'application/json',
@@ -65,7 +65,7 @@ function ViewShelter(){
     const post_comments = async (e) => {
         try {
             // Create the POST request using the fetch API
-            const response = await fetch(`http://127.0.0.1:8000/shelters/${shelterId}/comments/`, {
+            const response = await fetch(`https://1208-52-14-206-42.ngrok-free.app/shelters/${shelterId}/comments/`, {
                 method: 'post',
                 headers: {
                     'Content-Type': 'application/json',
