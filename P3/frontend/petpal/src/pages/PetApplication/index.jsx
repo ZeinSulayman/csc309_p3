@@ -22,7 +22,7 @@ const PetApplication = () => {
     useEffect(() => {
       const fetchPet = async () => {
         // Fetch pet details
-        const petResponse = await fetch(`https://three09-p3-backend.onrender.com/pets/details/${petId}/`, {
+        const petResponse = await fetch(`http://3.16.23.69:8000/pets/details/${petId}/`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('access_token')}`
@@ -54,7 +54,7 @@ const PetApplication = () => {
 
         try {
           // Create the POST request using the fetch API
-          const response = await fetch(`https://three09-p3-backend.onrender.com/pets/${petId}/application/`, {
+          const response = await fetch(`http://3.16.23.69:8000/pets/${petId}/application/`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

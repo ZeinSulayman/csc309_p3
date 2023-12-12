@@ -63,7 +63,7 @@ function SeekerAccount(props){
         console.log(formData)
         try {
             // Create the POST request using the fetch API
-            const response = await fetch('https://three09-p3-backend.onrender.com/seeker/', {
+            const response = await fetch('http://3.16.23.69:8000/seeker/', {
                 method: 'PUT',
                 headers: {
                     //'Content-Type': 'application/json',
@@ -95,7 +95,7 @@ function SeekerAccount(props){
         };
         try {
             // Create the POST request using the fetch API
-            const response = await fetch('https://three09-p3-backend.onrender.com/user/', {
+            const response = await fetch('http://3.16.23.69:8000/user/', {
                 method: 'put',
                 headers: {
                     'Content-Type': 'application/json',
@@ -121,7 +121,7 @@ function SeekerAccount(props){
     const del = async (e) => {
         try {
             // Create the POST request using the fetch API
-            const response = await fetch('https://three09-p3-backend.onrender.com/seeker/', {
+            const response = await fetch('http://3.16.23.69:8000/seeker/', {
                 method: 'delete',
                 headers: {
                     'Content-Type': 'application/json',
@@ -147,7 +147,7 @@ function SeekerAccount(props){
     const del2 = async (e) => {
         try {
             // Create the POST request using the fetch API
-            const response = await fetch('https://three09-p3-backend.onrender.com/user/', {
+            const response = await fetch('http://3.16.23.69:8000/user/', {
                 method: 'delete',
                 headers: {
                     'Content-Type': 'application/json',
@@ -171,7 +171,7 @@ function SeekerAccount(props){
 
 
     useEffect(() => {
-         fetch('https://three09-p3-backend.onrender.com/seeker/', {
+         fetch('http://3.16.23.69:8000/seeker/', {
                 method: 'get',
                 headers: {
                     'Content-Type': 'application/json',

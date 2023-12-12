@@ -9,7 +9,7 @@ const ShelterMaps = () => {
   useEffect(() => {
     const fetchShelters = async () => {
       try {
-        const response = await fetch('https://three09-p3-backend.onrender.com/shelters/', {
+        const response = await fetch('http://3.16.23.69:8000/shelters/', {
             method: 'get',
             headers: {
                 'Content-Type': 'application/json',

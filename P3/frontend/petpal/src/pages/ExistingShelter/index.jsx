@@ -125,7 +125,7 @@ function ShelterAccount(props){
     const del = async (e) => {
         try {
             // Create the POST request using the fetch API
-            const response = await fetch('https://three09-p3-backend.onrender.com/shelter/', {
+            const response = await fetch('http://3.16.23.69:8000/shelter/', {
                 method: 'delete',
                 headers: {
                     'Content-Type': 'application/json',
@@ -151,7 +151,7 @@ function ShelterAccount(props){
     const del2 = async (e) => {
         try {
             // Create the POST request using the fetch API
-            const response = await fetch('http://127.0.0.1:8000/user/', {
+            const response = await fetch('http://3.16.23.69:8000/user/', {
                 method: 'delete',
                 headers: {
                     'Content-Type': 'application/json',

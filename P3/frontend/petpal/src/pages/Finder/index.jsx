@@ -47,7 +47,7 @@ const Finder = () => {
 
   // Function to build API URL with filters
   const buildApiUrl = () => {
-    const baseUrl = 'https://three09-p3-backend.onrender.com/pets/'; // Replace with your Django API endpoint
+    const baseUrl = 'http://3.16.23.69:8000/pets/'; // Replace with your Django API endpoint
     const params = new URLSearchParams();
 
     // Add filters to the URL parameters

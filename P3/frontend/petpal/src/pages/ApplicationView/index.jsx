@@ -40,7 +40,7 @@ const Applications = () => {
    const getInfo = async(petId) => {
    try {
                  // Fetch pet details
-                 const petResponse = await fetch(`https://three09-p3-backend.onrender.com/pets/details/${petId}/`, {
+                 const petResponse = await fetch(`http://3.16.23.69:8000/pets/details/${petId}/`, {
                        method: 'GET',
                        headers: {
                          'Authorization': `Bearer ${localStorage.getItem('access_token')}`
@@ -55,7 +55,7 @@ const Applications = () => {
                }
   // Function to build API URL with filters
   const buildApiUrl = () => {
-    const baseUrl = 'http://127.0.0.1:8000/shelter/applications/'; // Replace with your Django API endpoint
+    const baseUrl = 'http://3.16.23.69:8000/shelter/applications/'; // Replace with your Django API endpoint
     const params = new URLSearchParams();
 
     if (filters.status)  {

@@ -48,7 +48,7 @@ function EditShelterAccount(props){
         formData.append("pic", file);
         try {
             // Create the POST request using the fetch API
-            const response = await fetch('https://three09-p3-backend.onrender.com/newuser/shelter/', {
+            const response = await fetch('http://3.16.23.69:8000/newuser/shelter/', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
