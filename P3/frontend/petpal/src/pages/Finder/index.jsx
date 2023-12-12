@@ -17,7 +17,7 @@ const Finder = () => {
     const fetchPets = async () => {
       const url = buildApiUrl();
       try {
-        const allresponse = await fetch('https://three09-p3-backend.onrender.com/pets/', {
+        const allresponse = await fetch('https://1208-52-14-206-42.ngrok-free.app/pets/', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('access_token')}`
@@ -47,7 +47,7 @@ const Finder = () => {
 
   // Function to build API URL with filters
   const buildApiUrl = () => {
-    const baseUrl = 'http://3.16.23.69:8000/pets/'; // Replace with your Django API endpoint
+    const baseUrl = 'https://1208-52-14-206-42.ngrok-free.app/pets/'; // Replace with your Django API endpoint
     const params = new URLSearchParams();
 
     // Add filters to the URL parameters

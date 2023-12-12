@@ -28,7 +28,7 @@ const submit = async (e) => {
 
     try {
         // Create the POST request using the fetch API
-        const response = await fetch('http://3.16.23.69:8000/api/user/', {
+        const response = await fetch('https://1208-52-14-206-42.ngrok-free.app/api/user/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ const submit = async (e) => {
 const getUser = async (e) => {
     //e.preventDefault();
     try {
-        const response = await fetch('http://3.16.23.69:8000/user/', {
+        const response = await fetch('https://1208-52-14-206-42.ngrok-free.app/user/', {
             method: 'get',
             headers: {
                 'Content-Type': 'application/json',

@@ -60,7 +60,7 @@ const CreatePet = () => {
 
         try {
             console.log(pet);
-            const response = await fetch('http://3.16.23.69:8000/pets/newpet/', {
+            const response = await fetch('https://1208-52-14-206-42.ngrok-free.app/pets/newpet/', {
               method: 'POST',
               headers: {
                 'Authorization': `Bearer ${localStorage.getItem('access_token')}`

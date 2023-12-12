@@ -17,7 +17,7 @@ const ShelterPets = () => {
     const fetchPets = async () => {
       const url = buildApiUrl();
       try {
-        const allresponse = await fetch('http://3.16.23.69:8000/pets/', {
+        const allresponse = await fetch('https://1208-52-14-206-42.ngrok-free.app/pets/', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('access_token')}`

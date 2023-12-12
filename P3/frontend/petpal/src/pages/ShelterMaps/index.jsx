@@ -9,7 +9,7 @@ const ShelterMaps = () => {
   useEffect(() => {
     const fetchShelters = async () => {
       try {
-        const response = await fetch('http://3.16.23.69:8000/shelters/', {
+        const response = await fetch('https://1208-52-14-206-42.ngrok-free.app/shelters/', {
             method: 'get',
             headers: {
                 'Content-Type': 'application/json',

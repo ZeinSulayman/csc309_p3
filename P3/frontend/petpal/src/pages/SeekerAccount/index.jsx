@@ -63,7 +63,7 @@ function SeekerAccount(props){
         console.log(formData)
         try {
             // Create the POST request using the fetch API
-            const response = await fetch('http://3.16.23.69:8000/seeker/', {
+            const response = await fetch('https://1208-52-14-206-42.ngrok-free.app/seeker/', {
                 method: 'PUT',
                 headers: {
                     //'Content-Type': 'application/json',
@@ -95,7 +95,7 @@ function SeekerAccount(props){
         };
         try {
             // Create the POST request using the fetch API
-            const response = await fetch('http://3.16.23.69:8000/user/', {
+            const response = await fetch('https://1208-52-14-206-42.ngrok-free.app/user/', {
                 method: 'put',
                 headers: {
                     'Content-Type': 'application/json',
@@ -121,7 +121,7 @@ function SeekerAccount(props){
     const del = async (e) => {
         try {
             // Create the POST request using the fetch API
-            const response = await fetch('http://3.16.23.69:8000/seeker/', {
+            const response = await fetch('https://1208-52-14-206-42.ngrok-free.app/seeker/', {
                 method: 'delete',
                 headers: {
                     'Content-Type': 'application/json',
@@ -147,7 +147,7 @@ function SeekerAccount(props){
     const del2 = async (e) => {
         try {
             // Create the POST request using the fetch API
-            const response = await fetch('http://3.16.23.69:8000/user/', {
+            const response = await fetch('https://1208-52-14-206-42.ngrok-free.app/user/', {
                 method: 'delete',
                 headers: {
                     'Content-Type': 'application/json',

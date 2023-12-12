@@ -27,7 +27,7 @@ const Register = () => {
 
         try {
             // Create the POST request using the fetch API
-            const response = await fetch('http://3.16.23.69:8000/api/newuser/', {
+            const response = await fetch('https://1208-52-14-206-42.ngrok-free.app/api/newuser/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -76,7 +76,7 @@ const submit2 = async (e) => {
 
     try {
         // Create the POST request using the fetch API
-        const response = await fetch('http://3.16.23.69:8000/api/user/', {
+        const response = await fetch('https://1208-52-14-206-42.ngrok-free.app/api/user/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
